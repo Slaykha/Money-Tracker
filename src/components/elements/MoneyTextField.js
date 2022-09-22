@@ -48,6 +48,7 @@ const MoneyTextField = () => {
             variant="filled"
         />
     );
+    
 };
 
 export default MoneyTextField;
