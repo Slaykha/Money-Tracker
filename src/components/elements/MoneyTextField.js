@@ -2,25 +2,27 @@ import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {NumericFormat} from 'react-number-format';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, styled } from '@mui/styles';
 
 const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, ...other } = props;
   
     return (
+// event.target.value nedir nerden gelir bu yaprak diyenlere cevap niteliğinde kod
       <NumericFormat
         {...other}
         getInputRef={ref}
-        onValueChange={(values) => {
+        onValueChange={(spending) => {
           onChange({
             target: {
-              value: values.value,
+              value: spending.money,
+              intValue: spending.value
             },
           });
         }}
         thousandSeparator
         isNumericString
-        prefix="₺"
+        prefix="$"
       />
     );
   });
@@ -29,22 +31,32 @@ const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
     onChange: PropTypes.func.isRequired,
   };
 
-const MoneyTextField = () => {
-    const [values, setValues] = useState({currentMoney: ''});
+
+const MoneyTextField = (props) => {
+    const {
+      spending,
+      setSpending
+    }=props
+
+    const [moneyValue, setMoneyValue] = useState({formattedValue: ""})
     
     const handleChange = (event) => {
-        setValues({
-        ...values,
-        });
+      setMoneyValue({
+        formattedValue: event.target.value
+      })
+      setSpending({
+        money: event.target.intValue,
+        type: spending.type
+      });
     };
     return (
         <TextField
             label="Money"
-            value={values.currentMoney}
-            onChange={handleChange}
+            value={moneyValue.formattedValue}
+            onChange={(e) => {handleChange(e)}}
             name="numberformat"
             id="formatted-numberformat-input"
-            InputProps={{inputComponent: NumberFormatCustom, style:{background: "rgb(174, 189, 202, 0.6)"}}}
+            InputProps={{inputComponent: NumberFormatCustom, style:{backgroundColor:"rgb(238, 238, 238, 0.6)" }}}
             variant="filled"
         />
     );

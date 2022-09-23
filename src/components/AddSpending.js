@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import AddSpendingButton from './elements/AddSpendingButton';
 import MoneyTextField from './elements/MoneyTextField';
 import SpendingTypeSelector from './elements/SpendingTypeSelector';
@@ -10,12 +10,18 @@ const useStyles = makeStyles({
         margin:"10%",
         padding:"5%",
         borderRadius:"10px",
-        backgroundColor: "#E8DFCA"
+        backgroundColor: "#393E46"
     }
 })
 
 const AddSpending = (props) => {
     const classes = useStyles()
+
+    const [spending, setSpending] = useState({money: "", type: ""})
+
+    const handleClick = () =>{
+        console.log(spending)
+    }
 
     return (
         <div>
@@ -25,9 +31,17 @@ const AddSpending = (props) => {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                <MoneyTextField/>
-                <SpendingTypeSelector/>
-                <AddSpendingButton />
+                <MoneyTextField
+                    spending={spending}
+                    setSpending={setSpending}
+                />
+                <SpendingTypeSelector
+                    spending={spending}
+                    setSpending={setSpending}
+                />
+                <AddSpendingButton 
+                    handleClick={handleClick}
+                />
             </Stack>
             
         </div>

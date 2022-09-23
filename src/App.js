@@ -2,7 +2,7 @@ import React from "react";
 import AddSpending from "./components/AddSpending";
 
 function App() {
-  document.body.style = "background-color: #F5EFE6;"
+  document.body.style = "background-color: #222831;"
   
   return (
     <div>

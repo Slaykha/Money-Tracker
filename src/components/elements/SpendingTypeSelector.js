@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
 
@@ -11,12 +12,38 @@ const spendingOptions = [
     {label: "other"},
 ]
 
-const SpendingTypeSelector = () => {
+const StyledAutocomplete = styled(Autocomplete)
+    `
+        background-color: rgb(238, 238, 238, 0.6);
+        border-radius: 5px;
+        & label.Mui-focused {
+            color: rgb(0, 173, 181);
+        }
+        & .MuiOutlinedInput-root {
+            &.Mui-focused fieldset {
+                border-color: rgb(0, 173, 181);
+        }
+      }
+    `
+
+const SpendingTypeSelector = (props) => {
+    const{
+        spending,
+        setSpending
+    }=props
+
+    const handleSelect = (option) => {
+        setSpending({
+            money: spending.money,
+            type: option.target.value
+        })
+    }
     return (
-        <Autocomplete
+        <StyledAutocomplete
             disablePortal
             id="combo-box-demo"
             options={spendingOptions}
+            onSelect={(option) => handleSelect(option)}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Spending" />}
         />
