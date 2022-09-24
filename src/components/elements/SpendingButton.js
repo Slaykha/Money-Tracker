@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 import React from 'react';
 
-const AddSpendingButton = (props) => {
+const SpendingButton = (props) => {
   const{
     handleClick
   } = props
@@ -10,7 +10,8 @@ const AddSpendingButton = (props) => {
         color: "rgb(0, 173, 181)",
         backgroundColor: "rgb(238, 238, 238, 0.6)",
         width:"100px",
-        height:"50px",
+        height:"55px",
+        marginLeft:"10%",
         '&:hover': {
           backgroundColor: "rgb(238, 238, 238, 1)",
         },
@@ -25,4 +26,4 @@ const AddSpendingButton = (props) => {
     );
 };
 
-export default AddSpendingButton;
+export default SpendingButton;

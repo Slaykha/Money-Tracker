@@ -1,49 +1,52 @@
-import { Box, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
-import AddSpendingButton from './elements/AddSpendingButton';
-import MoneyTextField from './elements/MoneyTextField';
+import SpendingButton from './elements/SpendingButton';
+import SpendingDatePicker from './elements/SpendingDatePicker';
 import SpendingTypeSelector from './elements/SpendingTypeSelector';
+import SpendingTextField from './elements/SpeningTextField';
 
 const useStyles = makeStyles({
-    mainStack:{
+    AddDiv:{
+        marginBottom:0,
+        marginTop:"5%",
+        display:"flex",
         margin:"10%",
         padding:"5%",
         borderRadius:"10px",
         backgroundColor: "#393E46"
-    }
+    },
+
 })
 
 const AddSpending = (props) => {
+    const date = new Date()
+
     const classes = useStyles()
 
-    const [spending, setSpending] = useState({money: "", type: ""})
+    const [spending, setSpending] = useState({date:"", money: "", type: ""})
 
     const handleClick = () =>{
         console.log(spending)
     }
 
     return (
-        <div>
-            <Stack
-                className={classes.mainStack}
-                direction="row"
-                justifyContent="space-evenly"
-                alignItems="center"
-            >
-                <MoneyTextField
-                    spending={spending}
-                    setSpending={setSpending}
-                />
-                <SpendingTypeSelector
-                    spending={spending}
-                    setSpending={setSpending}
-                />
-                <AddSpendingButton 
-                    handleClick={handleClick}
-                />
-            </Stack>
-            
+        <div className={classes.AddDiv}>
+            <SpendingDatePicker
+                currentDate={date}
+                spending={spending}
+                setSpending={setSpending}
+            />
+            <SpendingTextField
+                spending={spending}
+                setSpending={setSpending}
+            />
+            <SpendingTypeSelector
+                spending={spending}
+                setSpending={setSpending}
+            />
+            <SpendingButton 
+                handleClick={handleClick}
+            />
         </div>
     );
 };

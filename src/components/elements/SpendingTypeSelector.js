@@ -16,13 +16,6 @@ const StyledAutocomplete = styled(Autocomplete)
     `
         background-color: rgb(238, 238, 238, 0.6);
         border-radius: 5px;
-        & label.Mui-focused {
-            color: rgb(0, 173, 181);
-        }
-        & .MuiOutlinedInput-root {
-            &.Mui-focused fieldset {
-                border-color: rgb(0, 173, 181);
-        }
       }
     `
 
@@ -40,6 +33,7 @@ const SpendingTypeSelector = (props) => {
     }
     return (
         <StyledAutocomplete
+            style={{marginLeft:"5%"}}
             disablePortal
             id="combo-box-demo"
             options={spendingOptions}

@@ -1,5 +1,6 @@
 import React from "react";
 import AddSpending from "./components/AddSpending";
+import SpendingList from "./components/spendingsList/SpendingList";
 
 function App() {
   document.body.style = "background-color: #222831;"
@@ -7,6 +8,7 @@ function App() {
   return (
     <div>
       <AddSpending/>
+      <SpendingList/>
     </div>
   );
 }
