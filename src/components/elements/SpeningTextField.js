@@ -34,25 +34,27 @@ const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
 const SpendingTextField = (props) => {
     const {
       spending,
-      setSpending
+      setSpending,
+      staticWidth
     }=props
 
-    const [moneyValue, setMoneyValue] = useState({formattedValue: ""})
+    const [moneyValue, setMoneyValue] = useState("")
     
     const handleChange = (event) => {
-      setMoneyValue({
-        formattedValue: event.target.value
-      })
+      setMoneyValue(event.target.value)
+
       setSpending({
+        date: spending.date,
         money: event.target.intValue,
         type: spending.type
       });
     };
+
     return (
         <TextField
-            style={{marginLeft:"5%"}}
+            style={{marginLeft:"5%", width: staticWidth}}
             label="Money"
-            value={moneyValue.formattedValue}
+            value={moneyValue}
             onChange={(e) => {handleChange(e)}}
             name="numberformat"
             id="formatted-numberformat-input"

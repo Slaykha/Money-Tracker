@@ -7,7 +7,8 @@ const SpendingDatePicker = (props) => {
     const{
         spending,
         setSpending,
-        currentDate
+        currentDate,
+        staticWidth
     }=props
 
     //we use useRef here ro stop useEffect from geting into loop
@@ -29,7 +30,7 @@ const SpendingDatePicker = (props) => {
             <DesktopDatePicker
                 label="Date"
                 inputFormat="DD/MM/YYYY"
-                InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)" }}}
+                InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
                 value={spending.date}
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}
