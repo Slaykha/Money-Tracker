@@ -22,7 +22,8 @@ const SpendingDatePicker = (props) => {
         setSpending({
             date: newDate,
             money: spending.money,
-            type: spending.type
+            type: spending.type,
+            currency: spending.currency
         });
     };
     return (

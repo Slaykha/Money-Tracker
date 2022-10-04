@@ -4,6 +4,7 @@ import SpendingButton from './elements/SpendingButton';
 import SpendingDatePicker from './elements/SpendingDatePicker';
 import SpendingTypeSelector from './elements/SpendingTypeSelector';
 import SpendingTextField from './elements/SpeningTextField';
+import createSpendingApi from "../api/spendingApi"
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -30,12 +31,13 @@ const AddSpending = ({setSpendingArray}) => {
     const staticWidth = "250px"
     
 
-    const [spending, setSpending] = useState({date:"", money: "", type: ""})
+    const [spending, setSpending] = useState({date:"", money: "", type: "", currency: "Turk Lirası"})
 
     const handleClick = () =>{
         if(spending.money && spending.type){
-            setSpendingArray((prevState) => [...prevState, spending])
-        }
+            createSpendingApi("05647be3", spending)
+/*             setSpendingArray((prevState) => [...prevState, spending])
+ */        }
     }
 
     return (

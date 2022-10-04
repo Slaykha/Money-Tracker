@@ -46,7 +46,8 @@ const SpendingTextField = (props) => {
       setSpending({
         date: spending.date,
         money: event.target.intValue,
-        type: spending.type
+        type: spending.type,
+        currency: spending.currency
       });
     };
 

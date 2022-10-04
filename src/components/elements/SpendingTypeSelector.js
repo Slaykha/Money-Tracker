@@ -36,7 +36,8 @@ const SpendingTypeSelector = (props) => {
         setSpending({
             date: spending.date,
             money: spending.money,
-            type: option.target.value
+            type: option.target.value,
+            currency: spending.currency
         })
     }
     return (
