@@ -1,10 +1,11 @@
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
+import { createSpendingApi } from '../api/spendingApi';
 import SpendingButton from './elements/SpendingButton';
 import SpendingDatePicker from './elements/SpendingDatePicker';
 import SpendingTypeSelector from './elements/SpendingTypeSelector';
 import SpendingTextField from './elements/SpeningTextField';
-import createSpendingApi from "../api/spendingApi"
+import { ENDPOINT } from "../App";
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -31,11 +32,15 @@ const AddSpending = ({setSpendingArray}) => {
     const staticWidth = "250px"
     
 
-    const [spending, setSpending] = useState({date:"", money: "", type: "", currency: "Turk Lirası"})
+    const [spending, setSpending] = useState({date: 0, money: "", type: "", currency: "Turk Lirası"})
 
-    const handleClick = () =>{
+    const handleClick = async () =>{
         if(spending.money && spending.type){
-            createSpendingApi("05647be3", spending)
+            try {
+                createSpendingApi(ENDPOINT, "05647be3", spending)
+            } catch (error) {
+                console.info(error)
+            } 
 /*             setSpendingArray((prevState) => [...prevState, spending])
  */        }
     }

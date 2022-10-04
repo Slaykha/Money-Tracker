@@ -1,11 +1,11 @@
-import axios from 'axios'
+const axios = require("axios").default;
 
-const createSpendingApi = async (userId, data) => {
-    const resp = await axios.post(`http://localhost:12345/spending/${userId}`,
+const createSpendingApi = async (ENDPOINT ,userId, data) => {
+    const resp = await axios.post(`${ENDPOINT}/spending/${userId}`,
         {
             money: data.money,
             currency: data.currency,
-            spendingType: data.spendingType
+            spendingType: data.type
         },
     )
 
