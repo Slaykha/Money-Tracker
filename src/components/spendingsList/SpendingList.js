@@ -18,7 +18,6 @@ const SpendingList = (props) => {
     const getSepndings = async () => {
         try {
             const response = await fetchSpendingsApi(ENDPOINT, "05647be3")
-            console.log(response.data)
 
             setSpendingArray(response.data)
         } catch (error) {
@@ -26,7 +25,6 @@ const SpendingList = (props) => {
         } 
     }
     
-    console.log(spendingArray, "s")
     return (
         <div>
             <ListHead/>

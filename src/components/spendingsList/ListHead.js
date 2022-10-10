@@ -3,19 +3,18 @@ import React from 'react';
 
 const useStyles = makeStyles({
     HeaderDiv:{
-        marginTop:"2%",
-        marginBottom:0,
+        marginTop:"1%",
+        marginBottom:"2%",
         margin:"10%",
-        padding:"2%",
+        padding:"1.5%",
         borderRadius:"10px",
         backgroundColor: "#393E46",
         display:"flex"
     },
     HeaderElement:{
-        marginLeft:"15%",
+        width:"25%",
         color: "rgb(238, 238, 238)",
-        marginLeft:"auto",
-        marginRight:"auto"
+        textAlign:"center"
     }
 })
 

@@ -4,21 +4,23 @@ import { format } from 'date-fns';
 
 const useStyles = makeStyles({
     HeaderDiv:{
-        marginTop:"2%",
+        marginTop:"1%",
         marginBottom:0,
         margin:"10%",
-        padding:"1%",
+        padding:"1% 1.5%",
         borderRadius:"10px",
         backgroundColor: "#393E46",
         display:"flex"
     },
     HeaderElement:{
-        marginLeft:"15%",
+        width:"25%",
         color: "rgb(238, 238, 238)",
-        marginLeft:"auto",
-        marginRight:"auto"
+        textAlign:"center"
     }
 })
+
+const currencyMap = {turkLirası: "$"}
+
 
 const ListItem = (props) => {
     const classes = useStyles()
@@ -26,10 +28,13 @@ const ListItem = (props) => {
     const {
         spending
     }= props
+
+    console.log(currencyMap["turkLirası"])
+
     return (
         <div className={classes.HeaderDiv}>
             <div className={classes.HeaderElement}>{spending.spendingDate}</div>
-            <div className={classes.HeaderElement}>{spending.money}</div>
+            <div className={classes.HeaderElement}>{ spending.money}</div>
             <div className={classes.HeaderElement}>{spending.spendingType}</div>
             <div className={classes.HeaderElement}>DELETE</div>
         </div>
