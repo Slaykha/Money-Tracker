@@ -28,9 +28,9 @@ const ListItem = (props) => {
     }= props
     return (
         <div className={classes.HeaderDiv}>
-            <div className={classes.HeaderElement}>{format(spending.date ,"dd/MM/yyyy")}</div>
+            <div className={classes.HeaderElement}>{spending.spendingDate}</div>
             <div className={classes.HeaderElement}>{spending.money}</div>
-            <div className={classes.HeaderElement}>{spending.type}</div>
+            <div className={classes.HeaderElement}>{spending.spendingType}</div>
             <div className={classes.HeaderElement}>DELETE</div>
         </div>
     );

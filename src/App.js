@@ -16,6 +16,7 @@ function App() {
       />
       <SpendingList
         spendingArray={spendingArray}
+        setSpendingArray={setSpendingArray}
       />
     </div>
   );

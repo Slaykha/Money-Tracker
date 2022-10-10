@@ -9,11 +9,18 @@ const createSpendingApi = async (ENDPOINT ,userId, data) => {
         },
     )
 
-    return resp.status == 201 ? resp.data : false
+    return resp.status === 201 ? resp.data : false
     
 
 }
 
+const fetchSpendingsApi = async (ENDPOINT, userId) => {
+    const resp = await axios.get(`${ENDPOINT}/spendings/${userId}`)
+
+    return resp.status === 200 ? resp : false
+
+}
 module.exports={
-    createSpendingApi
+    createSpendingApi,
+    fetchSpendingsApi
 }
