@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AddSpending from "./components/AddSpending";
+import { Header } from "./components/header/Header";
+import { Menu } from "./components/sideMenu/Menu";
 import SpendingList from "./components/spendingsList/SpendingList";
 
 export const ENDPOINT = "http://localhost:12345"
@@ -11,13 +13,15 @@ function App() {
   
   return (
     <div>
-      <AddSpending
+      <Header />
+      <Menu />
+     {/*  <AddSpending
         setSpendingArray={setSpendingArray}
       />
       <SpendingList
         spendingArray={spendingArray}
         setSpendingArray={setSpendingArray}
-      />
+      /> */}
     </div>
   );
 }
