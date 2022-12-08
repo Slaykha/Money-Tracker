@@ -9,10 +9,11 @@ import { ENDPOINT } from "../App";
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
+        marginTop:0,
+        marginLeft:"350px",   
         marginBottom:0,
-        marginTop:"5%",
         display:"flex",
-        margin:"10%",
+        margin:"100px",
         padding:"5%",
         borderRadius:"10px",
         backgroundColor: "#393E46"
