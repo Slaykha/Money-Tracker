@@ -11,14 +11,15 @@ const useStyles = makeStyles({
       width: drawerWidth,
       backgroundColor: "#1A1A1A",
       height:"calc(100% - 50px)",
-      marginTop:"50px"
+      marginTop:"60px"
     }
   },
   divider:{
     background:"rgba(256,256,256,0.3)"
   },
   lists:{
-    marginTop:"20px"
+    marginTop:"20px",
+    
   }
 })
 

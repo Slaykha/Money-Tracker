@@ -1,6 +1,7 @@
 import { Divider } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
     headerDiv:{
@@ -16,7 +17,9 @@ const useStyles = makeStyles({
         textAlign:"center",
         color:"white",
         fontWeight:500,
-        fontSize:"26px"
+        fontSize:"26px",
+        cursor:"pointer",
+        textDecoration:"none"
     }
   
 })
@@ -26,7 +29,7 @@ export const Header = () => {
 
     return (
         <div className={classes.headerDiv}>
-            <div className={classes.logo}>Spending Tracker</div>
+            <Link to="/" className={classes.logo}>Spending Tracker</Link>
         </div>
     )
     }

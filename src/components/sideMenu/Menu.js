@@ -8,7 +8,7 @@ const useStyles = makeStyles({
         backgroundColor: "#1A1A1A",
         display:"flex",
         paddingLeft:"16px",
-        height:"100%"
+        height:"100%",
     },
   
   
