@@ -11,7 +11,8 @@ export const Item = (props) => {
     const classes = useStyles()
     const{
         itemText,
-        itemType
+        itemType,
+        itemLocation
     } = props
 
     return (
@@ -22,7 +23,7 @@ export const Item = (props) => {
                     variant="contained" 
                     sx={{marginLeft: "22px", width:"210px", justifyContent:"normal", fontSize:"14px"}}
                     component={Link}
-                    to="/add"    
+                    to={`/${itemLocation}`}    
                 >
                     {itemText}
                 </Button>  

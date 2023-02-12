@@ -26,7 +26,8 @@ const useStyles = makeStyles({
 export const LeftDrawer = () => {
   const classes = useStyles()
 
-  const [listItems, setListItems] = useState([{itemText:"Home Page", itemType:"Button"}])
+  const [homeListItems, setHomeListItems] = useState([{itemText:"Home Page", itemType:"Button", itemLocation:""}])
+  const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Add Spendngs", itemType:"Button", itemLocation:"add"}])
 
   return (
     <Drawer
@@ -36,7 +37,8 @@ export const LeftDrawer = () => {
       <div className={classes.lists}>
         <Divider classes={{root: classes.divider}} variant="middle"/>
         
-        <ItemList listTitle={"Home"} listItems={listItems}/>
+        <ItemList listTitle={"Home"} listItems={homeListItems}/>
+        <ItemList listTitle={"Spendings"} listItems={speningsListItems}/>
       </div>
     </Drawer>
   )

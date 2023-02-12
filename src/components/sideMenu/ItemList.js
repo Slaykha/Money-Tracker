@@ -23,7 +23,7 @@ export const ItemList = (props) => {
                 {listTitle}
             </div>
             {listItems && listItems.map((listItem) => (
-                <Item itemText={listItem.itemText} itemType={listItem.itemType}/>
+                <Item itemText={listItem.itemText} itemType={listItem.itemType} itemLocation={listItem.itemLocation}/>
             ))}
         </div>
     ) 
