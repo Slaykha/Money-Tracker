@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
-import AddSpending from "./components/AddSpending";
 import { Header } from "./components/header/Header";
 import { Home } from "./components/Home";
 import { Menu } from "./components/sideMenu/Menu";
 import SpendingList from "./components/spendingsList/SpendingList";
+import Spending from "./components/Spending";
 
 export const ENDPOINT = "http://localhost:12345"
 
@@ -20,7 +20,7 @@ function App() {
         <Menu />
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/add" element={<AddSpending setSpendingArray={setSpendingArray}/>} />
+          <Route path="/spending" element={<Spending setSpendingArray={setSpendingArray}/>} />
         </Routes>
         
       </BrowserRouter>

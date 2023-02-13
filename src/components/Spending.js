@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-const AddSpending = ({setSpendingArray}) => {
+const Spending = ({setSpendingArray}) => {
     const classes = useStyles()
 
     const date = new Date()
@@ -72,4 +72,4 @@ const AddSpending = ({setSpendingArray}) => {
     );
 };
 
-export default AddSpending;
+export default Spending;
