@@ -27,7 +27,7 @@ export const LeftDrawer = () => {
   const classes = useStyles()
 
   const [homeListItems, setHomeListItems] = useState([{itemText:"Home Page", itemType:"Button", itemLocation:""}])
-  const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Add Spendngs", itemType:"Button", itemLocation:"add"}])
+  const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Add Spendngs", itemType:"Text", itemLocation:"add"}])
 
   return (
     <Drawer
@@ -37,8 +37,8 @@ export const LeftDrawer = () => {
       <div className={classes.lists}>
         <Divider classes={{root: classes.divider}} variant="middle"/>
         
-        <ItemList listTitle={"Home"} listItems={homeListItems}/>
-        <ItemList listTitle={"Spendings"} listItems={speningsListItems}/>
+        <ItemList listTitle={"Main"} listItems={homeListItems}/>
+        <ItemList listTitle={"Spending"} listItems={speningsListItems}/>
       </div>
     </Drawer>
   )
