@@ -1,11 +1,11 @@
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
-import { createSpendingApi } from '../api/spendingApi';
-import SpendingButton from './elements/SpendingButton';
-import SpendingDatePicker from './elements/SpendingDatePicker';
-import SpendingTypeSelector from './elements/SpendingTypeSelector';
-import SpendingTextField from './elements/SpeningTextField';
-import { ENDPOINT } from "../App";
+import { createSpendingApi } from '../../api/spendingApi';
+import SpendingButton from '../elements/SpendingButton';
+import SpendingDatePicker from '../elements/SpendingDatePicker';
+import SpendingTypeSelector from '../elements/SpendingTypeSelector';
+import SpendingTextField from '../elements/SpeningTextField';
+import { ENDPOINT } from "../../App";
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
