@@ -31,7 +31,6 @@ const Spending = ({setSpendingArray}) => {
 
     const date = new Date()
     const staticWidth = "250px"
-    
 
     const [spending, setSpending] = useState({date: 0, money: "", type: "", currency: "Turk Lirası"})
 
