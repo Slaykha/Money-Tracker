@@ -7,7 +7,6 @@ const useStyles = makeStyles(() =>({
     width:"100%",
     height:300,
     position:"absolute",
-    top:80
   }
 }))
 
@@ -15,6 +14,7 @@ export const Home = () => {
   const classes = useStyles();
   return (
     <div>
+      <div>deneme</div>
       <div className={classes.homeHeader}>
 
       </div>

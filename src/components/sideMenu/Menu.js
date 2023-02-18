@@ -4,7 +4,7 @@ import { LeftDrawer } from './LeftDrawer'
 
 const useStyles = makeStyles({
     sideMenu:{
-
+        width:250,
         backgroundColor: "#1A1A1A",
         display:"flex",
         paddingLeft:"16px",
