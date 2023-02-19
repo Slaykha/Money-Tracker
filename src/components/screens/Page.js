@@ -19,13 +19,11 @@ const useStyles = makeStyles({
     display: "block",
   },
   pagination: {
-    display: "flex",
     justifyContent: "center",
     marginTop: "24px",
   },
   search: {
     marginBottom: "12px",
-    display: "flex",
   },
   searchButton: {
     marginLeft: "10px",
@@ -36,14 +34,14 @@ export default function Page(props) {
   const classes = useStyles();
 
   const PageComponent = props.component;
-
+/* 
   React.useEffect(() => {
     document.title = props.title;
-  });
+  }); */
 
   return (
-    <div>
-      <div className={classes.pageHeader}>
+    <div style={{marginLeft:"250px"}}>
+      {/* <div className={classes.pageHeader}>
         <div className={classes.pageHeaderTitles}>
           <Typography className={classes.pageTitle}>{props.title}</Typography>
           <Typography id="secondTitle" className={classes.pageTitle2}>
@@ -52,7 +50,7 @@ export default function Page(props) {
         </div>
 
         <Divider />
-      </div>
+      </div> */}
 
       <PageComponent />
     </div>

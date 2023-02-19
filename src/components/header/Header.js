@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
     headerDiv:{
-        marginBottom:"2%",
         padding:"25px",
         borderRadius:"10px",
         backgroundColor: "#1A1A1A",

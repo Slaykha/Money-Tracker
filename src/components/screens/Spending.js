@@ -10,7 +10,6 @@ import { ENDPOINT } from "../../App";
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
         marginTop:0,
-        marginLeft:"350px",   
         marginBottom:0,
         display:"flex",
         margin:"100px",

@@ -9,6 +9,7 @@ import Register from "./components/screens/Register";
 import { Container } from '@mui/material';
 import Page from "./components/screens/Page";
 import { makeStyles } from "@mui/styles";
+import { LeftDrawer } from "./components/sideMenu/LeftDrawer";
 
 export const ENDPOINT = "http://localhost:12345"
 
@@ -37,18 +38,13 @@ function App() {
         <Header />
         <Menu />
 
-        <main className={classes.content}>
-          <div />
-            <Container maxWidth="md">
               <Routes>
                 <Route path="/" element={<Page component={Home} title={"Home Screen"} />}/>
                 <Route path="/spending" element={<Page component={Spending} title={"Spending"} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} /> 
               </Routes>
-            </Container>
           
-        </main>
       </HashRouter>
      {/*  <AddSpending
         setSpendingArray={setSpendingArray}
