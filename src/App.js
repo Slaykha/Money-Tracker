@@ -4,8 +4,8 @@ import { Header } from "./components/header/Header";
 import { Home } from "./components/screens/Home";
 import { Menu } from "./components/sideMenu/Menu";
 import Spending from "./components/screens/Spending";
-import Login from "./components/screens/Login";
-import Register from "./components/screens/Register";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import { Container } from '@mui/material';
 import Page from "./components/screens/Page";
 import { makeStyles } from "@mui/styles";
@@ -35,15 +35,14 @@ function App() {
   return (
     <div>
       <HashRouter>
-        <Header />
-        <Menu />
 
-              <Routes>
-                <Route path="/" element={<Page component={Home} title={"Home Screen"} />}/>
-                <Route path="/spending" element={<Page component={Spending} title={"Spending"} />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} /> 
-              </Routes>
+
+        <Routes>
+          <Route path="/" element={<Page component={Home} title={"Home Screen"} />}/>
+          <Route path="/spending" element={<Page component={Spending} title={"Spending"} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} /> 
+        </Routes>
           
       </HashRouter>
      {/*  <AddSpending
