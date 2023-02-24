@@ -6,21 +6,21 @@ const useStyles = makeStyles(() =>({
     homeHeader:{
       background:"linear-gradient(to right, #0048B2 ,#3B8AFF, #0048B2)",
       width:"calc(100% - 250px)",
-      height:300,
+      height:200,
       position:"absolute",
     },
     headerTitle:{
         color:"white",
         position:"absolute",
         fontSize:28,
-        top:80,
+        top:30,
         left:30
     },
     headerText:{
         color:"white",
         position:"absolute",
         fontSize:18,
-        top:125,
+        top:75,
         left:30
     }
 }))
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() =>({
 export const HomePage = () => {
     const classes = useStyles()
 
-    const [boxElements, setBoxElements] = useState([{icon:"", title:"Total Spendings", content:"₺5.514,52"},])
+    const [boxElements, setBoxElements] = useState([{icon:"", title:"Total Spendings", content:"₺5.514,52"},{icon:"", title:"Total Spendings", content:"₺5.514,52"},])
 
     return (
         <div>

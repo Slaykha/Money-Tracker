@@ -12,7 +12,7 @@ const useStyles = makeStyles(() =>({
       height:120,
       borderRadius:10,
       color:"#D3D3D3",
-      marginTop:"250px",
+      marginTop:"150px",
       paddingLeft:"35px",
       marginRight:"4%"
     },
