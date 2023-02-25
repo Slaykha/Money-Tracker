@@ -51,6 +51,20 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
 
+  const handleClick = () => {
+    if(handleCheckPassword()){
+      handleRegister()
+    }
+  }
+
+  const handleCheckPassword = () => {
+    return (password === passwordCheck)
+  }
+
+  const handleRegister = () => {
+    console.log(email, password, name)
+  }
+
   return (
     <div className={classes.registerDiv}>
       <div className={classes.registerHeader}>Register</div>
@@ -61,6 +75,7 @@ const Register = () => {
         onChange={e => setName(e.target.value)}
         type="text"
         className={classes.registerTextField}
+        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -83,6 +98,7 @@ const Register = () => {
         onChange={e => setEmail(e.target.value)}
         type="text"
         className={classes.registerTextField}
+        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -105,6 +121,7 @@ const Register = () => {
         onChange={e => setPassword(e.target.value)}
         type="password"
         className={classes.registerTextField}
+        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -127,6 +144,7 @@ const Register = () => {
         onChange={e => setPasswordCheck(e.target.value)}
         type="password"
         className={classes.registerTextField}
+        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -145,6 +163,7 @@ const Register = () => {
       <Button 
         className={classes.registerButton}
         variant="contained"
+        onClick={handleClick}
         sx={{
           display:"flex",
           margin:"auto",

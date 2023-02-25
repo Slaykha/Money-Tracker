@@ -49,7 +49,13 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    console.log(email, password)
+    const handleClick = () => {
+      handleLogin()
+    }
+
+    const handleLogin = () => {
+      console.log(email, password)
+    }
 
     return (
       <div className={classes.loginDiv}>
@@ -105,6 +111,7 @@ const Login = () => {
         <Button 
           className={classes.loginButton}
           variant="contained"
+          onClick={handleClick}
           sx={{
             display:"flex",
             margin:"auto",
