@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
+import universe from "../../images/universe.jpg"
 
 const useStyles = makeStyles((theme) => ({
   loginDiv:{
@@ -50,14 +51,23 @@ const Login = () => {
     const [password, setPassword] = useState("")
 
     const handleClick = () => {
-      handleLogin()
+      if(handleValidateEmail()){
+        handleLogin()
+      }
     }
+
+    const handleValidateEmail = () => {
+      return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(email))
+    } 
 
     const handleLogin = () => {
       console.log(email, password)
     }
 
     return (
+      <div style={{ 
+        backgroundImage: `url(${universe})` 
+      }}>
       <div className={classes.loginDiv}>
         <div className={classes.loginHeader}>Login</div>
         <TextField 
@@ -129,6 +139,8 @@ const Login = () => {
           <Link className={classes.registerLink} to="/register"> Register</Link>
         </div>
       </div>
+      </div>
+
     )
 }
 

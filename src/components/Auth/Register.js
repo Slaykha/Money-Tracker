@@ -52,14 +52,20 @@ const Register = () => {
   const [passwordCheck, setPasswordCheck] = useState("")
 
   const handleClick = () => {
-    if(handleCheckPassword()){
+    if(handleCheckPassword() && handleValidateEmail()){
       handleRegister()
+    }else{
+      console.log("HATA!")
     }
   }
 
   const handleCheckPassword = () => {
     return (password === passwordCheck)
   }
+
+  const handleValidateEmail = () => {
+    return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(email))
+  }  
 
   const handleRegister = () => {
     console.log(email, password, name)
@@ -75,7 +81,7 @@ const Register = () => {
         onChange={e => setName(e.target.value)}
         type="text"
         className={classes.registerTextField}
-        required
+        
         sx={{
           display:"flex",
           margin:"auto",
@@ -98,7 +104,6 @@ const Register = () => {
         onChange={e => setEmail(e.target.value)}
         type="text"
         className={classes.registerTextField}
-        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -121,7 +126,6 @@ const Register = () => {
         onChange={e => setPassword(e.target.value)}
         type="password"
         className={classes.registerTextField}
-        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -144,7 +148,6 @@ const Register = () => {
         onChange={e => setPasswordCheck(e.target.value)}
         type="password"
         className={classes.registerTextField}
-        required
         sx={{
           display:"flex",
           margin:"auto",
@@ -172,7 +175,6 @@ const Register = () => {
           "&:hover":{
             background:"#368A65"
           }
-
         }}
       >
         Register
