@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import universe from "../../images/universe.jpg"
+import { LoginApi } from '../../api/authApi';
+import { ENDPOINT } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   loginDiv:{
@@ -49,19 +51,31 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const handleClick = () => {
-      if(handleValidateEmail()){
+      
         handleLogin()
-      }
+      
     }
 
     const handleValidateEmail = () => {
       return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(email))
     } 
 
-    const handleLogin = () => {
-      console.log(email, password)
+    const handleLogin = async () => {
+      try{
+        let response = await LoginApi(ENDPOINT, {email, password})
+        if(response){
+          setIsLoggedIn(true)
+        }
+      }catch(e){
+        console.error(e)
+      }
+    }
+
+    if(isLoggedIn){
+      return <Navigate to="/" />
     }
 
     return (

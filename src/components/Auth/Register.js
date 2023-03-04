@@ -2,7 +2,9 @@ import { Button, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { hover } from '@testing-library/user-event/dist/hover'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { RegisterApi } from '../../api/authApi'
+import { ENDPOINT } from '../../App'
 
 const useStyles = makeStyles((theme) => ({
   registerDiv:{
@@ -50,13 +52,14 @@ const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
+  const [isRegistered, setIsRegistered] = useState(false)
 
   const handleClick = () => {
-    if(handleCheckPassword() && handleValidateEmail()){
+    //
       handleRegister()
-    }else{
+ /*    }else{
       console.log("HATA!")
-    }
+    } */
   }
 
   const handleCheckPassword = () => {
@@ -67,8 +70,19 @@ const Register = () => {
     return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(email))
   }  
 
-  const handleRegister = () => {
-    console.log(email, password, name)
+  const handleRegister = async () => {
+    try{
+      const resp = await RegisterApi(ENDPOINT, {name, email, password})
+      if(resp){
+        setIsRegistered(true)
+      }
+    }catch(e){
+      console.error(e)
+    }
+  }
+
+  if(isRegistered){
+    return <Navigate to="/login" setIsRegistered />
   }
 
   return (
