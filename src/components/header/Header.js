@@ -19,16 +19,27 @@ const useStyles = makeStyles({
         fontSize:"26px",
         cursor:"pointer",
         textDecoration:"none"
+    },
+    rightSide:{
+        textAlign:"right",
+        color:"white",
+        fontSize:"18px",
+        cursor:"pointer",
+        textDecoration:"none",
+        marginLeft:"auto"
     }
   
 })
 
-export const Header = () => {
+export const Header = ({user}) => {
     const classes = useStyles()
 
     return (
         <div className={classes.headerDiv}>
             <Link to="/" className={classes.logo}>Spending Tracker</Link>
+            <div className={classes.rightSide}>
+                {user.name}
+            </div>
         </div>
     )
     }

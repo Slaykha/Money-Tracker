@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter, HashRouter, Route, Routes, Switch } from "react-router-dom";
-import { Header } from "./components/header/Header";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./components/screens/Home";
-import { Menu } from "./components/sideMenu/Menu";
 import Spending from "./components/screens/Spending";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import { Container } from '@mui/material';
 import Page from "./components/screens/Page";
 import { makeStyles } from "@mui/styles";
-import { LeftDrawer } from "./components/sideMenu/LeftDrawer";
 
 export const ENDPOINT = "http://localhost:12345"
 
