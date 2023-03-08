@@ -1,7 +1,5 @@
 import { makeStyles } from '@mui/styles'
-import React, { useEffect, useState } from 'react'
-import { GetUserApi } from '../../api/authApi'
-import { ENDPOINT } from '../../App'
+import React, { useState } from 'react'
 import { Boxes } from './Boxes'
 
 const useStyles = makeStyles(() =>({
@@ -27,16 +25,15 @@ const useStyles = makeStyles(() =>({
     }
 }))
 
-export const HomePage = (props) => {
+export const HomePage = ({user}) => {
     const classes = useStyles()
-    console.log(props)
 
     const [boxElements, setBoxElements] = useState([{icon:"", title:"Total Spendings", content:"₺5.514,52"},{icon:"", title:"Total Spendings", content:"₺5.514,52"},])
 
     return (
         <div>
             <div className={classes.homeHeader}>
-                <div className={classes.headerTitle}> Hello  </div>
+                <div className={classes.headerTitle}> Hello {user.name} </div>
                 <div className={classes.headerText}> We are on a mission to make peoples life easier. </div>
                 <Boxes boxElements={boxElements}/>
                 

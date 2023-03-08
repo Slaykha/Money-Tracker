@@ -61,23 +61,16 @@ const Login = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
-      console.log(user)
+      console.log(user.user)
       if(user.user){
         setIsLoggedIn(true)
       }else{
         setIsLoggedIn(false)
       }
-    }, [user])
-    
-    useEffect(() => {
-      fetchUser()
-    }, [])
-    
+    }, [user.user])
   
     const handleClick = () => {
-      
         handleLogin()
-      
     }
 
     const handleValidateEmail = () => {

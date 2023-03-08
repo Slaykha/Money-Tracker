@@ -1,7 +1,8 @@
-import { Divider } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { LogoutApi } from '../../api/authApi'
+import { ENDPOINT } from '../../App'
 
 const useStyles = makeStyles({
     headerDiv:{
@@ -34,10 +35,18 @@ const useStyles = makeStyles({
 export const Header = ({user}) => {
     const classes = useStyles()
 
+    const handleLogOut = async () => {
+        try{
+            await LogoutApi(ENDPOINT)
+        }catch(e){
+            console.errır(e)
+        }
+    }
+
     return (
         <div className={classes.headerDiv}>
             <Link to="/" className={classes.logo}>Spending Tracker</Link>
-            <div className={classes.rightSide}>
+            <div className={classes.rightSide} onClick={() => handleLogOut()}>
                 {user.name}
             </div>
         </div>

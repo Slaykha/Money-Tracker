@@ -27,6 +27,14 @@ const LoginApi = async (ENDPOINT, data) => {
     return resp.status === 200 ? resp : false
 }
 
+const LogoutApi = async (ENDPOINT) => {
+    const resp = await axios.post(`${ENDPOINT}/user/logout`,
+    {withCredentials: true},
+    )
+
+    return resp.status === 200 ? resp : false
+}
+
 const GetUserApi = async (ENDPOINT) => {
     const resp = await axios.get(`${ENDPOINT}/user/token`,
     {withCredentials: true},
@@ -38,5 +46,6 @@ const GetUserApi = async (ENDPOINT) => {
 module.exports={
     RegisterApi,
     LoginApi,
+    LogoutApi,
     GetUserApi
 }
