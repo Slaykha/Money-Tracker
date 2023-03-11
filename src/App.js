@@ -63,7 +63,6 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
 });
 
 const mapDispatchToProps = (dispatch) => ({
