@@ -53,12 +53,13 @@ const Login = (props) => {
 
     const {
       fetchUser,
-      user
+      user,
+      isLoggedIn
     } = props
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    /* const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
       console.log(user.user)
@@ -67,7 +68,7 @@ const Login = (props) => {
       }else{
         setIsLoggedIn(false)
       }
-    }, [user.user])
+    }, [user.user]) */
   
     const handleClick = () => {
         handleLogin()
@@ -80,13 +81,13 @@ const Login = (props) => {
     const handleLogin = async () => {
       try{
         await LoginApi(ENDPOINT, {email, password})
-        fetchUser()
+        //fetchUser()
       }catch(e){
-        console.error(e)
+        console.log(e)
       }
     }
 
-    if(isLoggedIn){
+    if(!isLoggedIn){
       return <Navigate to="/" />
     }
 

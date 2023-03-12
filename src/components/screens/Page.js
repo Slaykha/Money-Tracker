@@ -15,27 +15,29 @@ function Page(props) {
 
   const {
     user,
-    fetchSpendings
+    fetchSpendings,
+    isLoggedIn
   } = props
 
   const PageComponent = props.component;
 
   useEffect(() => {
-    if(user.user.id != ""){
-      fetchSpendings(user.user.id)
+    if(user.id && user.id != ""){
+      console.log(user.id, "@@@@@@@@@@@@")
+      fetchSpendings(user.id)
     }
   }, [user])
-  
+
 
   return (
     <>
-      {user.user ?
+      {!isLoggedIn ?
       <>
-        <Header user={user.user}/>
+        <Header user={user}/>
         <Menu/>
         <div style={{marginLeft:"250px"}}>
 
-          <PageComponent user={user.user}/>
+          <PageComponent user={user}/>
         </div>
       </>
       :

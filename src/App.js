@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "./components/screens/Home";
 import Spending from "./components/screens/Spending";
 import Login from "./components/Auth/Login";
@@ -28,28 +28,33 @@ function App(props) {
   document.body.style = "background-color: #222831;"
 
   const {
-    fetchUser
+    fetchUser,
+    user
   } = props
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     fetchUser()
   }, [])
-  
 
-  const [spendingArray, setSpendingArray] = useState([])
+  useEffect(() => {
+    if(user){
+      setIsLoggedIn(true)
+    }else{
+      setIsLoggedIn(false)
+    }
+  }, [user])
   
   return (
     <div>
       <HashRouter>
-
-
         <Routes>
-          <Route path="/" element={<Page component={Home} title={"Home Screen"} />}/>
-          <Route path="/spending" element={<Page component={Spending} title={"Spending"} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} /> 
+          <Route path="/" element={<Page component={Home} isLoggedIn={isLoggedIn} Ititle={"Home Screen"} />}/>
+          <Route path="/spending" element={<Page component={Spending} isLoggedIn={isLoggedIn} title={"Spending"} />} />
+          <Route path="/login" element={<Login isLoggedIn={isLoggedIn}/>} />
+          <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
         </Routes>
-          
       </HashRouter>
      {/*  <AddSpending
         setSpendingArray={setSpendingArray}
@@ -63,6 +68,7 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user
 });
 
 const mapDispatchToProps = (dispatch) => ({

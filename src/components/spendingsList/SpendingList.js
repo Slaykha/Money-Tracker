@@ -42,7 +42,7 @@ const SpendingList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.user.user.id,
+    userId: state.user.id,
     spendings: state.spendings
 });
 
