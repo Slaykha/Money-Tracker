@@ -3,32 +3,35 @@ import { fetchSpendingsApi } from '../../api/spendingApi';
 import ListHead from './ListHead';
 import ListItem from './ListItem';
 import { ENDPOINT } from "../../App";
+import { connect } from 'react-redux';
 
 const SpendingList = (props) => {
     const{
         spendingArray,
-        setSpendingArray
+        setSpendingArray,
+        userId,
+        spendings
     }=props
 
 
-    useEffect(() => {
+    /* useEffect(() => {
         getSepndings()
     }, [])
 
     const getSepndings = async () => {
         try {
-            const response = await fetchSpendingsApi(ENDPOINT, "05647be3")
+            const response = await fetchSpendingsApi(ENDPOINT, userId)
 
             setSpendingArray(response.data)
         } catch (error) {
             console.info(error)
         } 
-    }
+    } */
     
     return (
         <div>
             <ListHead/>
-            {spendingArray && spendingArray.map((spending) => (
+            {spendings && spendings.map((spending) => (
                 <ListItem
                     spending={spending}
                 />
@@ -38,4 +41,13 @@ const SpendingList = (props) => {
     );
 };
 
-export default SpendingList;
+const mapStateToProps = (state) => ({
+    userId: state.user.user.id,
+    spendings: state.spendings
+});
+
+const mapDispatchToProps = (dispatch) => ({
+   
+});
+
+export default connect(mapStateToProps,) (SpendingList);

@@ -1,11 +1,12 @@
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
-import { createSpendingApi } from '../../api/spendingApi';
 import SpendingButton from '../elements/SpendingButton';
 import SpendingDatePicker from '../elements/SpendingDatePicker';
 import SpendingTypeSelector from '../elements/SpendingTypeSelector';
 import SpendingTextField from '../elements/SpeningTextField';
-import { ENDPOINT } from "../../App";
+import { connect } from 'react-redux';
+import { createSpending } from '../../actions/spendingAction';
+import SpendingList from '../spendingsList/SpendingList';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -25,49 +26,71 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-const Spending = ({setSpendingArray}) => {
+const Spending = (props) => {
     const classes = useStyles()
+
+    const {
+        setSpendingArray,
+        userId,
+        createSpending
+    } = props
 
     const date = new Date()
     const staticWidth = "250px"
 
     const [spending, setSpending] = useState({date: 0, money: "", type: "", currency: "Turk Lirası"})
 
-    const handleClick = async () =>{
+    const handleClick = () =>{
         if(spending.money && spending.type){
-            try {
-                createSpendingApi(ENDPOINT, "05647be3", spending)
+            createSpending(userId, spending)
+            /* try {
+                createSpendingApi(ENDPOINT, userId, spending)
             } catch (error) {
                 console.info(error)
             } 
-/*             setSpendingArray((prevState) => [...prevState, spending])
- */        }
+            setSpendingArray((prevState) => [...prevState, spending]) */
+        }
     }
 
     return (
-        <div className={classes.AddDiv}>
-            <SpendingDatePicker
-                currentDate={date}
-                spending={spending}
-                setSpending={setSpending}
-                staticWidth={staticWidth}
-            />
-            <SpendingTextField
-                spending={spending}
-                setSpending={setSpending}
-                staticWidth={staticWidth}
-            />
-            <SpendingTypeSelector
-                spending={spending}
-                setSpending={setSpending}
-                staticWidth={staticWidth}
-            />
-            <SpendingButton 
-                handleClick={handleClick}
-                staticWidth={staticWidth}
-            />
-        </div>
+        <>
+            <div className={classes.AddDiv}>
+                <SpendingDatePicker
+                    currentDate={date}
+                    spending={spending}
+                    setSpending={setSpending}
+                    staticWidth={staticWidth}
+                />
+                <SpendingTextField
+                    spending={spending}
+                    setSpending={setSpending}
+                    staticWidth={staticWidth}
+                />
+                <SpendingTypeSelector
+                    spending={spending}
+                    setSpending={setSpending}
+                    staticWidth={staticWidth}
+                />
+                <SpendingButton 
+                    handleClick={handleClick}
+                    staticWidth={staticWidth}
+                />
+            </div>
+            <SpendingList />
+        </>
+
+        
     );
 };
 
-export default Spending;
+const mapStateToProps = (state) => ({
+    userId: state.user.user.id    
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    createSpending: (userId, spending)=>{
+        dispatch(createSpending(userId, spending))
+    }
+});
+
+export default connect(mapStateToProps,mapDispatchToProps) (Spending);

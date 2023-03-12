@@ -1,6 +1,6 @@
-import { fetchSpendingsApi } from "../api/spendingApi"
+import { createSpendingApi, fetchSpendingsApi } from "../api/spendingApi"
 import { ENDPOINT } from "../App"
-import { FETCH_SPENDINGS } from "./types"
+import { CREATE_SPENDING, FETCH_SPENDINGS } from "./types"
 
 export const fetchSpendings = (userId) => async (
     dispatch
@@ -10,4 +10,14 @@ export const fetchSpendings = (userId) => async (
             type: FETCH_SPENDINGS,
             payload: resp.data
         })
+}
+
+export const createSpending = (userId, spending) => async (dispatch) => {
+    const resp = await createSpendingApi(ENDPOINT, userId, spending)
+        if(resp){
+            dispatch({
+                type: CREATE_SPENDING,
+                payload: resp
+            })
+        }
 }

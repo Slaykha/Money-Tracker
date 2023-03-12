@@ -1,2 +1,3 @@
 export const FETCH_USER = "FETCH_USER";
 export const FETCH_SPENDINGS = "FETCH_SPENDINGS";
+export const CREATE_SPENDING = "CREATE_SPENDING";
