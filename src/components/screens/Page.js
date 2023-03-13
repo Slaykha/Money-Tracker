@@ -23,7 +23,6 @@ function Page(props) {
 
   useEffect(() => {
     if(user.id && user.id != ""){
-      console.log(user.id, "@@@@@@@@@@@@")
       fetchSpendings(user.id)
     }
   }, [user])

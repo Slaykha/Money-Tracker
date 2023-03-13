@@ -84,7 +84,7 @@ const Spending = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.user.user.id    
+    userId: state.user.id    
 });
 
 const mapDispatchToProps = (dispatch) => ({

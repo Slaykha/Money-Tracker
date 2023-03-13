@@ -52,7 +52,7 @@ function App(props) {
         <Routes>
           <Route path="/" element={<Page component={Home} isLoggedIn={isLoggedIn} Ititle={"Home Screen"} />}/>
           <Route path="/spending" element={<Page component={Spending} isLoggedIn={isLoggedIn} title={"Spending"} />} />
-          <Route path="/login" element={<Login isLoggedIn={isLoggedIn}/>} />
+          <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
         </Routes>
       </HashRouter>

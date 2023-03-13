@@ -10,7 +10,11 @@ const useStyles = makeStyles({
         borderRadius:"10px",
         backgroundColor: "#1A1A1A",
         display:"flex",
-        paddingLeft:0
+        paddingLeft:0,
+        position: "sticky",
+        top: 0, 
+        zIndex:9999
+
     },
     logo:{
         width:"250px",
