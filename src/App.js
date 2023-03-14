@@ -39,7 +39,7 @@ function App(props) {
   }, [])
 
   useEffect(() => {
-    if(user){
+    if(Object.keys(user).length !== 0){
       setIsLoggedIn(true)
     }else{
       setIsLoggedIn(false)

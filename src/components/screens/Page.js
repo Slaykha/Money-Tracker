@@ -27,10 +27,13 @@ function Page(props) {
     }
   }, [user])
 
+  console.log(isLoggedIn)
+  if(!isLoggedIn){
+    return <Navigate to="/login" />
+  }
 
   return (
     <>
-      {!isLoggedIn ?
       <>
         <Header user={user}/>
         <Menu/>
@@ -39,11 +42,7 @@ function Page(props) {
           <PageComponent user={user}/>
         </div>
       </>
-      :
-      <Navigate to="/login"/>
-      }
     </>
-    
   );
 }
 

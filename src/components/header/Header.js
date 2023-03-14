@@ -43,7 +43,7 @@ export const Header = ({user}) => {
         try{
             await LogoutApi(ENDPOINT)
         }catch(e){
-            console.errır(e)
+            console.error(e)
         }
     }
 
