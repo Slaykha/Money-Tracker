@@ -22,7 +22,7 @@ function Page(props) {
   const PageComponent = props.component;
 
   useEffect(() => {
-    if(user.id && user.id != ""){
+    if(user.id && user.id !== ""){
       fetchSpendings(user.id)
     }
   }, [user])

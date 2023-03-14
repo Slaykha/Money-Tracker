@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { Link, Navigate } from 'react-router-dom';
-import universe from "../../images/universe.jpg"
+import loginBackground from "../../images/loginBackground.jpg"
+import loginBackground2 from "../../images/loginBackground2.jpg"
+import loginVideo from "../../images/loginVideo.mp4"
 import { LoginApi } from '../../api/authApi';
 import { ENDPOINT } from '../../App';
 import { connect } from 'react-redux';
@@ -45,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "white !important",
     color:"whitesmoke"
   },
+  imageContent:{
+    backgroundImage: `url(${loginBackground2})`,
+    backgroundSize: "fill",
+    backgroundRepeat: "no-repeat",
+    maxWidth: "100vw",
+    height: "100vh",
+}
 
 }))
 
@@ -92,9 +101,7 @@ const Login = (props) => {
     }
 
     return (
-      <div style={{ 
-        backgroundImage: `url(${universe})` 
-      }}>
+      <div className={classes.imageContent}>
       <div className={classes.loginDiv}>
         <div className={classes.loginHeader}>Login</div>
         <TextField 
