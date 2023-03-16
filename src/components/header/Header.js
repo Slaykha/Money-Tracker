@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { LogoutApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
 
@@ -42,6 +42,7 @@ export const Header = ({user}) => {
     const handleLogOut = async () => {
         try{
             await LogoutApi(ENDPOINT)
+            return <Navigate to="/login"/>
         }catch(e){
             console.error(e)
         }

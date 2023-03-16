@@ -2,7 +2,9 @@ import { Button, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { hover } from '@testing-library/user-event/dist/hover'
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
+import { fetchUser } from '../../actions/userActions'
 import { RegisterApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
 
@@ -45,8 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Register = () => {
+const Register = (props) => {
   const classes = useStyles() 
+  const {
+    isLoggedIn,
+    fetchUser
+  } = props
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -55,11 +61,12 @@ const Register = () => {
   const [isRegistered, setIsRegistered] = useState(false)
 
   const handleClick = () => {
-    //
+    if(handleCheckPassword()){
       handleRegister()
- /*    }else{
+    }
+    else{
       console.log("HATA!")
-    } */
+    }
   }
 
   const handleCheckPassword = () => {
@@ -74,15 +81,15 @@ const Register = () => {
     try{
       const resp = await RegisterApi(ENDPOINT, {name, email, password})
       if(resp){
-        setIsRegistered(true)
+        fetchUser()
       }
     }catch(e){
       console.error(e)
     }
   }
 
-  if(isRegistered){
-    return <Navigate to="/login" setIsRegistered />
+  if(isLoggedIn){
+    return <Navigate to="/" />
   }
 
   return (
@@ -201,4 +208,13 @@ const Register = () => {
   )
 }
 
-export default Register
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUser: () => {
+    dispatch(fetchUser());
+  },
+});
+
+export default connect(mapStateToProps,mapDispatchToProps) (Register);

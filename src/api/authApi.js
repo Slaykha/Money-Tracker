@@ -7,11 +7,11 @@ const RegisterApi = async (ENDPOINT, data) => {
             email: data.email,
             password: data.password
         },
+        {withCredentials: true},
     )
 
-    return resp.status === 201 ? resp.data : false
+    return resp.status === 201 ? resp : false
     
-
 }
 
 const LoginApi = async (ENDPOINT, data) => {
