@@ -94,7 +94,7 @@ const Login = (props) => {
           fetchUser()
         }
       }catch(e){
-        console.log(e)
+        console.error(e)
       }
     }
 
@@ -105,77 +105,77 @@ const Login = (props) => {
 
     return (
       <div className={classes.imageContent}>
-      <div className={classes.loginDiv}>
-        <div className={classes.loginHeader}>Login</div>
-        <TextField 
-          label="Email" 
-          variant="outlined" 
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          type="text"
-          className={classes.emailTextField}
-          sx={{
-            display:"flex",
-            margin:"auto",
-            marginTop:"20%",
-            color:"white",
-            input: {
-              color:"whitesmoke"
-            },
-          }}
-          InputProps={{
-            classes: {
-              notchedOutline: classes.notchedOutline
-            }
-          }}
-          InputLabelProps={{
-            style: { color: '#fff' },
-          }}
-        />
+        <div className={classes.loginDiv}>
+          <div className={classes.loginHeader}>Login</div>
+          <TextField 
+            label="Email" 
+            variant="outlined" 
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            type="text"
+            className={classes.emailTextField}
+            sx={{
+              display:"flex",
+              margin:"auto",
+              marginTop:"20%",
+              color:"white",
+              input: {
+                color:"whitesmoke"
+              },
+            }}
+            InputProps={{
+              classes: {
+                notchedOutline: classes.notchedOutline
+              }
+            }}
+            InputLabelProps={{
+              style: { color: '#fff' },
+            }}
+          />
 
-        <TextField 
-          label="Password" 
-          variant="outlined" 
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          type="password"
-          className={classes.emailTextField}
-          sx={{
-            display:"flex",
-            margin:"auto",
-            marginTop:"5%"
-          }}
-          InputProps={{
-            classes: {
-              notchedOutline: classes.notchedOutline
-            }
-          }}
-          InputLabelProps={{
-            style: { color: '#fff' },
-          }}
-        />
+          <TextField 
+            label="Password" 
+            variant="outlined" 
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+            className={classes.emailTextField}
+            sx={{
+              display:"flex",
+              margin:"auto",
+              marginTop:"5%"
+            }}
+            InputProps={{
+              classes: {
+                notchedOutline: classes.notchedOutline
+              }
+            }}
+            InputLabelProps={{
+              style: { color: '#fff' },
+            }}
+          />
 
-        <Button 
-          className={classes.loginButton}
-          variant="contained"
-          onClick={handleClick}
-          sx={{
-            display:"flex",
-            margin:"auto",
-            marginTop:"5%",
-            background:"#399564",
-            "&:hover":{
-              background:"#368A65"
-            }
-          }}
-        >
-          Login
-        </Button>
-        <div className={classes.registerText}>
-          Create a new Account
-          <Link className={classes.registerLink} to="/register"> Register</Link>
+          <Button 
+            className={classes.loginButton}
+            variant="contained"
+            onClick={handleClick}
+            sx={{
+              display:"flex",
+              margin:"auto",
+              marginTop:"5%",
+              background:"#399564",
+              "&:hover":{
+                background:"#368A65"
+              }
+            }}
+          >
+            Login
+          </Button>
+          <div className={classes.registerText}>
+            Create a new Account
+            <Link className={classes.registerLink} to="/register"> Register</Link>
+          </div>
         </div>
-      </div>
       </div>
 
     )

@@ -7,6 +7,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { fetchUser } from '../../actions/userActions'
 import { RegisterApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
+import loginBackground2 from "../../images/loginBackground2.jpg"
 
 const useStyles = makeStyles((theme) => ({
   registerDiv:{
@@ -45,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "white !important",
     color:"whitesmoke"
   },
+  imageContent:{
+    backgroundImage: `url(${loginBackground2})`,
+    backgroundSize: "fill",
+    backgroundRepeat: "no-repeat",
+    maxWidth: "100vw",
+    height: "100vh",
+  }
 }))
 
 const Register = (props) => {
@@ -93,118 +101,120 @@ const Register = (props) => {
   }
 
   return (
-    <div className={classes.registerDiv}>
-      <div className={classes.registerHeader}>Register</div>
-      <TextField 
-        label="Name" 
-        variant="outlined" 
-        value={name}
-        onChange={e => setName(e.target.value)}
-        type="text"
-        className={classes.registerTextField}
-        
-        sx={{
-          display:"flex",
-          margin:"auto",
-          marginTop:"10%",
-        }}
-        InputProps={{
-          classes: {
-            notchedOutline: classes.notchedOutline
-          }
-        }}
-        InputLabelProps={{
-          style: { color: '#fff' },
-        }}
-      />
+    <div className={classes.imageContent}>
+      <div className={classes.registerDiv}>
+        <div className={classes.registerHeader}>Register</div>
+        <TextField 
+          label="Name" 
+          variant="outlined" 
+          value={name}
+          onChange={e => setName(e.target.value)}
+          type="text"
+          className={classes.registerTextField}
+          
+          sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"10%",
+          }}
+          InputProps={{
+            classes: {
+              notchedOutline: classes.notchedOutline
+            }
+          }}
+          InputLabelProps={{
+            style: { color: '#fff' },
+          }}
+        />
 
-      <TextField 
-        label="Email" 
-        variant="outlined" 
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        type="text"
-        className={classes.registerTextField}
-        sx={{
-          display:"flex",
-          margin:"auto",
-          marginTop:"5%"
-        }}
-        InputProps={{
-          classes: {
-            notchedOutline: classes.notchedOutline
-          }
-        }}
-        InputLabelProps={{
-          style: { color: '#fff' },
-        }}
-      />
+        <TextField 
+          label="Email" 
+          variant="outlined" 
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          type="text"
+          className={classes.registerTextField}
+          sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"5%"
+          }}
+          InputProps={{
+            classes: {
+              notchedOutline: classes.notchedOutline
+            }
+          }}
+          InputLabelProps={{
+            style: { color: '#fff' },
+          }}
+        />
 
-      <TextField 
-        label="Password" 
-        variant="outlined" 
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        type="password"
-        className={classes.registerTextField}
-        sx={{
-          display:"flex",
-          margin:"auto",
-          marginTop:"5%"
-        }}
-        InputProps={{
-          classes: {
-            notchedOutline: classes.notchedOutline
-          }
-        }}
-        InputLabelProps={{
-          style: { color: '#fff' },
-        }}
-      />
+        <TextField 
+          label="Password" 
+          variant="outlined" 
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+          className={classes.registerTextField}
+          sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"5%"
+          }}
+          InputProps={{
+            classes: {
+              notchedOutline: classes.notchedOutline
+            }
+          }}
+          InputLabelProps={{
+            style: { color: '#fff' },
+          }}
+        />
 
-      <TextField 
-        label="Password Again" 
-        variant="outlined" 
-        value={passwordCheck}
-        onChange={e => setPasswordCheck(e.target.value)}
-        type="password"
-        className={classes.registerTextField}
-        sx={{
-          display:"flex",
-          margin:"auto",
-          marginTop:"5%"
-        }}
-        InputProps={{
-          classes: {
-            notchedOutline: classes.notchedOutline
-          }
-        }}
-        InputLabelProps={{
-          style: { color: '#fff' },
-        }}
-      />
+        <TextField 
+          label="Password Again" 
+          variant="outlined" 
+          value={passwordCheck}
+          onChange={e => setPasswordCheck(e.target.value)}
+          type="password"
+          className={classes.registerTextField}
+          sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"5%"
+          }}
+          InputProps={{
+            classes: {
+              notchedOutline: classes.notchedOutline
+            }
+          }}
+          InputLabelProps={{
+            style: { color: '#fff' },
+          }}
+        />
 
-      <Button 
-        className={classes.registerButton}
-        variant="contained"
-        onClick={handleClick}
-        sx={{
-          display:"flex",
-          margin:"auto",
-          marginTop:"5%",
-          background:"#399564",
-          "&:hover":{
-            background:"#368A65"
-          }
-        }}
-      >
-        Register
-      </Button>
-      <div className={classes.loginText}>
-        Already have an Account?
-        <Link className={classes.loginLink} to="/login"> Login</Link>
-      </div>
-    </div>  
+        <Button 
+          className={classes.registerButton}
+          variant="contained"
+          onClick={handleClick}
+          sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"5%",
+            background:"#399564",
+            "&:hover":{
+              background:"#368A65"
+            }
+          }}
+        >
+          Register
+        </Button>
+        <div className={classes.loginText}>
+          Already have an Account?
+          <Link className={classes.loginLink} to="/login"> Login</Link>
+        </div>
+      </div>  
+    </div>
   )
 }
 
