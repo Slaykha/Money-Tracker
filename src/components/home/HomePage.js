@@ -1,13 +1,14 @@
 import { makeStyles } from '@mui/styles'
 import React, { useState } from 'react'
 import { Boxes } from './Boxes'
+import { GraphBoxes } from './GraphBoxes'
 
 const useStyles = makeStyles(() =>({
     homeHeader:{
-      background:"linear-gradient(to right, #0048B2 ,#3B8AFF, #0048B2)",
-      width:"calc(100% - 250px)",
-      height:200,
-      position:"absolute",
+        background:"linear-gradient(to right, #0048B2 ,#3B8AFF, #0048B2)",
+        width:"calc(100% - 250px)",
+        height:200,
+        position:"absolute",
     },
     headerTitle:{
         color:"white",
@@ -22,13 +23,15 @@ const useStyles = makeStyles(() =>({
         fontSize:18,
         top:75,
         left:30
-    }
+    },
+    
 }))
 
 export const HomePage = ({user}) => {
     const classes = useStyles()
 
     const [boxElements, setBoxElements] = useState([{icon:"", title:"Total Spendings", content:"₺5.514,52"},{icon:"", title:"Total Spendings", content:"₺5.514,52"},])
+    const [graphBoxes, setGraphBoxes] = useState([{title:"deneme1", content:"",}, {title:"deneme2", content:"",}, {title:"deneme3", content:"",}])
 
     return (
         <div>
@@ -36,7 +39,8 @@ export const HomePage = ({user}) => {
                 <div className={classes.headerTitle}> Hello {user.name} </div>
                 <div className={classes.headerText}> We are on a mission to make peoples life easier. </div>
                 <Boxes boxElements={boxElements}/>
-                
+                <GraphBoxes boxType={"fullBox"}/>
+                <GraphBoxes boxType={"multipleBox"} boxes={graphBoxes}/>
             </div>
         </div>
     )
