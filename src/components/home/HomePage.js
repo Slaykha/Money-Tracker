@@ -27,7 +27,7 @@ const useStyles = makeStyles(() =>({
     
 }))
 
-export const HomePage = ({user}) => {
+export const HomePage = ({user, spendings}) => {
     const classes = useStyles()
 
     const [boxElements, setBoxElements] = useState([{icon:"", title:"Total Spendings", content:"₺5.514,52"},{icon:"", title:"Total Spendings", content:"₺5.514,52"},])
@@ -39,7 +39,7 @@ export const HomePage = ({user}) => {
                 <div className={classes.headerTitle}> Hello {user.name} </div>
                 <div className={classes.headerText}> We are on a mission to make peoples life easier. </div>
                 <Boxes boxElements={boxElements}/>
-                <GraphBoxes boxType={"fullBox"}/>
+                <GraphBoxes boxType={"fullBox"} spendings={spendings}/>
                 <GraphBoxes boxType={"multipleBox"} boxes={graphBoxes}/>
             </div>
         </div>

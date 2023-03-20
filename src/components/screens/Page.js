@@ -16,7 +16,8 @@ function Page(props) {
   const {
     user,
     fetchSpendings,
-    isLoggedIn
+    isLoggedIn,
+    spendings
   } = props
 
   const PageComponent = props.component;
@@ -39,7 +40,7 @@ function Page(props) {
         <Menu/>
         <div style={{marginLeft:"250px"}}>
 
-          <PageComponent user={user}/>
+          <PageComponent user={user} spendings={spendings}/>
         </div>
       </>
     </>
@@ -47,7 +48,8 @@ function Page(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  spendings :state.spendings
 });
 
 const mapDispatchToProps = (dispatch) => ({
