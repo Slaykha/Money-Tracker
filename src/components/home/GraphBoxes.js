@@ -1,5 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, NativeSelect, Select } from '@mui/material';
 import { makeStyles } from '@mui/styles'
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
@@ -44,6 +45,7 @@ const useStyles = makeStyles(() =>({
     },
     Legend:{
         color:"#1A75FF",
+        paddingTop:"0.5%"
     },
     Selector:{
         color:"#D3D3D3",
@@ -129,48 +131,91 @@ export const GraphBoxes = (props) => {
             })
             setData(weeklyData)
         }
-        else if(interval === "Y"){
-            const yearlyData = [{Xaxis:"January", spending:0}, {Xaxis:"February", spending:0}, {Xaxis:"March", spending:0}, {Xaxis:"April", spending:0}, {Xaxis:"May", spending:0}, {Xaxis:"June", spending:0}, {Xaxis:"July", spending:0}, {Xaxis:"August", spending:0}, {Xaxis:"September", spending:0}, {Xaxis:"October", spending:0}, {Xaxis:"November", spending:0}, {Xaxis:"December", spending:0}]
+        else if(interval === "M"){
+            const monthlyData = [{Xaxis:"January", spending:0}, {Xaxis:"February", spending:0}, {Xaxis:"March", spending:0}, {Xaxis:"April", spending:0}, {Xaxis:"May", spending:0}, {Xaxis:"June", spending:0}, {Xaxis:"July", spending:0}, {Xaxis:"August", spending:0}, {Xaxis:"September", spending:0}, {Xaxis:"October", spending:0}, {Xaxis:"November", spending:0}, {Xaxis:"December", spending:0}]
             spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
                 let spendingDate = new Date(spending.spendingDate)
                 let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
                 if(spendingDate.getFullYear() === limitDate.getFullYear()){
                     switch (spendingDate.getMonth()) {
                         case 0:
-                            yearlyData[0].spending += spending.money
+                            monthlyData[0].spending += spending.money
                             break;
                         case 1:
-                            yearlyData[1].spending += spending.money
+                            monthlyData[1].spending += spending.money
                             break;
                         case 2:
-                            yearlyData[2].spending += spending.money
+                            monthlyData[2].spending += spending.money
                             break;
                         case 3:
-                            yearlyData[3].spending += spending.money
+                            monthlyData[3].spending += spending.money
                             break;
                         case 4:
-                            yearlyData[4].spending += spending.money
+                            monthlyData[4].spending += spending.money
                             break;
                         case 5:
-                            yearlyData[5].spending += spending.money
+                            monthlyData[5].spending += spending.money
                             break;
                         case 6:
-                            yearlyData[6].spending += spending.money
+                            monthlyData[6].spending += spending.money
                             break;
                         case 7:
-                            yearlyData[7].spending += spending.money
+                            monthlyData[7].spending += spending.money
                             break;
                         case 8:
-                            yearlyData[8].spending += spending.money
+                            monthlyData[8].spending += spending.money
                             break;
                         case 9:
-                            yearlyData[9].spending += spending.money
+                            monthlyData[9].spending += spending.money
                             break;
                         case 10:
-                            yearlyData[10].spending += spending.money
+                            monthlyData[10].spending += spending.money
                             break;
                         case 11:
-                            yearlyData[11].spending += spending.money
+                            monthlyData[11].spending += spending.money
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+            setData(monthlyData)
+        }else if(interval === "Y"){
+            const yearlyData = [{Xaxis:"2014", spending:0}, {Xaxis:"2015", spending:0}, {Xaxis:"2016", spending:0}, {Xaxis:"2017", spending:0}, {Xaxis:"2018", spending:0}, {Xaxis:"2019", spending:0}, {Xaxis:"2020", spending:0}, {Xaxis:"2021", spending:0}, {Xaxis:"2022", spending:0}, {Xaxis:"2023", spending:0}]
+            spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
+                let spendingDate = new Date(spending.spendingDate)
+                let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
+                if(spendingDate.getFullYear() > limitDate.getFullYear() - 10){
+                    switch (spendingDate.getFullYear()) {
+                        case 2014:
+                            yearlyData[0].spending += spending.money
+                            break;
+                        case 2015:
+                            yearlyData[1].spending += spending.money
+                            break;
+                        case 2016:
+                            yearlyData[2].spending += spending.money
+                            break;
+                        case 2017:
+                            yearlyData[3].spending += spending.money
+                            break;
+                        case 2018:
+                            yearlyData[4].spending += spending.money
+                            break;
+                        case 2019:
+                            yearlyData[5].spending += spending.money
+                            break;
+                        case 2020:
+                            yearlyData[6].spending += spending.money
+                            break;
+                        case 2021:
+                            yearlyData[7].spending += spending.money
+                            break;
+                        case 2022:
+                            yearlyData[8].spending += spending.money
+                            break;
+                        case 2023:
+                            yearlyData[9].spending += spending.money
                             break;
                         default:
                             break;
@@ -188,7 +233,7 @@ export const GraphBoxes = (props) => {
                 getDataByDate(e.target.value)
                 break;
             case "M":
-            
+                getDataByDate(e.target.value)
                 break;
             case "Y":
                 getDataByDate(e.target.value)
@@ -211,20 +256,25 @@ export const GraphBoxes = (props) => {
                             ● Spendings
                         </div>
                         <div className={classes.Selector}>
+                        <Box sx={{ minWidth: 120 }}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={dataTime}
-                                    label="Age"
-                                    onChange={handleChange}
+                                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                                Age
+                                </InputLabel>
+                                <NativeSelect
+                                defaultValue={"W"}
+                                inputProps={{
+                                    name: 'age',
+                                    id: 'uncontrolled-native',
+                                }}
+                                onChange={handleChange}
                                 >
-                                    <MenuItem value={"W"}>This Week</MenuItem>
-                                    <MenuItem value={"M"}>This Month</MenuItem>
-                                    <MenuItem value={"Y"}>This Year</MenuItem>
-                                </Select>
-                            </FormControl>                        
+                                <option value={"W"}>Weekly</option>
+                                <option value={"M"}>Mountly</option>
+                                <option value={"Y"}>Yearly</option>
+                                </NativeSelect>
+                            </FormControl>
+                        </Box>                      
                         </div>
                     </div>
                     
@@ -238,11 +288,10 @@ export const GraphBoxes = (props) => {
                                 bottom: 5,
                             }}
                         >
-                            
                             <XAxis dataKey="Xaxis" />
                             <YAxis />
-                            <Tooltip  />
-                            <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending"/>
+                            <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
+                            <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
