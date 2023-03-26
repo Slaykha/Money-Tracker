@@ -1,4 +1,5 @@
-import { Button, TextField } from '@mui/material'
+import { CurrencyYen } from '@mui/icons-material'
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { hover } from '@testing-library/user-event/dist/hover'
 import React, { useState } from 'react'
@@ -12,7 +13,7 @@ import loginBackground2 from "../../images/loginBackground2.jpg"
 const useStyles = makeStyles((theme) => ({
   registerDiv:{
     width:400,
-    height:600,
+    height:650,
     background:"#ED9121",
     borderRadius:5,
     position: "absolute",
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   notchedOutline:{
     borderColor: "white !important",
-    color:"whitesmoke"
+    color:"whitesmoke",
   },
   imageContent:{
     backgroundImage: `url(${loginBackground2})`,
@@ -54,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   }
 }))
+
+const CURRENCIES = [{name:"TRY", symbol:"₺"},
+                    {name:"USD", symbol:"$"},
+                    {name:"EUR", symbol:"€"},
+                    ]
 
 const Register = (props) => {
   const classes = useStyles() 
@@ -66,7 +72,8 @@ const Register = (props) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordCheck, setPasswordCheck] = useState("")
-  const [isRegistered, setIsRegistered] = useState(false)
+  const [currency, setCurrency] = useState({})
+  const [currencies, setCurrenies] = useState(CURRENCIES);
 
   const handleClick = () => {
     if(handleCheckPassword()){
@@ -87,7 +94,7 @@ const Register = (props) => {
 
   const handleRegister = async () => {
     try{
-      const resp = await RegisterApi(ENDPOINT, {name, email, password})
+      const resp = await RegisterApi(ENDPOINT, {name, email, password, currency})
       if(resp){
         fetchUser()
       }
@@ -95,6 +102,10 @@ const Register = (props) => {
       console.error(e)
     }
   }
+
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
 
   if(isLoggedIn){
     return <Navigate to="/" />
@@ -116,6 +127,7 @@ const Register = (props) => {
             display:"flex",
             margin:"auto",
             marginTop:"10%",
+            width:"80%"
           }}
           InputProps={{
             classes: {
@@ -137,7 +149,8 @@ const Register = (props) => {
           sx={{
             display:"flex",
             margin:"auto",
-            marginTop:"5%"
+            marginTop:"5%",
+            width:"80%"
           }}
           InputProps={{
             classes: {
@@ -159,7 +172,8 @@ const Register = (props) => {
           sx={{
             display:"flex",
             margin:"auto",
-            marginTop:"5%"
+            marginTop:"5%",
+            width:"80%"
           }}
           InputProps={{
             classes: {
@@ -181,7 +195,8 @@ const Register = (props) => {
           sx={{
             display:"flex",
             margin:"auto",
-            marginTop:"5%"
+            marginTop:"5%",
+            width:"80%"
           }}
           InputProps={{
             classes: {
@@ -192,6 +207,51 @@ const Register = (props) => {
             style: { color: '#fff' },
           }}
         />
+
+        <FormControl sx={{
+            display:"flex",
+            margin:"auto",
+            marginTop:"5%",
+            width:"80%"
+          }}
+        >
+          <InputLabel 
+            id="demo-simple-select-label"
+            sx={{
+              color:"white",
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+            }}
+          >
+            Currency
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Currency"
+            onChange={handleChange}
+            sx={{
+              color: "white",
+              '.MuiOutlinedInput-notchedOutline': {
+                borderColor: 'whiteSmoke',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+              '.MuiSvgIcon-root ': {
+                fill: "white !important",
+              },
+            }}
+          >
+            {currencies.length != 0 && currencies.map((currency) => (
+              <MenuItem value={currency.symbol}>{currency.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         <Button 
           className={classes.registerButton}
@@ -204,7 +264,8 @@ const Register = (props) => {
             background:"#399564",
             "&:hover":{
               background:"#368A65"
-            }
+            },
+            width:"80%"
           }}
         >
           Register

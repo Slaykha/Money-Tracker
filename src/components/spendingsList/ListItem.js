@@ -19,7 +19,6 @@ const useStyles = makeStyles({
     }
 })
 
-const currencyMap = {turkLirası: "$"}
 
 
 const ListItem = (props) => {
@@ -29,7 +28,6 @@ const ListItem = (props) => {
         spending
     }= props
 
-    console.log(currencyMap["turkLirası"])
 
     return (
         <div className={classes.HeaderDiv}>

@@ -1,12 +1,9 @@
 const axios = require("axios").default;
 
 const RegisterApi = async (ENDPOINT, data) => {
+    console.log(data)
     const resp = await axios.post(`${ENDPOINT}/user/register`,
-        {
-            name: data.name,
-            email: data.email,
-            password: data.password
-        },
+        data,
         {withCredentials: true},
     )
 

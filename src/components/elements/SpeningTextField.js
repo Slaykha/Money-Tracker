@@ -47,7 +47,6 @@ const SpendingTextField = (props) => {
         date: spending.date,
         money: parseFloat(event.target.intValue),
         type: spending.type,
-        currency: spending.currency
       });
     };
 

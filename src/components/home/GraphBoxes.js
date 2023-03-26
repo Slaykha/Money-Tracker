@@ -59,7 +59,8 @@ export const GraphBoxes = (props) => {
     const {
         boxType,
         boxes,
-        spendings
+        spendings,
+        totalSpendings
     } = props;
     const classes = useStyles()
 
@@ -72,16 +73,6 @@ export const GraphBoxes = (props) => {
         getDataByDate("W")
       }
     }, [])
-    
-
-    const calculateTotalSpending = () =>{
-        let total = 0
-        Object.keys(spendings).length !== 0 && spendings.map((spending) => 
-            total += spending.money
-        )
-
-        return total
-    }
 
     const getDataByDate = (interval) => {
         if(interval === "W"){
@@ -249,7 +240,7 @@ export const GraphBoxes = (props) => {
                 <div className={classes.fullBox}>
                     <div className={classes.GraphsTop}>
                         <div className={classes.TotalSpending}>
-                            <div className={classes.TotalSpendingValue}>₺{calculateTotalSpending()}</div>
+                            <div className={classes.TotalSpendingValue}>₺{totalSpendings}</div>
                             <div className={classes.TotalSpendingText}>Spending</div>
                         </div>
                         <div className={classes.Legend}>
@@ -258,9 +249,6 @@ export const GraphBoxes = (props) => {
                         <div className={classes.Selector}>
                         <Box sx={{ minWidth: 120 }}>
                             <FormControl fullWidth>
-                                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                Age
-                                </InputLabel>
                                 <NativeSelect
                                 defaultValue={"W"}
                                 inputProps={{
@@ -268,6 +256,21 @@ export const GraphBoxes = (props) => {
                                     id: 'uncontrolled-native',
                                 }}
                                 onChange={handleChange}
+                                sx={{
+                                    color: "white",
+                                    '.MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'whiteSmoke',
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'white',
+                                    },
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'white',
+                                    },
+                                    '.MuiSvgIcon-root ': {
+                                      fill: "white !important",
+                                    },
+                                  }}
                                 >
                                 <option value={"W"}>Weekly</option>
                                 <option value={"M"}>Mountly</option>

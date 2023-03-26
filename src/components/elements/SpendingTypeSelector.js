@@ -37,7 +37,6 @@ const SpendingTypeSelector = (props) => {
             date: spending.date,
             money: spending.money,
             type: option.target.value,
-            currency: spending.currency
         })
     }
     return (

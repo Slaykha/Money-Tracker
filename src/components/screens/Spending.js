@@ -38,7 +38,7 @@ const Spending = (props) => {
     const date = new Date()
     const staticWidth = "250px"
 
-    const [spending, setSpending] = useState({date: 0, money: "", type: "", currency: "Turk Lirası"})
+    const [spending, setSpending] = useState({date: 0, money: "", type: ""})
 
     const handleClick = () =>{
         if(spending.money && spending.type){
