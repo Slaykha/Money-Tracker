@@ -19,23 +19,26 @@ const SpendingDatePicker = (props) => {
     },[redCurrentDate])
 
     const handleChange = (newDate) => {
-        setSpending({
-            date: newDate,
-            money: spending.money,
-            type: spending.type,
-        });
+        setSpending(newDate );
     };
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-                label="Date"
-                inputFormat="DD/MM/YYYY"
-                InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
-                value={spending.date}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
-        </LocalizationProvider>
+        <div
+            style={{margin:"2%"}}
+        >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopDatePicker
+                    label="Date"
+                    inputFormat="DD/MM/YYYY"
+                    InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
+                    value={spending.date}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} 
+                        fullWidth
+                    />}
+                />
+            </LocalizationProvider>
+        </div>
+      
         
     );
 };

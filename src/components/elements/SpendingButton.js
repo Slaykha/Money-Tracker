@@ -10,9 +10,9 @@ const SpendingButton = (props) => {
     const ColorButton = styled(Button)(({ theme }) => ({
         color: "rgb(0, 173, 181)",
         backgroundColor: "rgb(238, 238, 238, 0.6)",
-        width: staticWidth,
+        width: "96%",
         height:"55px",
-        marginLeft:"10%",
+        margin:"2%",
         '&:hover': {
           backgroundColor: "rgb(238, 238, 238, 1)",
         },

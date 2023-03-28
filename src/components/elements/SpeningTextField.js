@@ -43,16 +43,12 @@ const SpendingTextField = (props) => {
     const handleChange = (event) => {
       setMoneyValue(event.target.value)
 
-      setSpending({
-        date: spending.date,
-        money: parseFloat(event.target.intValue),
-        type: spending.type,
-      });
+      setSpending(parseFloat(event.target.intValue));
     };
 
     return (
         <TextField
-            style={{marginLeft:"5%", width: staticWidth}}
+            style={{margin: "2%", width: "96%"}}
             label="Money"
             value={moneyValue}
             onChange={(e) => {handleChange(e)}}

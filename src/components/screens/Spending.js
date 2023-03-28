@@ -7,6 +7,8 @@ import SpendingTextField from '../elements/SpeningTextField';
 import { connect } from 'react-redux';
 import { createSpending } from '../../actions/spendingAction';
 import SpendingList from '../spendingsList/SpendingList';
+import AddSpendingDialog from '../spending/AddSpendingDialog';
+import { Button } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -22,8 +24,13 @@ const useStyles = makeStyles((theme) => ({
         AddDiv: {
           display: "block"
          }
+    },
+    AddSpendingDialogButton:{
+        display:"block",
+        textAlign: "right",
+        margin:"2%",
+        marginRight:"10%"
     }
-
 }))
 
 const Spending = (props) => {
@@ -39,10 +46,14 @@ const Spending = (props) => {
     const staticWidth = "250px"
 
     const [spending, setSpending] = useState({date: 0, money: "", type: ""})
+    const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
 
-    const handleClick = () =>{
-        if(spending.money && spending.type){
-            createSpending(userId, spending)
+    const handleClose = () => {
+        setOpenAddSpendingDialog(false)
+    }
+    const handleClick = (date, money, type) =>{
+        if(money && type){
+            createSpending(userId, {date, money, type})
             /* try {
                 createSpendingApi(ENDPOINT, userId, spending)
             } catch (error) {
@@ -54,7 +65,22 @@ const Spending = (props) => {
 
     return (
         <>
-            <div className={classes.AddDiv}>
+            <div
+                className={classes.AddSpendingDialogButton}
+            >
+                <Button
+                    variant="contained"
+                    onClick={() => setOpenAddSpendingDialog(true)}
+                >
+                    Add Spending
+                </Button>
+            </div>
+            <AddSpendingDialog 
+                open={openAddSpendingDialog}
+                handleClose={handleClose}
+                handleClick={handleClick}
+            />
+            {/* <div className={classes.AddDiv}>
                 <SpendingDatePicker
                     currentDate={date}
                     spending={spending}
@@ -75,7 +101,7 @@ const Spending = (props) => {
                     handleClick={handleClick}
                     staticWidth={staticWidth}
                 />
-            </div>
+            </div> */}
             <SpendingList />
         </>
 
