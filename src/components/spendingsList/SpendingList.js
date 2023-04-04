@@ -4,6 +4,8 @@ import ListHead from './ListHead';
 import ListItem from './ListItem';
 import { ENDPOINT } from "../../App";
 import { connect } from 'react-redux';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import SpendingListItem from './SpendingListItem';
 
 const SpendingList = (props) => {
     const{
@@ -30,12 +32,27 @@ const SpendingList = (props) => {
     
     return (
         <div>
-            <ListHead/>
+            <Table sx={{ width:"80%", marginLeft:"10%", background:"#393E46", borderRadius:"10px" }} aria-label="simple table">
+                <TableHead>
+                <TableRow>
+                    <TableCell sx={{color:"rgb(238, 238, 238)"}}>Date</TableCell>
+                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Money</TableCell>
+                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Type</TableCell>
+                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Delete</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                {spendings && spendings.map((spending) => (
+                    <SpendingListItem spending={spending}/>
+                ))}
+                </TableBody>
+            </Table>
+{/*             <ListHead/>
             {spendings && spendings.map((spending) => (
                 <ListItem
                     spending={spending}
                 />
-            ))}
+            ))} */}
             
         </div>
     );
