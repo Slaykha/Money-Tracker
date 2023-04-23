@@ -58,7 +58,7 @@ export const HomePage = ({user, spendings}) => {
                 <div className={classes.headerTitle}> Hello {user.name} </div>
                 <div className={classes.headerText}> We are on a mission to make peoples life easier. </div>
                 <Boxes boxElements={boxElements}/>
-                <GraphBoxes boxType={"fullBox"} spendings={spendings} totalSpendings={totalSpendings}/>
+                <GraphBoxes boxType={"fullBox"} spendings={spendings} totalSpendings={totalSpendings} currency={user.currency}/>
                 <GraphBoxes boxType={"multipleBox"} boxes={graphBoxes}/>
             </div>
         </div>

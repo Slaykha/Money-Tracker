@@ -4,8 +4,9 @@ import {NumericFormat} from 'react-number-format';
 import TextField from '@mui/material/TextField';
 
 const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props;
+    const { onChange, currency, ...other } = props;
   
+    console.log(currency)
     return (
 // event.target.value nedir nerden gelir bu yaprak diyenlere cevap niteliğinde kod
       <NumericFormat
@@ -21,13 +22,14 @@ const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
         }}
         thousandSeparator
         valueIsNumericString
-        prefix="$"
+        prefix={currency}
       />
     );
   });
   
   NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
+    currency: PropTypes.string.isRequired,
   };
 
 
@@ -35,8 +37,10 @@ const SpendingTextField = (props) => {
     const {
       spending,
       setSpending,
-      staticWidth
+      staticWidth,
+      currency
     }=props
+
 
     const [moneyValue, setMoneyValue] = useState("")
     
@@ -53,8 +57,7 @@ const SpendingTextField = (props) => {
             value={moneyValue}
             onChange={(e) => {handleChange(e)}}
             name="numberformat"
-            id="formatted-numberformat-input"
-            InputProps={{inputComponent: NumberFormatCustom, style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
+            InputProps={{inputComponent: NumberFormatCustom, inputProps: {currency}, style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
             variant="filled"
         />
     );

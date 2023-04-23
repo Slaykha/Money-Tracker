@@ -39,7 +39,8 @@ const Spending = (props) => {
     const {
         setSpendingArray,
         userId,
-        createSpending
+        createSpending,
+        userCurrency
     } = props
 
     const date = new Date()
@@ -79,6 +80,7 @@ const Spending = (props) => {
                 open={openAddSpendingDialog}
                 handleClose={handleClose}
                 handleClick={handleClick}
+                currency={userCurrency}
             />
             {/* <div className={classes.AddDiv}>
                 <SpendingDatePicker
@@ -110,7 +112,8 @@ const Spending = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.user.id    
+    userId: state.user.id,
+    userCurrency: state.user.currency
 });
 
 const mapDispatchToProps = (dispatch) => ({

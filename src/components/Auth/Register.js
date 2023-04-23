@@ -9,6 +9,7 @@ import { fetchUser } from '../../actions/userActions'
 import { RegisterApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
 import loginBackground2 from "../../images/loginBackground2.jpg"
+import { CURRENCIES } from '../../helpers/currencies'
 
 const useStyles = makeStyles((theme) => ({
   registerDiv:{
@@ -56,10 +57,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CURRENCIES = [{name:"TRY", symbol:"₺"},
-                    {name:"USD", symbol:"$"},
-                    {name:"EUR", symbol:"€"},
-                    ]
+
 
 const Register = (props) => {
   const classes = useStyles() 

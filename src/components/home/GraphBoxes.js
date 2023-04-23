@@ -60,7 +60,8 @@ export const GraphBoxes = (props) => {
         boxType,
         boxes,
         spendings,
-        totalSpendings
+        totalSpendings,
+        currency
     } = props;
     const classes = useStyles()
 
@@ -240,7 +241,7 @@ export const GraphBoxes = (props) => {
                 <div className={classes.fullBox}>
                     <div className={classes.GraphsTop}>
                         <div className={classes.TotalSpending}>
-                            <div className={classes.TotalSpendingValue}>₺{totalSpendings}</div>
+                            <div className={classes.TotalSpendingValue}>{currency}{totalSpendings}</div>
                             <div className={classes.TotalSpendingText}>Spending</div>
                         </div>
                         <div className={classes.Legend}>

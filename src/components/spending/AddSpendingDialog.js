@@ -9,7 +9,8 @@ const AddSpendingDialog = (props) => {
     const {
         open,
         handleClose,
-        handleClick
+        handleClick,
+        currency
     } = props
 
     const date = new Date()
@@ -32,6 +33,7 @@ const AddSpendingDialog = (props) => {
                     setSpending={setSpendingDate}
                 />
                 <SpendingTextField
+                    currency={currency}
                     spending={money}
                     setSpending={setMoney}
                 />
