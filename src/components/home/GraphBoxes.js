@@ -70,18 +70,23 @@ export const GraphBoxes = (props) => {
     const [data, setData] = useState()
 
     useEffect(() => {
-      if(!data){
         getDataByDate("W")
-      }
-    }, [])
+    }, [spendings])
 
     const getDataByDate = (interval) => {
         if(interval === "W"){
             const weeklyData = [{Xaxis:"Monday", spending:0}, {Xaxis:"Tuesday", spending:0}, {Xaxis:"Wednesday", spending:0}, {Xaxis:"Thursday", spending:0}, {Xaxis:"Friday", spending:0}, {Xaxis:"Saturday", spending:0}, {Xaxis:"Sunday", spending:0}]
             spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
                 let spendingDate = new Date(spending.spendingDate)
-                let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate() - 7))
-                if(spendingDate > limitDate){
+                let today = new Date().getDay()
+                let limitDate
+                if(today === 0){
+                    limitDate = new Date(new Date(new Date()).setDate(new Date().getDate() - 7))
+                }else{
+                    limitDate = new Date(new Date(new Date()).setDate(new Date().getDate() - today))
+                }
+        
+                if(spendingDate.setHours(0,0,0,0) > limitDate.setHours(0,0,0,0)){
                     switch (spendingDate.getDay()) {
                         case 0:
                             weeklyData[6].spending += spending.money
@@ -281,23 +286,24 @@ export const GraphBoxes = (props) => {
                         </Box>                      
                         </div>
                     </div>
-                    
+                    {data && 
                         <ResponsiveContainer width="98%" height="80%">
-                        <LineChart
-                            data={data}
-                            margin={{
-                                top: 20,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <XAxis dataKey="Xaxis" />
-                            <YAxis />
-                            <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
-                            <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
-                        </LineChart>
-                    </ResponsiveContainer>
+                            <LineChart
+                                data={data}
+                                margin={{
+                                    top: 20,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                }}
+                            >
+                                <XAxis dataKey="Xaxis" />
+                                <YAxis />
+                                <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
+                                <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
+                            </LineChart>
+                        </ResponsiveContainer>
+                    }
                 </div>
                 :
                 <>
