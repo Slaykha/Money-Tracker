@@ -19,7 +19,15 @@ const fetchSpendingsApi = async (ENDPOINT, userId) => {
     return resp.status === 200 ? resp : false
 
 }
+
+const deleteSpendingApi = async (ENDPOINT, spendingId) => {
+    const resp = await axios.delete(`${ENDPOINT}/spending/${spendingId}`)
+
+    return resp.status === 200 ? true : false
+}
+
 module.exports={
     createSpendingApi,
-    fetchSpendingsApi
+    fetchSpendingsApi,
+    deleteSpendingApi
 }

@@ -1,6 +1,6 @@
 import { createSpendingApi, fetchSpendingsApi } from "../api/spendingApi"
 import { ENDPOINT } from "../App"
-import { CREATE_SPENDING, FETCH_SPENDINGS } from "./types"
+import { CREATE_SPENDING, FETCH_SPENDINGS, DELETE_SPENDING} from "./types"
 
 export const fetchSpendings = (userId) => async (
     dispatch
@@ -20,4 +20,12 @@ export const createSpending = (userId, spending) => async (dispatch) => {
                 payload: resp
             })
         }
+}
+
+export const deleteSpending = (spendingId) => dispatch => {
+    console.log(spendingId)
+    dispatch({
+        type: DELETE_SPENDING,
+        payload: spendingId
+    })
 }

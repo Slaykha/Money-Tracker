@@ -1,4 +1,4 @@
-import { FETCH_SPENDINGS, CREATE_SPENDING } from "../actions/types"
+import { FETCH_SPENDINGS, CREATE_SPENDING, DELETE_SPENDING } from "../actions/types"
 
 const spendingReducer = (state = {}, action) => {
     switch(action.type){
@@ -6,6 +6,8 @@ const spendingReducer = (state = {}, action) => {
             return action.payload
         case CREATE_SPENDING:
             return [...state, action.payload]
+        case DELETE_SPENDING:
+            return [...state.filter(spending => spending.id !== action.payload)]
         default:
             return state
     }

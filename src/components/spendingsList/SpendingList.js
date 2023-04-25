@@ -6,13 +6,15 @@ import { ENDPOINT } from "../../App";
 import { connect } from 'react-redux';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import SpendingListItem from './SpendingListItem';
+import { deleteSpending } from '../../actions/spendingAction';
 
 const SpendingList = (props) => {
     const{
         spendingArray,
         setSpendingArray,
         userId,
-        spendings
+        spendings,
+        deleteSpending
     }=props
 
 
@@ -43,7 +45,7 @@ const SpendingList = (props) => {
                 </TableHead>
                 <TableBody>
                 {spendings && spendings.map((spending) => (
-                    <SpendingListItem spending={spending}/>
+                    <SpendingListItem spending={spending} deleteSpending={deleteSpending}/>
                 ))}
                 </TableBody>
             </Table>
@@ -63,8 +65,8 @@ const mapStateToProps = (state) => ({
     spendings: state.spendings
 });
 
-const mapDispatchToProps = (dispatch) => ({
-   
+const mapDispatchToProps = (dispatch) => ({ 
+    deleteSpending: (spendingId) => {dispatch(deleteSpending(spendingId))}
 });
 
-export default connect(mapStateToProps,) (SpendingList);
+export default connect(mapStateToProps,mapDispatchToProps) (SpendingList);

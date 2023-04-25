@@ -1,8 +1,10 @@
 import { IconButton, TableCell, TableRow } from '@mui/material'
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ENDPOINT } from '../../App';
+import { deleteSpendingApi } from '../../api/spendingApi';
 
-const SpendingListItem = ({spending}) => {
+const SpendingListItem = ({spending, deleteSpending}) => {
 
     const getFormattedDate = () => {
         let today = new Date(spending.spendingDate);
@@ -17,7 +19,13 @@ const SpendingListItem = ({spending}) => {
     }
 
     const handleDelete = async () => {
-
+        try{
+            let resp = await deleteSpendingApi(ENDPOINT, spending.id)
+            if(resp)
+                deleteSpending(spending.id)
+        }catch(e){
+            console.error(e)
+        }
     }
 
     return (
