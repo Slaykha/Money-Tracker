@@ -8,6 +8,7 @@ import Page from "./components/screens/Page";
 import { makeStyles } from "@mui/styles";
 import { connect } from "react-redux";
 import { fetchUser } from "./actions/userActions";
+import DailyTracker from "./components/screens/DailyTracker";
 
 export const ENDPOINT = "http://localhost:12345"
 
@@ -52,6 +53,7 @@ function App(props) {
         <Routes>
           <Route path="/" element={<Page component={Home} isLoggedIn={isLoggedIn} Ititle={"Home Screen"} />}/>
           <Route path="/spending" element={<Page component={Spending} isLoggedIn={isLoggedIn} title={"Spending"} />} />
+          <Route path="/dailyTracker" element={<Page component={DailyTracker} isLoggedIn={isLoggedIn} title={"Daily Tracker"} />} />
           <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
         </Routes>

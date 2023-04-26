@@ -1,6 +1,6 @@
-import { GetUserApi } from "../api/authApi"
+import { GetUserApi, UpdateUserDailyLimitApi } from "../api/authApi"
 import { ENDPOINT } from "../App"
-import { FETCH_USER } from "./types"
+import { FETCH_USER, UPDATE_USER_DAILY_LIMIT } from "./types"
 
 export const fetchUser = () => async (
     dispatch
@@ -10,5 +10,13 @@ export const fetchUser = () => async (
             type: FETCH_USER,
             payload: resp.data
         })
-    
+}
+
+export const UpdateUserDailyLimit = (userId, dailyLimit) => async (dispatch) => {
+    const resp = await UpdateUserDailyLimitApi(ENDPOINT, userId, dailyLimit)
+        if(resp)
+            dispatch({
+                type:UPDATE_USER_DAILY_LIMIT,
+                payload: resp
+            })
 }
