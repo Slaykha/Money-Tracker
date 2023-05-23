@@ -42,7 +42,7 @@ export const Header = ({user}) => {
     const handleLogOut = async () => {
         try{
             await LogoutApi(ENDPOINT)
-            return <Navigate to="/login"/>
+            window.location.reload()
         }catch(e){
             console.error(e)
         }

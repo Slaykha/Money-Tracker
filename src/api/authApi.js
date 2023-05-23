@@ -25,9 +25,11 @@ const LoginApi = async (ENDPOINT, data) => {
 }
 
 const LogoutApi = async (ENDPOINT) => {
-    const resp = await axios.post(`${ENDPOINT}/user/logout`,
-    {withCredentials: true},
-    )
+    const resp = await axios({
+        method: "post",
+        url: `${ENDPOINT}/user/logout`,
+        withCredentials: true
+    })
 
     return resp.status === 200 ? resp : false
 }
