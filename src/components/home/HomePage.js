@@ -40,7 +40,7 @@ export const HomePage = ({user, spendings}) => {
             total += spending.money
         )
 
-        return total
+        return total.toFixed(2)
     }
 
     useEffect(() => {

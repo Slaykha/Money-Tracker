@@ -19,7 +19,7 @@ const SpendingDatePicker = (props) => {
     },[redCurrentDate])
 
     const handleChange = (newDate) => {
-        setSpending(newDate );
+        setSpending(new Date(newDate));
     };
     return (
         <div
@@ -30,7 +30,7 @@ const SpendingDatePicker = (props) => {
                     label="Date"
                     inputFormat="DD/MM/YYYY"
                     InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
-                    value={spending.date}
+                    value={spending}
                     onChange={handleChange}
                     renderInput={(params) => <TextField {...params} 
                         fullWidth

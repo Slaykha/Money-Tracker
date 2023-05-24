@@ -4,7 +4,8 @@ const createSpendingApi = async (ENDPOINT ,userId, data) => {
     const resp = await axios.post(`${ENDPOINT}/spending/${userId}`,
         {
             money: data.money,
-            spendingType: data.type
+            spendingType: data.type,
+            spendingDate: data.date
         },
     )
 

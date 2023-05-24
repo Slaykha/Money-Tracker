@@ -57,6 +57,7 @@ const SpendingTextField = (props) => {
             onChange={(e) => {handleChange(e)}}
             name="numberformat"
             InputProps={{inputComponent: NumberFormatCustom, inputProps: {currency}, style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
+            InputLabelProps={{ shrink: true }}
             variant="filled"
         />
     );
