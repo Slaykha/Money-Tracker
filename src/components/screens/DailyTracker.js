@@ -9,10 +9,22 @@ const DailyTracker = (props) => {
 
     const left = 20
 
-    const { dailyLimit } = props;
+    const { dailyLimit, spendings, currency } = props;
+
+    const todaysSpendings = () => {
+        let today = new Date(new Date(new Date().setHours(0,0,0,0)).setDate(new Date().getDate()))
+        let spendingsTotal = 0
+        spendings && spendings.map((spending) => {
+            if(new Date(spending.spendingDate) > today){
+                spendingsTotal += spending.money
+            }
+        })
+
+        return spendingsTotal
+    }
 
     const percentageCalculator = () => {
-        return (left / dailyLimit) * 100 * 3.6 
+        return (todaysSpendings() / dailyLimit) * 100 * 3.6 
     };
 
     return (
@@ -51,7 +63,7 @@ const DailyTracker = (props) => {
                         fontSize:"24px"
                     }} 
                 >
-                    {dailyLimit} / {dailyLimit - left}
+                    {(dailyLimit - todaysSpendings()).toFixed(2)} {currency}  / {dailyLimit} {currency}
                 </div>
             </div>
         </div>
@@ -60,6 +72,8 @@ const DailyTracker = (props) => {
 
 const mapStateToProps = (state) => ({
     dailyLimit: state.user.dailyLimit,
+    spendings: state.spendings,
+    currency: state.user.currency
 });
 
 const mapDispatchToProps = (dispatch) => ({});

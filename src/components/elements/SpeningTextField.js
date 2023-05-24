@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, currency, ...other } = props;
   
-    console.log(currency)
     return (
 // event.target.value nedir nerden gelir bu yaprak diyenlere cevap niteliğinde kod
       <NumericFormat

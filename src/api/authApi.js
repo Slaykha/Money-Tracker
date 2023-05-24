@@ -1,7 +1,6 @@
 const axios = require("axios").default;
 
 const RegisterApi = async (ENDPOINT, data) => {
-    console.log(data)
     const resp = await axios.post(`${ENDPOINT}/user/register`,
         data,
         {withCredentials: true},
