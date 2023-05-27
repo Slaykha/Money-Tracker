@@ -1,23 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const CircleProgressBar = ({spendings, dailyLimit, currency}) => {
+const CircleProgressBar = ({todaysSpendings, dailyLimit, currency}) => {
 
-    const todaysSpendings = () => {
-        let today = new Date(new Date(new Date().setHours(0, 0, 0, 0)).setDate(new Date().getDate()))
-        let spendingsTotal = 0
-        spendings && spendings.map((spending) => {
-            if (new Date(spending.spendingDate) > today) {
-                spendingsTotal += spending.money
-            }
+    const [percentage, setPrecentage] = useState(0)
+
+    const calculateTotalAmount = () => {
+        let total = 0
+        todaysSpendings && todaysSpendings.map((spending) => {
+            total += spending.money
         })
 
-        return spendingsTotal
+        return total.toFixed(2)
     }
 
     const percentageCalculator = () => {
-        return (todaysSpendings() / dailyLimit) * 100 * 3.6
+        setPrecentage((calculateTotalAmount() / dailyLimit) * 100 * 3.6)
     };
 
+    useEffect(() => {
+        console.log(todaysSpendings, "deneme")
+        if(todaysSpendings)
+            percentageCalculator()
+    }, [todaysSpendings])
+    
+    console.log(percentage)
 
     return (
         <div
@@ -31,7 +37,7 @@ const CircleProgressBar = ({spendings, dailyLimit, currency}) => {
                 height: "300px",
                 borderRadius: "100%",
                 border: "4px solid #D7DBDD ",
-                background: `conic-gradient(from 0deg, green 0deg ${percentageCalculator()}deg, greenyellow ${percentageCalculator()}deg ${360 - percentageCalculator()}deg)`,
+                background: `conic-gradient(from 0deg, green 0deg ${percentage}deg, greenyellow ${percentage}deg ${360 - percentage}deg)`,
                 transition: "--p 0.5s,--l 0.5s,--a 0.5s"
             }}
         >
@@ -46,18 +52,30 @@ const CircleProgressBar = ({spendings, dailyLimit, currency}) => {
             >
                 <div
                     style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginTop: "25%",
                         color: "white",
                         fontSize: "24px"
                     }}
-                >
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{percentageCalculator() / 3.6} %
-                    <br />
-                    <br />
-                    {(dailyLimit - todaysSpendings()).toFixed(2)} {currency}  / {dailyLimit} {currency}
+                >     
+                    <div
+                        style={{
+                            display: "flex",
+                            marginTop:"30%",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        {percentage < 360  ? (100 - (percentage / 3.6)).toFixed(2) : "00.00"}%
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            marginTop:"10%",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        {parseFloat(calculateTotalAmount()).toFixed(2)} {currency}  / {dailyLimit} {currency}
+                    </div>
                 </div>
             </div>
         </div>

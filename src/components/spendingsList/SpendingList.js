@@ -1,68 +1,60 @@
-import React, { useEffect } from 'react';
-import { fetchSpendingsApi } from '../../api/spendingApi';
-import ListHead from './ListHead';
-import ListItem from './ListItem';
-import { ENDPOINT } from "../../App";
+import React from 'react';
 import { connect } from 'react-redux';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import SpendingListItem from './SpendingListItem';
 import { deleteSpending } from '../../actions/spendingAction';
 
 const SpendingList = (props) => {
     const{
-        spendingArray,
-        setSpendingArray,
-        userId,
         spendings,
-        deleteSpending
+        deleteSpending,
+        currency
     }=props
 
-
-    /* useEffect(() => {
-        getSepndings()
-    }, [])
-
-    const getSepndings = async () => {
-        try {
-            const response = await fetchSpendingsApi(ENDPOINT, userId)
-
-            setSpendingArray(response.data)
-        } catch (error) {
-            console.info(error)
-        } 
-    } */
     
     return (
         <div>
             <Table sx={{ width:"80%", marginLeft:"10%", background:"#393E46", borderRadius:"10px" }} aria-label="simple table">
                 <TableHead>
-                <TableRow>
-                    <TableCell sx={{color:"rgb(238, 238, 238)"}}>Date</TableCell>
-                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Money</TableCell>
-                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Type</TableCell>
-                    <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Delete</TableCell>
-                </TableRow>
+                    {spendings && spendings.length !== 0 && 
+                        <TableRow>
+                            <TableCell sx={{color:"rgb(238, 238, 238)"}}>Date</TableCell>
+                            <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Amount</TableCell>
+                            <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Spending Type</TableCell>
+                            <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">Delete</TableCell>
+                        </TableRow>
+                    }
                 </TableHead>
                 <TableBody>
-                {spendings && spendings.map((spending) => (
-                    <SpendingListItem spending={spending} deleteSpending={deleteSpending}/>
-                ))}
+                {spendings && spendings.length !== 0 ? spendings.map((spending) => (
+                    <SpendingListItem 
+                        spending={spending} 
+                        deleteSpending={deleteSpending}
+                        currency={currency}    
+                    />
+                ))
+                :
+                <div
+                    style={{
+                        fontSize:"36px",
+                        display:"block",
+                        textAlign:"center",
+                        marginTop:"5%",
+                        marginBottom:"5%",
+                        color:"whitesmoke"
+                    }}
+                >
+                    No Records Found To Display!
+                </div>
+                }
                 </TableBody>
             </Table>
-{/*             <ListHead/>
-            {spendings && spendings.map((spending) => (
-                <ListItem
-                    spending={spending}
-                />
-            ))} */}
-            
         </div>
     );
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.user.id,
-    spendings: state.spendings
+    currency: state.user.currency
 });
 
 const mapDispatchToProps = (dispatch) => ({ 

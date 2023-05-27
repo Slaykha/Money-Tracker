@@ -4,7 +4,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { ENDPOINT } from '../../App';
 import { deleteSpendingApi } from '../../api/spendingApi';
 
-const SpendingListItem = ({spending, deleteSpending}) => {
+const SpendingListItem = (props) => {
+    const {
+        spending, 
+        deleteSpending,
+        currency
+    } = props
 
     const getFormattedDate = () => {
         let today = new Date(spending.spendingDate);
@@ -35,7 +40,7 @@ const SpendingListItem = ({spending, deleteSpending}) => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} component="th" scope="row">{getFormattedDate()}</TableCell>
-                <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">{spending.money}</TableCell>
+                <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">{spending.money.toFixed(2)}&nbsp;{currency}</TableCell>
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">{spending.spendingType}</TableCell>
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">
                     <IconButton 

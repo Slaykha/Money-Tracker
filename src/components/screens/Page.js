@@ -28,7 +28,6 @@ function Page(props) {
     }
   }, [user])
 
-  console.log(isLoggedIn)
   if(!isLoggedIn){
     return <Navigate to="/login" />
   }

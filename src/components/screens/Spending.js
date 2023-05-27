@@ -1,9 +1,5 @@
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
-import SpendingButton from '../elements/SpendingButton';
-import SpendingDatePicker from '../elements/SpendingDatePicker';
-import SpendingTypeSelector from '../elements/SpendingTypeSelector';
-import SpendingTextField from '../elements/SpeningTextField';
 import { connect } from 'react-redux';
 import { createSpending } from '../../actions/spendingAction';
 import SpendingList from '../spendingsList/SpendingList';
@@ -37,16 +33,12 @@ const Spending = (props) => {
     const classes = useStyles()
 
     const {
-        setSpendingArray,
         userId,
         createSpending,
-        userCurrency
+        userCurrency,
+        spendings
     } = props
 
-    const date = new Date()
-    const staticWidth = "250px"
-
-    const [spending, setSpending] = useState({date: 0, money: "", type: ""})
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
 
     const handleClose = () => {
@@ -55,12 +47,6 @@ const Spending = (props) => {
     const handleClick = (date, money, type) =>{
         if(money && type){
             createSpending(userId, {date, money, type})
-            /* try {
-                createSpendingApi(ENDPOINT, userId, spending)
-            } catch (error) {
-                console.info(error)
-            } 
-            setSpendingArray((prevState) => [...prevState, spending]) */
         }
     }
 
@@ -82,29 +68,9 @@ const Spending = (props) => {
                 handleClick={handleClick}
                 currency={userCurrency}
             />
-            {/* <div className={classes.AddDiv}>
-                <SpendingDatePicker
-                    currentDate={date}
-                    spending={spending}
-                    setSpending={setSpending}
-                    staticWidth={staticWidth}
-                />
-                <SpendingTextField
-                    spending={spending}
-                    setSpending={setSpending}
-                    staticWidth={staticWidth}
-                />
-                <SpendingTypeSelector
-                    spending={spending}
-                    setSpending={setSpending}
-                    staticWidth={staticWidth}
-                />
-                <SpendingButton 
-                    handleClick={handleClick}
-                    staticWidth={staticWidth}
-                />
-            </div> */}
-            <SpendingList />
+            <SpendingList
+                spendings={spendings}
+            />
         </>
 
         
@@ -113,7 +79,9 @@ const Spending = (props) => {
 
 const mapStateToProps = (state) => ({
     userId: state.user.id,
-    userCurrency: state.user.currency
+    userCurrency: state.user.currency,
+    spendings: state.spendings
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

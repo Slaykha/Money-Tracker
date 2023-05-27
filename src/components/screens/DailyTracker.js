@@ -1,18 +1,61 @@
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import CircleProgressBar from "../dailyTracker/CircleProgressBar";
+import SpendingList from "../spendingsList/SpendingList";
+import { Button } from "@mui/material";
+import AddSpendingDialog from "../spending/AddSpendingDialog";
+import { createSpending } from "../../actions/spendingAction";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+    AddSpendingDialogButton:{
+        display:"block",
+        textAlign: "right",
+        margin:"2%",
+        marginRight:"10%"
+    }
+}));
 
 const DailyTracker = (props) => {
     const classes = useStyles();
 
-    const left = 20
+    const { 
+        userId,
+        dailyLimit, 
+        spendings, 
+        currency,
+        createSpending
+    } = props;
 
-    const { dailyLimit, spendings, currency } = props;
+    const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
+    const [todaysSpendings, setTodaysSpendings] = useState([])
 
+    const handleTodaysSpendings = () => {
+        setTodaysSpendings([])
+        let today = new Date(new Date(new Date().setHours(0, 0, 0, 0)).setDate(new Date().getDate()))
+        spendings && spendings.map((spending) => {
+            if (new Date(spending.spendingDate) > today) {
+                setTodaysSpendings(todaysSpendings => [...todaysSpendings, spending])
+            }
+        })
+    }
+
+    const handleClose = () => {
+        setOpenAddSpendingDialog(false)
+    }
+    const handleClick = (date, money, type) =>{
+        if(money && type){
+            createSpending(userId, {date, money, type})
+        }
+    }
+
+    useEffect(() => {
+        if(spendings)
+        handleTodaysSpendings()
+    }, [spendings])
     
+    console.log(todaysSpendings, "dsafds")
+
     return (
         <div>
             <div
@@ -21,7 +64,7 @@ const DailyTracker = (props) => {
                 Daily Spending Limit
             </div>
             <div
-                style={{marginTop:"5%",}}
+                style={{marginTop:"2%",}}
             >
                 <div
                     style={{display:"flex", fontSize:"24px", color:"whitesmoke", justifyContent:"center", margin:"2%"}}
@@ -29,9 +72,30 @@ const DailyTracker = (props) => {
                     Daily Limit: {dailyLimit}{currency}
                 </div>
                 <CircleProgressBar 
-                    spendings={spendings}
+                    todaysSpendings={todaysSpendings}
                     dailyLimit={dailyLimit}
                     currency={currency}
+                />
+            </div>
+            <div style={{marginTop:"2%"}}>
+                <div
+                    className={classes.AddSpendingDialogButton}
+                >
+                    <Button
+                        variant="contained"
+                        onClick={() => setOpenAddSpendingDialog(true)}
+                    >
+                        Add Spending
+                    </Button>
+                </div>
+                <AddSpendingDialog 
+                    open={openAddSpendingDialog}
+                    handleClose={handleClose}
+                    handleClick={handleClick}
+                    currency={currency}
+                />
+                <SpendingList
+                    spendings={todaysSpendings}
                 />
             </div>
         </div>
@@ -39,11 +103,16 @@ const DailyTracker = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+    userId: state.user.id,
     dailyLimit: state.user.dailyLimit,
     spendings: state.spendings,
     currency: state.user.currency
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+    createSpending: (userId, spending)=>{
+        dispatch(createSpending(userId, spending))
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyTracker);
