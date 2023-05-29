@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { Link, Navigate } from 'react-router-dom';
-import loginBackground from "../../images/loginBackground.jpg"
 import loginBackground2 from "../../images/loginBackground2.jpg"
-import loginVideo from "../../images/loginVideo.mp4"
 import { LoginApi } from '../../api/authApi';
 import { ENDPOINT } from '../../App';
-import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/userActions';
+
 
 const useStyles = makeStyles((theme) => ({
   loginDiv:{
@@ -61,23 +58,11 @@ const Login = (props) => {
     const classes = useStyles()
 
     const {
-      fetchUser,
-      user,
       isLoggedIn,
     } = props
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    /* const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-    useEffect(() => {
-      console.log(user.user)
-      if(user.user){
-        setIsLoggedIn(true)
-      }else{
-        setIsLoggedIn(false)
-      }
-    }, [user.user]) */
   
     const handleClick = () => {
         handleLogin()
@@ -89,10 +74,7 @@ const Login = (props) => {
 
     const handleLogin = async () => {
       try{
-        let resp = await LoginApi(ENDPOINT, {email, password})
-        if(resp){
-          fetchUser()
-        }
+        await LoginApi(ENDPOINT, {email, password})
       }catch(e){
         console.error(e)
       }
@@ -181,14 +163,5 @@ const Login = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUser: () => {
-    dispatch(fetchUser());
-  },
-});
-
-export default connect(mapStateToProps,mapDispatchToProps) (Login);
+export default Login;

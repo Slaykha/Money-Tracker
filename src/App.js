@@ -13,25 +13,21 @@ import DailyTracker from "./components/screens/DailyTracker";
 export const ENDPOINT = "http://localhost:12345"
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexGrow: 1,
-    },
-    content: {
-      flexGrow: 1,
-      padding: 0,
-      overflowX: "auto"
-    },
+
   }));
 
 function App(props) {
   const classes = useStyles();
+
+  const COOKIE = document.cookie
+
   document.body.style = "background-color: #222831;"
 
   const {
     fetchUser,
     user
   } = props
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -40,7 +36,7 @@ function App(props) {
   }, [])
 
   useEffect(() => {
-    if(Object.keys(user).length !== 0){
+    if(COOKIE){
       setIsLoggedIn(true)
     }else{
       setIsLoggedIn(false)
@@ -58,13 +54,6 @@ function App(props) {
           <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
         </Routes>
       </HashRouter>
-     {/*  <AddSpending
-        setSpendingArray={setSpendingArray}
-      />
-      <SpendingList
-        spendingArray={spendingArray}
-        setSpendingArray={setSpendingArray}
-      /> */}
     </div>
   );
 }

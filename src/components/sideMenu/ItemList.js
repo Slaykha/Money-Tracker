@@ -14,7 +14,8 @@ export const ItemList = (props) => {
     const classes = useStyles()
     const{
         listTitle,
-        listItems
+        listItems,
+        
     } = props
 
     return (
@@ -23,7 +24,7 @@ export const ItemList = (props) => {
                 {listTitle}
             </div>
             {listItems && listItems.map((listItem) => (
-                <Item itemText={listItem.itemText} itemType={listItem.itemType} itemLocation={listItem.itemLocation}/>
+                <Item itemText={listItem.itemText} itemType={listItem.itemType} itemLocation={listItem.itemLocation} itemIcon={listItem.itemIcon}/>
             ))}
         </div>
     ) 

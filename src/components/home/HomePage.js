@@ -48,7 +48,7 @@ export const HomePage = ({user, spendings}) => {
         if(totalSpendings !== total){
             setTotalSpendings(total)
         }
-        setBoxElements([{icon:"", title:"Total Spendings", content:`${user.currency}${totalSpendings}`}])
+        setBoxElements([{icon:"", title:"Total Spendings", content:`${user.currency}${totalSpendings}`},{icon:"", title:"Today's Total Spendings", content:`${user.currency}${totalSpendings}`}])
     }, [spendings, totalSpendings])
     
 

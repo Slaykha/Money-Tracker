@@ -1,6 +1,6 @@
 import { FETCH_SPENDINGS, CREATE_SPENDING, DELETE_SPENDING } from "../actions/types"
 
-const spendingReducer = (state = {}, action) => {
+const spendingReducer = (state = [], action) => {
     switch(action.type){
         case FETCH_SPENDINGS:
             return action.payload

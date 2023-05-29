@@ -3,6 +3,7 @@ import React from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { LogoutApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const useStyles = makeStyles({
     headerDiv:{
@@ -26,12 +27,19 @@ const useStyles = makeStyles({
         textDecoration:"none"
     },
     rightSide:{
+        display:"flex",
         textAlign:"right",
         color:"white",
-        fontSize:"18px",
         cursor:"pointer",
+        marginLeft:"auto",
+        marginRight:"3%"
+    },
+    icon:{
+        paddingRight:"15%"
+    },
+    userName:{
+        fontSize:"20px",
         textDecoration:"none",
-        marginLeft:"auto"
     }
   
 })
@@ -52,7 +60,13 @@ export const Header = ({user}) => {
         <div className={classes.headerDiv}>
             <Link to="/" className={classes.logo}>Spending Tracker</Link>
             <div className={classes.rightSide} onClick={() => handleLogOut()}>
-                {user.name}
+                <div className={classes.icon}>
+                    <AccountCircleIcon 
+                    />
+                </div>
+                <div className={classes.userName}>
+                    {user.name}
+                </div>
             </div>
         </div>
     )
