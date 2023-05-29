@@ -4,7 +4,7 @@ import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
 import { connect } from "react-redux";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { fetchSpendings } from "../../actions/spendingAction";
+import { fetchSpendings, fetchTodaysTotal } from "../../actions/spendingAction";
 import { fetchUser } from "../../actions/userActions";
 
 
@@ -19,28 +19,25 @@ function Page(props) {
     fetchSpendings,
     isLoggedIn,
     spendings,
-    fetchUser
+    fetchTodaysTotal,
+    todaysTotal
   } = props
 
   const PageComponent = props.component;
 
-  const storedLocation = localStorage.getItem("currentLocation") || "/";
-
   const navigate = useNavigate()
-  const location = useLocation();
-
-  useEffect(() => {
-    localStorage.setItem("currentLocation", location.pathname);
-  }, [location]);
 
   useEffect(() => {
     if(user && user.id !== ""){
       fetchSpendings(user.id)
+      fetchTodaysTotal(user.id)
     }
   }, [user])
 
+  
+
   if(!isLoggedIn){
-    navigate(storedLocation)
+    navigate("/login")
   }
 
   return (
@@ -50,7 +47,7 @@ function Page(props) {
         <Menu/>
         <div style={{marginLeft:"250px"}}>
 
-          <PageComponent user={user} spendings={spendings}/>
+          <PageComponent user={user} spendings={spendings} todaysTotal={todaysTotal}/>
         </div>
       </>
     </>
@@ -59,15 +56,16 @@ function Page(props) {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  spendings :state.spendings
+  spendings : state.spendings,
+  todaysTotal: state.todaysTotal
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSpendings: (userId) => {
     dispatch(fetchSpendings(userId))
   },
-  fetchUser: () => {
-    dispatch(fetchUser());
+  fetchTodaysTotal: (userId) => {
+    dispatch(fetchTodaysTotal(userId));
   },
 });
 

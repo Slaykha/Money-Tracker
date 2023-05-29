@@ -33,7 +33,7 @@ export const LeftDrawer = () => {
   const [homeListItems, setHomeListItems] = useState([{itemText:"Home Page", itemType:"Button", itemLocation:"", itemIcon:<AddIcon />}])
   const [graphListItems, setGraphListItems] = useState([{itemText:"Graph 1", itemType:"Text", itemLocation:"", itemIcon:<TimelineIcon />}, {itemText:"Graph 2", itemType:"Text", itemLocation:"", itemIcon:<EqualizerIcon />}, {itemText:"Graph 3", itemType:"Text", itemLocation:"", itemIcon:<DataUsageIcon />}])
   const [trackerListItems, setTrackerListItems] = useState([{itemText:"Daily Tracker", itemType:"Text", itemLocation:"dailyTracker", itemIcon:<DataUsageIcon />}])
-  const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Spending", itemType:"Text", itemLocation:"spending", itemIcon:<AddIcon />}])
+  const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Spendings", itemType:"Text", itemLocation:"spending", itemIcon:<AddIcon />}])
 
   return (
     <Drawer

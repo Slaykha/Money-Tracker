@@ -24,7 +24,8 @@ const DailyTracker = (props) => {
         dailyLimit, 
         spendings, 
         currency,
-        createSpending
+        createSpending,
+        todaysTotal
     } = props;
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
@@ -72,7 +73,7 @@ const DailyTracker = (props) => {
                     Daily Limit: {dailyLimit}{currency}
                 </div>
                 <CircleProgressBar 
-                    todaysSpendings={todaysSpendings}
+                    todaysTotal={todaysTotal}
                     dailyLimit={dailyLimit}
                     currency={currency}
                 />

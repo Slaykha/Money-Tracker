@@ -75,6 +75,7 @@ const Login = (props) => {
     const handleLogin = async () => {
       try{
         await LoginApi(ENDPOINT, {email, password})
+        window.location.reload()
       }catch(e){
         console.error(e)
       }

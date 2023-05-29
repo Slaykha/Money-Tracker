@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
-const CircleProgressBar = ({todaysSpendings, dailyLimit, currency}) => {
+const CircleProgressBar = ({todaysTotal, dailyLimit, currency}) => {
 
     const [percentage, setPrecentage] = useState(0)
 
-    const calculateTotalAmount = () => {
-        let total = 0
-        todaysSpendings && todaysSpendings.map((spending) => {
-            total += spending.money
-        })
-
-        return total.toFixed(2)
-    }
-
     const percentageCalculator = () => {
-        setPrecentage((calculateTotalAmount() / dailyLimit) * 100 * 3.6)
+        setPrecentage((todaysTotal / dailyLimit) * 100 * 3.6)
     };
 
     useEffect(() => {
-        console.log(todaysSpendings, "deneme")
-        if(todaysSpendings)
+        if(todaysTotal)
             percentageCalculator()
-    }, [todaysSpendings])
+    }, [todaysTotal])
     
     console.log(percentage)
 
@@ -74,7 +64,7 @@ const CircleProgressBar = ({todaysSpendings, dailyLimit, currency}) => {
                             alignItems: "center",
                         }}
                     >
-                        {parseFloat(calculateTotalAmount()).toFixed(2)} {currency}  / {dailyLimit} {currency}
+                        {parseFloat(todaysTotal).toFixed(2)} {currency}  / {dailyLimit} {currency}
                     </div>
                 </div>
             </div>
