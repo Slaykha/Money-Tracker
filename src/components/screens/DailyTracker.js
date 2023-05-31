@@ -8,6 +8,19 @@ import AddSpendingDialog from "../spending/AddSpendingDialog";
 import { createSpending } from "../../actions/spendingAction";
 
 const useStyles = makeStyles((theme) => ({
+    title:{
+        fontSize:"36px", 
+        color:"whitesmoke", 
+        marginTop:"5%", 
+        marginLeft:"5%"
+    },
+    graphTitle:{
+        display:"flex", 
+        fontSize:"24px", 
+        color:"whitesmoke", 
+        justifyContent:"center", 
+        margin:"2%"
+    },
     AddSpendingDialogButton:{
         display:"block",
         textAlign: "right",
@@ -55,21 +68,13 @@ const DailyTracker = (props) => {
         handleTodaysSpendings()
     }, [spendings])
     
-    console.log(todaysSpendings, "dsafds")
-
     return (
         <div>
-            <div
-                style={{fontSize:"36px", color:"whitesmoke", marginTop:"5%", marginLeft:"5%"}}
-            >
+            <div className={classes.title}>
                 Daily Spending Limit
             </div>
-            <div
-                style={{marginTop:"2%",}}
-            >
-                <div
-                    style={{display:"flex", fontSize:"24px", color:"whitesmoke", justifyContent:"center", margin:"2%"}}
-                >
+            <div style={{marginTop:"2%",}}>
+                <div className={classes.graphTitle}>
                     Daily Limit: {dailyLimit}{currency}
                 </div>
                 <CircleProgressBar 

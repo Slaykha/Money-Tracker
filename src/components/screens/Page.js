@@ -3,12 +3,15 @@ import { makeStyles } from "@mui/styles";
 import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
 import { connect } from "react-redux";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchSpendings, fetchTodaysTotal } from "../../actions/spendingAction";
-import { fetchUser } from "../../actions/userActions";
 
 
 const useStyles = makeStyles({
+  bodyComponent:{
+    marginLeft:"250px", 
+    marginTop:"120px"
+  }
 });
 
 function Page(props) {
@@ -30,11 +33,16 @@ function Page(props) {
   useEffect(() => {
     if(user && user.id !== ""){
       fetchSpendings(user.id)
-      fetchTodaysTotal(user.id)
     }
+    return () => {}
   }, [user])
 
-  
+  useEffect(() => {
+    if(user && user.id !== ""){
+      fetchTodaysTotal(user.id)
+    }
+    return () => {}
+  }, [spendings])
 
   if(!isLoggedIn){
     navigate("/login")
@@ -45,8 +53,7 @@ function Page(props) {
       <>
         <Header user={user}/>
         <Menu/>
-        <div style={{marginLeft:"250px"}}>
-
+        <div className={classes.bodyComponent}>
           <PageComponent user={user} spendings={spendings} todaysTotal={todaysTotal}/>
         </div>
       </>

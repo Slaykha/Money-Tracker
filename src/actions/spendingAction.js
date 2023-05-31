@@ -6,10 +6,11 @@ export const fetchSpendings = (userId) => async (
     dispatch
 ) => {
     const resp = await fetchSpendingsApi(ENDPOINT, userId)
-        dispatch({
-            type: FETCH_SPENDINGS,
-            payload: resp.data
-        })
+        if (resp)
+            dispatch({
+                type: FETCH_SPENDINGS,
+                payload: resp.data
+            })
 }
 
 export const createSpending = (userId, spending) => async (dispatch) => {

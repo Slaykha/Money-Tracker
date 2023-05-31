@@ -11,7 +11,6 @@ const SpendingList = (props) => {
         currency
     }=props
 
-    console.log(spendings)
     return (
         <div>
             <Table sx={{ width:"80%", marginLeft:"10%", background:"#393E46", borderRadius:"10px" }} aria-label="simple table">

@@ -51,7 +51,39 @@ const useStyles = makeStyles(() =>({
         color:"#D3D3D3",
         marginLeft:"auto",
         marginRight:"25%"
-
+    },
+    largePlaceHolder:{
+        marginTop:"10px",
+        height: "20px",
+        width:"70px",
+        background:"linear-gradient(to right, rgb(211,211,211, 0.1) 0%, rgb(211,211,211, 0.4) 4%, rgb(211,211,211, 0.1) 8%)",
+        backgroundSize: "200% 100%",
+        borderRadius:"20px",
+        animation: `$scanner 0.9s linear infinite`,
+    },
+    smallPlaceHolder:{
+        marginTop:"10px",
+        marginRight:"5px",
+        height: "20px",
+        width:"30px",
+        background:"linear-gradient(to right, rgb(211,211,211, 0.1) 0%, rgb(211,211,211, 0.4) 8%, rgb(211,211,211, 0.1) 16%)",
+        backgroundSize: "200% 100%",
+        borderRadius:"20px",
+        animation: `$scanner 0.9s linear infinite`,
+    },
+    contentPlaceHoler:{
+        display:"flex"
+    },
+    '@keyframes scanner': {
+        "0%": { backgroundPosition: "200% 0%" },
+    },
+    graphPlaceHolder:{
+        fontSize:"36px",
+        display:"block",
+        textAlign:"center",
+        marginTop:"10%",
+        marginBottom:"5%",
+        color:"whitesmoke"
     }
 }))
 
@@ -245,10 +277,20 @@ export const GraphBoxes = (props) => {
             {boxType === "fullBox" ?
                 <div className={classes.fullBox}>
                     <div className={classes.GraphsTop}>
-                        <div className={classes.TotalSpending}>
-                            <div className={classes.TotalSpendingValue}>{currency}{totalSpendings}</div>
-                            <div className={classes.TotalSpendingText}>Spending</div>
-                        </div>
+                        {currency && totalSpendings
+                        ?
+                            <div className={classes.TotalSpending}>
+                                <div className={classes.TotalSpendingValue}>{currency}{totalSpendings}</div>
+                                <div className={classes.TotalSpendingText}>Spending</div>
+                            </div>
+                        :
+                            <div className={classes.TotalSpending}> 
+                                <div className={classes.contentPlaceHoler}>
+                                    <div className={classes.smallPlaceHolder}/>
+                                    <div className={classes.largePlaceHolder}/>
+                                </div>
+                            </div>
+                        }
                         <div className={classes.Legend}>
                             ● Spendings
                         </div>
@@ -286,7 +328,8 @@ export const GraphBoxes = (props) => {
                         </Box>                      
                         </div>
                     </div>
-                    {data && 
+                    {data && data.length != 0 
+                    ?
                         <ResponsiveContainer width="98%" height="80%">
                             <LineChart
                                 data={data}
@@ -303,6 +346,10 @@ export const GraphBoxes = (props) => {
                                 <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
                             </LineChart>
                         </ResponsiveContainer>
+                    :
+                        <div className={classes.graphPlaceHolder}>
+                            No Records To Display!
+                        </div>
                     }
                 </div>
                 :

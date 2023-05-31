@@ -9,6 +9,7 @@ const useStyles = makeStyles(() =>({
         width:"calc(100% - 250px)",
         height:200,
         position:"absolute",
+        marginTop:"-40px"
     },
     headerTitle:{
         color:"white",
@@ -48,7 +49,7 @@ export const HomePage = ({user, spendings, todaysTotal}) => {
         if(totalSpendings !== total){
             setTotalSpendings(total)
         }
-        setBoxElements([{icon:"", title:"Total Spendings", content:`${user.currency}${totalSpendings}`},{icon:"", title:"Today's Total Spendings", content:`${user.currency}${todaysTotal}`}])
+        setBoxElements([{icon:"", title:"Total Spendings", content:`${totalSpendings}`},{icon:"", title:"Today's Total Spendings", content:`${todaysTotal}`}])
     }, [spendings, totalSpendings])
     
 
@@ -57,7 +58,7 @@ export const HomePage = ({user, spendings, todaysTotal}) => {
             <div className={classes.homeHeader}>
                 <div className={classes.headerTitle}> Hello {user.name} </div>
                 <div className={classes.headerText}> We are on a mission to make peoples life easier. </div>
-                <Boxes boxElements={boxElements}/>
+                <Boxes boxElements={boxElements} currency={user.currency}/>
                 <GraphBoxes boxType={"fullBox"} spendings={spendings} totalSpendings={totalSpendings} currency={user.currency}/>
                 <GraphBoxes boxType={"multipleBox"} boxes={graphBoxes}/>
             </div>

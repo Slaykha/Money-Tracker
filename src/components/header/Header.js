@@ -8,15 +8,15 @@ import { Menu, MenuItem } from '@mui/material'
 
 const useStyles = makeStyles({
     headerDiv:{
-        padding:"25px",
-        borderRadius:"10px",
+        padding: "25px",
         backgroundColor: "#1A1A1A",
-        display:"flex",
-        paddingLeft:0,
-        position: "sticky",
-        top: 0, 
-        zIndex:9999
-
+        display: "flex",
+        paddingLeft: 0,
+        position: "fixed",
+        top: 0,
+        zIndex: 9999,
+        width: "100%",
+        boxSizing: "border-box"
     },
     logo:{
         width:"250px",
