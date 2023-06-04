@@ -41,10 +41,11 @@ const SpendingTypeSelector = (props) => {
             style={{margin: "2%"}}
             disablePortal
             id="combo-box-demo"
+            value={spending}
             options={spendingOptions}
             onSelect={(option) => handleSelect(option)}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Spending" />}
+            renderInput={(params) => <TextField {...params} label="Spending Type" />}
         />
     );
 };

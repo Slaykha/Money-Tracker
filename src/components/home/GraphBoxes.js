@@ -81,7 +81,7 @@ const useStyles = makeStyles(() =>({
         fontSize:"36px",
         display:"block",
         textAlign:"center",
-        marginTop:"10%",
+        marginTop:"8%",
         marginBottom:"5%",
         color:"whitesmoke"
     }
@@ -328,7 +328,7 @@ export const GraphBoxes = (props) => {
                         </Box>                      
                         </div>
                     </div>
-                    {data && data.length != 0 
+                    {data && data.length != 0
                     ?
                         <ResponsiveContainer width="98%" height="80%">
                             <LineChart

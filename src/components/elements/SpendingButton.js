@@ -22,7 +22,7 @@ const SpendingButton = (props) => {
         <ColorButton
           onClick={() => handleClick()}
         >
-            Add
+            Add Spending
         </ColorButton>
     );
 };

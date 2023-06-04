@@ -4,7 +4,7 @@ import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchSpendings, fetchTodaysTotal } from "../../actions/spendingAction";
+import { fetchTodaysTotal } from "../../actions/spendingAction";
 
 
 const useStyles = makeStyles({
@@ -19,7 +19,6 @@ function Page(props) {
 
   const {
     user,
-    fetchSpendings,
     isLoggedIn,
     spendings,
     fetchTodaysTotal,
@@ -30,13 +29,7 @@ function Page(props) {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if(user && user.id !== ""){
-      fetchSpendings(user.id)
-    }
-    return () => {}
-  }, [user])
-
+  
   useEffect(() => {
     if(user && user.id !== ""){
       fetchTodaysTotal(user.id)
@@ -47,6 +40,7 @@ function Page(props) {
   if(!isLoggedIn){
     navigate("/login")
   }
+
 
   return (
     <>
@@ -68,9 +62,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchSpendings: (userId) => {
-    dispatch(fetchSpendings(userId))
-  },
   fetchTodaysTotal: (userId) => {
     dispatch(fetchTodaysTotal(userId));
   },

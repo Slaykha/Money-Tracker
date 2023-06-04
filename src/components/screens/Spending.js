@@ -1,10 +1,12 @@
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { createSpending } from '../../actions/spendingAction';
+import { createSpending, fetchSpendings } from '../../actions/spendingAction';
 import SpendingList from '../spendingsList/SpendingList';
 import AddSpendingDialog from '../spending/AddSpendingDialog';
 import { Button } from '@mui/material';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterSpendingDialog from '../spending/FilterSpendingDialog';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -33,28 +35,63 @@ const Spending = (props) => {
     const classes = useStyles()
 
     const {
-        userId,
+        user,
         createSpending,
         userCurrency,
-        spendings
+        spendings,
+        fetchSpendings
     } = props
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
+    const [openFilterSpendingDialog, setOpenFilterSpendingDialog] = useState(false)
+
+    const [dateFilter, setDateFilter] = useState("")
+    const [typeFilter, setTypeFilter] = useState("")
+
 
     const handleClose = () => {
         setOpenAddSpendingDialog(false)
     }
+
+    const handleCloseFilter = () => {
+        setOpenFilterSpendingDialog(false)
+    }
+
     const handleClick = (date, money, type) =>{
         if(money && type){
-            createSpending(userId, {date, money, type})
+            createSpending(user.id, {date, money, type})
         }
     }
 
+    const handleFilter = () => {
+        fetchSpendings(user.id, dateFilter, typeFilter)
+        handleCloseFilter()
+    }
+    
+    useEffect(() => {
+        if(user && user.id !== ""){
+          fetchSpendings(user.id, "", "")
+        }
+        return () => {}
+    }, [user])
+
     return (
         <>
-            <div
-                className={classes.AddSpendingDialogButton}
-            >
+            <div className={classes.AddSpendingDialogButton}>
+                <Button
+                    onClick={() => setOpenFilterSpendingDialog(true)}
+                    variant="contained"
+                    sx={{
+                    background: "whitesmoke",
+                    '&:hover': {
+                        background: "ghostWhite",
+                    },
+                    marginRight:"2%"
+                    }}
+                >
+                    <FilterAltIcon sx={{ color: "gray" }} />
+                </Button>
+
                 <Button
                     variant="contained"
                     onClick={() => setOpenAddSpendingDialog(true)}
@@ -68,6 +105,13 @@ const Spending = (props) => {
                 handleClick={handleClick}
                 currency={userCurrency}
             />
+            <FilterSpendingDialog 
+                open={openFilterSpendingDialog}
+                handleClose={handleCloseFilter}
+                setType={setTypeFilter}
+                type={typeFilter}
+                handleFilter={handleFilter}
+            />
             <SpendingList
                 spendings={spendings}
             />
@@ -78,7 +122,7 @@ const Spending = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.user.id,
+    user: state.user,
     userCurrency: state.user.currency,
     spendings: state.spendings
 
@@ -87,7 +131,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     createSpending: (userId, spending)=>{
         dispatch(createSpending(userId, spending))
-    }
+    },
+    fetchSpendings: (userId, date, type) => {
+        dispatch(fetchSpendings(userId, date, type))
+    },
 });
 
 export default connect(mapStateToProps,mapDispatchToProps) (Spending);

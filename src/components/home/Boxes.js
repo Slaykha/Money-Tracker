@@ -57,7 +57,7 @@ export const Boxes = (props) => {
         <div className={classes.Boxes}>
             {boxElements && boxElements.map((box) => (
                 <>
-                    {box.title && box.content && currency
+                    {box.title && box.content && currency 
                     ?
                         <div className={classes.Box}>
                             <div className={classes.boxText}>{box.title} </div>

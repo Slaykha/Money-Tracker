@@ -2,6 +2,8 @@ import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react'
 import { Boxes } from './Boxes'
 import { GraphBoxes } from './GraphBoxes'
+import { connect } from 'react-redux'
+import { fetchSpendings } from '../../actions/spendingAction'
 
 const useStyles = makeStyles(() =>({
     homeHeader:{
@@ -28,8 +30,15 @@ const useStyles = makeStyles(() =>({
     
 }))
 
-export const HomePage = ({user, spendings, todaysTotal}) => {
+const HomePage = (props) => {
     const classes = useStyles()
+
+    const {
+        user, 
+        spendings, 
+        todaysTotal,        
+        fetchSpendings
+    } = props 
 
     const [boxElements, setBoxElements] = useState([{icon:"", title:"", content:""}])
     const [graphBoxes, setGraphBoxes] = useState([{title:"deneme1", content:"",}, {title:"deneme2", content:"",}, {title:"deneme3", content:"",}])
@@ -52,6 +61,13 @@ export const HomePage = ({user, spendings, todaysTotal}) => {
         setBoxElements([{icon:"", title:"Total Spendings", content:`${totalSpendings}`},{icon:"", title:"Today's Total Spendings", content:`${todaysTotal}`}])
     }, [spendings, totalSpendings])
     
+    useEffect(() => {
+        if(user && user.id !== ""){
+          fetchSpendings(user.id, "", "")
+        }
+        return () => {}
+    }, [user])
+    
 
     return (
         <div>
@@ -65,3 +81,17 @@ export const HomePage = ({user, spendings, todaysTotal}) => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user,
+    spendings : state.spendings,
+    todaysTotal: state.todaysTotal
+});
+  
+const mapDispatchToProps = (dispatch) => ({
+    fetchSpendings: (userId, date, type) => {
+        dispatch(fetchSpendings(userId, date, type))
+    },
+});
+
+export default connect(mapStateToProps,mapDispatchToProps) (HomePage);
