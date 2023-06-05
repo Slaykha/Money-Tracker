@@ -57,7 +57,7 @@ const HomePage = (props) => {
 
     const getDataByDate = (interval) => {
         if(interval === "W"){
-            const weeklyData = [{name:"Monday", spending:0, fill: '#1A75FF'}, {name:"Tuesday", spending:0, fill: '#1A75FF'}, {name:"Wednesday", spending:0, fill: '#1A75FF'}, {name:"Thursday", spending:0, fill: '#1A75FF'}, {name:"Friday", spending:0, fill: '#1A75FF'}, {name:"Saturday", spending:0, fill: '#1A75FF'}, {name:"Sunday", spending:0, fill: '#1A75FF'}]
+            const weeklyData = [{name:"Monday", spending:0, fill: '#1A75FF'}, {name:"Tuesday", spending:0, fill: '#8dd1e1'}, {name:"Wednesday", spending:0, fill: '#82ca9d'}, {name:"Thursday", spending:0, fill: '#a4de6c'}, {name:"Friday", spending:0, fill: '#d0ed57'}, {name:"Saturday", spending:0, fill: '#ffc658'}, {name:"Sunday", spending:0, fill: '#ff4a4a'}]
             spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
                 let spendingDate = new Date(spending.spendingDate)
                 let today = new Date().getDay()
@@ -111,7 +111,7 @@ const HomePage = (props) => {
             setData(weeklyData)
         }
         else if(interval === "M"){
-            const monthlyData = [{name:"January", spending:0}, {name:"February", spending:0}, {name:"March", spending:0}, {name:"April", spending:0}, {name:"May", spending:0}, {name:"June", spending:0}, {name:"July", spending:0}, {name:"August", spending:0}, {name:"September", spending:0}, {name:"October", spending:0}, {name:"November", spending:0}, {name:"December", spending:0}]
+            const monthlyData = [{name:"January", spending:0, fill: '#d51aff'}, {name:"February", spending:0, fill: '#851aff'}, {name:"March", spending:0, fill: '#1A75FF'}, {name:"April", spending:0, fill: '#1a98ff'}, {name:"May", spending:0, fill: '#1ad1ff'}, {name:"June", spending:0, fill: '#1affe8'}, {name:"July", spending:0, fill: '#1aff98'}, {name:"August", spending:0, fill: '#1aff35'}, {name:"September", spending:0, fill: '#a0ff1a'}, {name:"October", spending:0, fill: '#ecff1a'}, {name:"November", spending:0, fill: '#ff9c1a'}, {name:"December", spending:0, fill: '#ff291a'}]
             spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
                 let spendingDate = new Date(spending.spendingDate)
                 let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
@@ -160,41 +160,32 @@ const HomePage = (props) => {
             })
             setData(monthlyData)
         }else if(interval === "Y"){
-            const yearlyData = [{name:"2014", spending:0}, {name:"2015", spending:0}, {name:"2016", spending:0}, {name:"2017", spending:0}, {name:"2018", spending:0}, {name:"2019", spending:0}, {name:"2020", spending:0}, {name:"2021", spending:0}, {name:"2022", spending:0}, {name:"2023", spending:0}]
+            const yearlyData = [{name:"2018", spending:0, fill: '#1A75FF'}, {name:"2019", spending:0, fill: '#8dd1e1'}, {name:"2020", spending:0, fill: '#82ca9d'}, {name:"2021", spending:0, fill: '#a4de6c'}, {name:"2022", spending:0, fill: '#d0ed57'}, {name:"2023", spending:0, fill: '#ffc658'}, {name:"2024", spending:0, fill: '#ff4a4a'}]
             spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
                 let spendingDate = new Date(spending.spendingDate)
                 let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
-                if(spendingDate.getFullYear() > limitDate.getFullYear() - 10){
+                if(spendingDate.getFullYear() > limitDate.getFullYear() - 7){
                     switch (spendingDate.getFullYear()) {
-                        case 2014:
+                        case 2018:
                             yearlyData[0].spending += spending.money
                             break;
-                        case 2015:
+                        case 2019:
                             yearlyData[1].spending += spending.money
                             break;
-                        case 2016:
+                        case 2020:
                             yearlyData[2].spending += spending.money
                             break;
-                        case 2017:
+                        case 2021:
                             yearlyData[3].spending += spending.money
                             break;
-                        case 2018:
+                        case 2022:
                             yearlyData[4].spending += spending.money
                             break;
-                        case 2019:
+                        case 2023:
                             yearlyData[5].spending += spending.money
                             break;
-                        case 2020:
+                        case 2024:
                             yearlyData[6].spending += spending.money
-                            break;
-                        case 2021:
-                            yearlyData[7].spending += spending.money
-                            break;
-                        case 2022:
-                            yearlyData[8].spending += spending.money
-                            break;
-                        case 2023:
-                            yearlyData[9].spending += spending.money
                             break;
                         default:
                             break;

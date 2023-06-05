@@ -232,37 +232,41 @@ export const GraphBoxes = (props) => {
                                                     <XAxis dataKey="name" />
                                                     <YAxis />
                                                     <Tooltip />
-                                                    <Legend />
                                                     <Bar dataKey="spending" fill="#1A75FF" />
                                                 </BarChart>
                                             </ResponsiveContainer>
               
                                         :
-                                            <ResponsiveContainer width="90%" height="100%">
-                                                <RadialBarChart 
-                                                    cx="50%"
-                                                    cy="50%"
-                                                    innerRadius="10%" 
-                                                    outerRadius="90%" 
-                                                    data={data} 
-                                                    startAngle={0} 
-                                                    endAngle={360}
-                                                >
-                                                    <RadialBar minAngle={15} background clockWise={true} dataKey='spending' nameKey="name" />
-                                                    <Legend 
-                                                        iconSize={10} 
-                                                        layout="vertical" 
-                                                        verticalAlign="middle" 
-                                                        wrapperStyle={{
-                                                            top: '50%',
-                                                            right: -40,
-                                                            transform: 'translate(0, -50%)',
-                                                            lineHeight: '24px'
-                                                        }} 
-                                                    />
-                                                    <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
-                                                </RadialBarChart>
-                                            </ResponsiveContainer>
+                                            box.content === "pie" ?
+                                                <ResponsiveContainer width="90%" height="100%">
+                                                    <RadialBarChart 
+                                                        cx="40%"
+                                                        cy="50%"
+                                                        innerRadius="10%" 
+                                                        outerRadius="90%" 
+                                                        data={data} 
+                                                        startAngle={0} 
+                                                        endAngle={360}
+                                                    >
+                                                        <RadialBar minAngle={15} background clockWise={true} dataKey='spending' nameKey="name" />
+                                                        <Legend 
+                                                            iconType='circle'
+                                                            iconSize={8} 
+                                                            layout="vertical" 
+                                                            verticalAlign="middle" 
+                                                            wrapperStyle={{
+                                                                top: '50%',
+                                                                right: 0,
+                                                                transform: 'translate(0, -50%)',
+                                                                lineHeight: '16px',
+                                                                fontSize:"14px"
+                                                            }} 
+                                                        />
+                                                        <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
+                                                    </RadialBarChart>
+                                                </ResponsiveContainer>
+                                            :
+                                            <div></div>
                                     :
                                         <div className={classes.graphPlaceHolderMultiBox}>
                                             No Records To Display!
