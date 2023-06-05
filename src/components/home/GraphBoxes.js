@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, NativeSelect, Select } from '@mui/ma
 import { makeStyles } from '@mui/styles'
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, BarChart, Bar, RadialBarChart, RadialBar } from 'recharts';
 
 const useStyles = makeStyles(() =>({
     fullBox:{
@@ -84,6 +84,13 @@ const useStyles = makeStyles(() =>({
         marginTop:"8%",
         marginBottom:"5%",
         color:"whitesmoke"
+    },
+    graphPlaceHolderMultiBox:{
+        fontSize:"24px",
+        display:"block",
+        textAlign:"center",
+        marginTop:"25%",
+        color:"whiteSmoke"
     }
 }))
 
@@ -93,170 +100,15 @@ export const GraphBoxes = (props) => {
         boxes,
         spendings,
         totalSpendings,
-        currency
+        currency,
+        data,
+        getDataByDate
     } = props;
     const classes = useStyles()
 
     const boxNumber = boxes && boxes.length
-    const [dataTime, setDataTime] = useState("W")
-    const [data, setData] = useState()
-
-    useEffect(() => {
-        getDataByDate("W")
-    }, [spendings])
-
-    const getDataByDate = (interval) => {
-        if(interval === "W"){
-            const weeklyData = [{Xaxis:"Monday", spending:0}, {Xaxis:"Tuesday", spending:0}, {Xaxis:"Wednesday", spending:0}, {Xaxis:"Thursday", spending:0}, {Xaxis:"Friday", spending:0}, {Xaxis:"Saturday", spending:0}, {Xaxis:"Sunday", spending:0}]
-            spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
-                let spendingDate = new Date(spending.spendingDate)
-                let today = new Date().getDay()
-                let limitDate
-                if(today === 0){
-                    limitDate = new Date(new Date(new Date()).setDate(new Date().getDate() - 7))
-                }else{
-                    limitDate = new Date(new Date(new Date()).setDate(new Date().getDate() - today))
-                }
-        
-                if(spendingDate.setHours(0,0,0,0) > limitDate.setHours(0,0,0,0)){
-                    switch (spendingDate.getDay()) {
-                        case 0:
-                            weeklyData[6].spending += spending.money
-                            weeklyData[6].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-                            break;
-                        case 1:
-                            weeklyData[0].spending += spending.money
-                            weeklyData[0].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-                            break;
-                        case 2:
-                            weeklyData[1].spending += spending.money
-                            weeklyData[1].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-
-                            break;
-                        case 3:
-                            weeklyData[2].spending += spending.money
-                            weeklyData[2].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-
-                            break;
-                        case 4:
-                            weeklyData[3].spending += spending.money
-                            weeklyData[3].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-
-                            break;
-                        case 5:
-                            weeklyData[4].spending += spending.money
-                            weeklyData[4].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-
-                            break;
-                        case 6:
-                            weeklyData[5].spending += spending.money
-                            weeklyData[5].Xaxis = spendingDate.toLocaleString('en-us', {  weekday: 'long' })
-
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            })
-            setData(weeklyData)
-        }
-        else if(interval === "M"){
-            const monthlyData = [{Xaxis:"January", spending:0}, {Xaxis:"February", spending:0}, {Xaxis:"March", spending:0}, {Xaxis:"April", spending:0}, {Xaxis:"May", spending:0}, {Xaxis:"June", spending:0}, {Xaxis:"July", spending:0}, {Xaxis:"August", spending:0}, {Xaxis:"September", spending:0}, {Xaxis:"October", spending:0}, {Xaxis:"November", spending:0}, {Xaxis:"December", spending:0}]
-            spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
-                let spendingDate = new Date(spending.spendingDate)
-                let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
-                if(spendingDate.getFullYear() === limitDate.getFullYear()){
-                    switch (spendingDate.getMonth()) {
-                        case 0:
-                            monthlyData[0].spending += spending.money
-                            break;
-                        case 1:
-                            monthlyData[1].spending += spending.money
-                            break;
-                        case 2:
-                            monthlyData[2].spending += spending.money
-                            break;
-                        case 3:
-                            monthlyData[3].spending += spending.money
-                            break;
-                        case 4:
-                            monthlyData[4].spending += spending.money
-                            break;
-                        case 5:
-                            monthlyData[5].spending += spending.money
-                            break;
-                        case 6:
-                            monthlyData[6].spending += spending.money
-                            break;
-                        case 7:
-                            monthlyData[7].spending += spending.money
-                            break;
-                        case 8:
-                            monthlyData[8].spending += spending.money
-                            break;
-                        case 9:
-                            monthlyData[9].spending += spending.money
-                            break;
-                        case 10:
-                            monthlyData[10].spending += spending.money
-                            break;
-                        case 11:
-                            monthlyData[11].spending += spending.money
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            })
-            setData(monthlyData)
-        }else if(interval === "Y"){
-            const yearlyData = [{Xaxis:"2014", spending:0}, {Xaxis:"2015", spending:0}, {Xaxis:"2016", spending:0}, {Xaxis:"2017", spending:0}, {Xaxis:"2018", spending:0}, {Xaxis:"2019", spending:0}, {Xaxis:"2020", spending:0}, {Xaxis:"2021", spending:0}, {Xaxis:"2022", spending:0}, {Xaxis:"2023", spending:0}]
-            spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
-                let spendingDate = new Date(spending.spendingDate)
-                let limitDate = new Date(new Date(new Date()).setDate(new Date().getDate()))
-                if(spendingDate.getFullYear() > limitDate.getFullYear() - 10){
-                    switch (spendingDate.getFullYear()) {
-                        case 2014:
-                            yearlyData[0].spending += spending.money
-                            break;
-                        case 2015:
-                            yearlyData[1].spending += spending.money
-                            break;
-                        case 2016:
-                            yearlyData[2].spending += spending.money
-                            break;
-                        case 2017:
-                            yearlyData[3].spending += spending.money
-                            break;
-                        case 2018:
-                            yearlyData[4].spending += spending.money
-                            break;
-                        case 2019:
-                            yearlyData[5].spending += spending.money
-                            break;
-                        case 2020:
-                            yearlyData[6].spending += spending.money
-                            break;
-                        case 2021:
-                            yearlyData[7].spending += spending.money
-                            break;
-                        case 2022:
-                            yearlyData[8].spending += spending.money
-                            break;
-                        case 2023:
-                            yearlyData[9].spending += spending.money
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            })
-            setData(yearlyData)
-        }
-    }
 
     const handleChange = (e) => {
-        setDataTime(e.target.value)
         switch (e.target.value) {
             case "W":
                 getDataByDate(e.target.value)
@@ -271,6 +123,7 @@ export const GraphBoxes = (props) => {
                 break;
         }
     }
+
 
     return (
         <>
@@ -340,7 +193,7 @@ export const GraphBoxes = (props) => {
                                     bottom: 5,
                                 }}
                             >
-                                <XAxis dataKey="Xaxis" />
+                                <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
                                 <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
@@ -355,17 +208,66 @@ export const GraphBoxes = (props) => {
                 :
                 <>
                     {
-                        boxes && boxes.map((boxContent, index) => (
+                        boxes && boxes.map((box, index) => (
                             <div 
                                 className={classes.multipleBox}
                                 style={{width:`${88 / boxNumber}%`}}
                             >
-                                <div>
+                                {
+                                    data && data.length != 0
+                                    ?
                                     
-                                </div>
-                                <div>
-
-                                </div>
+                                        box.content === "bar" ?
+                                            <ResponsiveContainer width="98%" height="95%">
+                                                <BarChart 
+                                                    margin={{
+                                                        top: 30,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }} 
+                                                    data={data}
+                                                >
+                                                    
+                                                    <XAxis dataKey="name" />
+                                                    <YAxis />
+                                                    <Tooltip />
+                                                    <Legend />
+                                                    <Bar dataKey="spending" fill="#1A75FF" />
+                                                </BarChart>
+                                            </ResponsiveContainer>
+              
+                                        :
+                                            <ResponsiveContainer width="90%" height="100%">
+                                                <RadialBarChart 
+                                                    cx="50%"
+                                                    cy="50%"
+                                                    innerRadius="10%" 
+                                                    outerRadius="90%" 
+                                                    data={data} 
+                                                    startAngle={0} 
+                                                    endAngle={360}
+                                                >
+                                                    <RadialBar minAngle={15} background clockWise={true} dataKey='spending' nameKey="name" />
+                                                    <Legend 
+                                                        iconSize={10} 
+                                                        layout="vertical" 
+                                                        verticalAlign="middle" 
+                                                        wrapperStyle={{
+                                                            top: '50%',
+                                                            right: -40,
+                                                            transform: 'translate(0, -50%)',
+                                                            lineHeight: '24px'
+                                                        }} 
+                                                    />
+                                                    <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
+                                                </RadialBarChart>
+                                            </ResponsiveContainer>
+                                    :
+                                        <div className={classes.graphPlaceHolderMultiBox}>
+                                            No Records To Display!
+                                        </div>
+                                }
                             </div>
                         ))
                     }
