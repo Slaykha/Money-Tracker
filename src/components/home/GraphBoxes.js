@@ -1,8 +1,13 @@
-import { FormControl, InputLabel, MenuItem, NativeSelect, Select } from '@mui/material';
+import { FormControl, IconButton, InputLabel, MenuItem, NativeSelect, Select } from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, BarChart, Bar, RadialBarChart, RadialBar } from 'recharts';
+import LineGraph from '../graph/LineGraph';
+import BarGraph from '../graph/BarGraph';
+import RadialBarGraph from '../graph/RadialBarGraph';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() =>({
     fullBox:{
@@ -12,7 +17,8 @@ const useStyles = makeStyles(() =>({
         borderRadius:"10px",
         margin:"3%",
         marginTop:"1%",
-        marginBottom:"1%"
+        marginBottom:"1%",
+        position: 'relative'
     },
     multipleBoxContainer:{
         display:"flex",
@@ -24,7 +30,8 @@ const useStyles = makeStyles(() =>({
         borderRadius:"10px",
         marginLeft:"3%",
         margin:"0.5%",
-        float:"left"
+        float:"left",
+        position: 'relative'
     },
     GraphsTop:{
         display:"flex",
@@ -91,7 +98,8 @@ const useStyles = makeStyles(() =>({
         textAlign:"center",
         marginTop:"25%",
         color:"whiteSmoke"
-    }
+    },
+
 }))
 
 export const GraphBoxes = (props) => {
@@ -104,7 +112,10 @@ export const GraphBoxes = (props) => {
         data,
         getDataByDate
     } = props;
+
     const classes = useStyles()
+
+    const navigate = useNavigate()
 
     const boxNumber = boxes && boxes.length
 
@@ -124,11 +135,25 @@ export const GraphBoxes = (props) => {
         }
     }
 
+    const onExpandClick = (type) => {
+        navigate(`/${type}`)
+    }
+
 
     return (
         <>
             {boxType === "fullBox" ?
                 <div className={classes.fullBox}>
+                    <IconButton
+                        onClick={() => onExpandClick("lineGraph")}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                        }}
+                    >
+                        <OpenInFullIcon style={{color:"whitesmoke"}}/>
+                    </IconButton>
                     <div className={classes.GraphsTop}>
                         {currency && totalSpendings
                         ?
@@ -181,100 +206,37 @@ export const GraphBoxes = (props) => {
                         </Box>                      
                         </div>
                     </div>
-                    {data && data.length != 0
-                    ?
-                        <ResponsiveContainer width="98%" height="80%">
-                            <LineChart
-                                data={data}
-                                margin={{
-                                    top: 20,
-                                    right: 30,
-                                    left: 20,
-                                    bottom: 5,
-                                }}
-                            >
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
-                                <Line type="linear" dataKey="spending" stroke="#1A75FF" name="Spending" activeDot={{ r: 6 }} strokeWidth={2}/>
-                            </LineChart>
-                        </ResponsiveContainer>
-                    :
-                        <div className={classes.graphPlaceHolder}>
-                            No Records To Display!
-                        </div>
-                    }
+                    <LineGraph data={data} />
                 </div>
                 :
                 <>
-                    {
-                        boxes && boxes.map((box, index) => (
-                            <div 
-                                className={classes.multipleBox}
-                                style={{width:`${88 / boxNumber}%`}}
+                    {boxes && boxes.map((box, index) => (
+                        <div 
+                            className={classes.multipleBox}
+                            style={{width:`${88 / boxNumber}%`}}
+                        >
+                            <IconButton
+                                onClick={() => {box.content === "bar" ?  onExpandClick("barGraph") : onExpandClick("radialBarGraph")}}
+                                sx={{
+                                    position: 'absolute',
+                                    right: 4,
+                                    top: 4,
+                                    zIndex: 1
+                                }}
                             >
-                                {
-                                    data && data.length != 0
-                                    ?
-                                    
-                                        box.content === "bar" ?
-                                            <ResponsiveContainer width="98%" height="95%">
-                                                <BarChart 
-                                                    margin={{
-                                                        top: 30,
-                                                        right: 30,
-                                                        left: 20,
-                                                        bottom: 5,
-                                                    }} 
-                                                    data={data}
-                                                >
-                                                    
-                                                    <XAxis dataKey="name" />
-                                                    <YAxis />
-                                                    <Tooltip />
-                                                    <Bar dataKey="spending" fill="#1A75FF" />
-                                                </BarChart>
-                                            </ResponsiveContainer>
-              
-                                        :
-                                            box.content === "pie" ?
-                                                <ResponsiveContainer width="90%" height="100%">
-                                                    <RadialBarChart 
-                                                        cx="40%"
-                                                        cy="50%"
-                                                        innerRadius="10%" 
-                                                        outerRadius="90%" 
-                                                        data={data} 
-                                                        startAngle={0} 
-                                                        endAngle={360}
-                                                    >
-                                                        <RadialBar minAngle={15} background clockWise={true} dataKey='spending' nameKey="name" />
-                                                        <Legend 
-                                                            iconType='circle'
-                                                            iconSize={8} 
-                                                            layout="vertical" 
-                                                            verticalAlign="middle" 
-                                                            wrapperStyle={{
-                                                                top: '50%',
-                                                                right: 0,
-                                                                transform: 'translate(0, -50%)',
-                                                                lineHeight: '16px',
-                                                                fontSize:"14px"
-                                                            }} 
-                                                        />
-                                                        <Tooltip cursor={{ stroke: '#ED9121', strokeWidth: 1 }} />
-                                                    </RadialBarChart>
-                                                </ResponsiveContainer>
-                                            :
-                                            <div></div>
-                                    :
-                                        <div className={classes.graphPlaceHolderMultiBox}>
-                                            No Records To Display!
-                                        </div>
-                                }
-                            </div>
-                        ))
-                    }
+                                <OpenInFullIcon fontSize='small' style={{color:"whitesmoke"}}/>
+                            </IconButton>
+
+                            {box.content === "bar" ?
+                                <BarGraph data={data}/>
+                            :
+                                box.content === "pie" ?
+                                    <RadialBarGraph data={data}/>
+                                :
+                                <div></div>
+                            }
+                        </div>
+                    ))}
                 </>
             }
         </> 

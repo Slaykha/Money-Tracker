@@ -31,7 +31,7 @@ export const LeftDrawer = () => {
   const classes = useStyles()
 
   const [homeListItems, setHomeListItems] = useState([{itemText:"Home Page", itemType:"Button", itemLocation:"", itemIcon:<AddIcon />}])
-  const [graphListItems, setGraphListItems] = useState([{itemText:"Graph 1", itemType:"Text", itemLocation:"", itemIcon:<TimelineIcon />}, {itemText:"Graph 2", itemType:"Text", itemLocation:"", itemIcon:<EqualizerIcon />}, {itemText:"Graph 3", itemType:"Text", itemLocation:"", itemIcon:<DataUsageIcon />}])
+  const [graphListItems, setGraphListItems] = useState([{itemText:"Line Graph", itemType:"Text", itemLocation:"lineGraph", itemIcon:<TimelineIcon />}, {itemText:"Bar Graph", itemType:"Text", itemLocation:"barGraph", itemIcon:<EqualizerIcon />}, {itemText:"Radial Graph", itemType:"Text", itemLocation:"radialBarGraph", itemIcon:<DataUsageIcon />}])
   const [trackerListItems, setTrackerListItems] = useState([{itemText:"Daily Tracker", itemType:"Text", itemLocation:"dailyTracker", itemIcon:<DataUsageIcon />}])
   const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Spendings", itemType:"Text", itemLocation:"spending", itemIcon:<AddIcon />}])
 
