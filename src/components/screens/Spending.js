@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSpending, fetchSpendings } from '../../actions/spendingAction';
 import SpendingList from '../spendingsList/SpendingList';
 import AddSpendingDialog from '../spending/AddSpendingDialog';
-import { Button } from '@mui/material';
+import { Alert, Button, Snackbar } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterSpendingDialog from '../spending/FilterSpendingDialog';
 
@@ -48,6 +48,7 @@ const Spending = (props) => {
     const [dateFilter, setDateFilter] = useState("")
     const [typeFilter, setTypeFilter] = useState("")
 
+    const [alert, setAlert] = useState({ open: false, message: "", status: "" })
 
     const handleClose = () => {
         setOpenAddSpendingDialog(false)
@@ -115,9 +116,14 @@ const Spending = (props) => {
             <SpendingList
                 spendings={spendings}
             />
+            <Snackbar
+                open={alert.open}
+                autoHideDuration={2000}
+                onClose={() => setAlert({ open: false, message: "", status: "" })}
+            >
+                <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+            </Snackbar>
         </>
-
-        
     );
 };
 

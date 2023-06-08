@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 import React, { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { LogoutApi } from '../../api/authApi'
 import { ENDPOINT } from '../../App'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -41,7 +41,10 @@ const useStyles = makeStyles({
     userName:{
         fontSize:"20px",
         textDecoration:"none",
-    }
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+   }
   
 })
 
@@ -73,8 +76,7 @@ export const Header = ({user}) => {
             <Link to="/" className={classes.logo}>Spending Tracker</Link>
             <div className={classes.rightSide} onClick={handleClick}>
                 <div className={classes.icon}>
-                    <AccountCircleIcon 
-                    />
+                    <AccountCircleIcon />
                 </div>
 
                 <div className={classes.userName}>
@@ -92,7 +94,12 @@ export const Header = ({user}) => {
                 disableScrollLock={true}
                 fullWidth
             >
-                <MenuItem onClick={() => {}}>My Profile</MenuItem>
+                <MenuItem 
+                    component={Link}
+                    to="/profile"    
+                >
+                    My Profile
+                </MenuItem>
                 <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
                 
             </Menu>

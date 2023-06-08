@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {NumericFormat} from 'react-number-format';
 import TextField from '@mui/material/TextField';
@@ -49,16 +49,23 @@ const SpendingTextField = (props) => {
       setSpending(parseFloat(event.target.intValue));
     };
 
+    useEffect(() => {
+      if(spending && spending != 0){
+        setMoneyValue(spending)
+      }
+    }, [spending])
+    
+
     return (
         <TextField
-            style={{margin: "2%", width: "96%"}}
-            label="Money"
-            value={moneyValue}
-            onChange={(e) => {handleChange(e)}}
-            name="numberformat"
-            InputProps={{inputComponent: NumberFormatCustom, inputProps: {currency}, style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
-            InputLabelProps={{ shrink: true }}
-            variant="filled"
+          style={{margin: "2%", width: "96%"}}
+          label="Money"
+          value={moneyValue}
+          onChange={(e) => {handleChange(e)}}
+          name="numberformat"
+          InputProps={{inputComponent: NumberFormatCustom, inputProps: {currency}, style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
+          InputLabelProps={{ shrink: true }}
+          variant="filled"
         />
     );
     

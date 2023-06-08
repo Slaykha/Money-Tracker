@@ -48,10 +48,20 @@ const UpdateUserDailyLimitApi = async (ENDPOINT, userId, dailyLimit) => {
 
     return resp.status === 200 ? resp.data : false
 }
+
+const UpdateUserApi = async (ENDPOINT, userId, user) => {
+    const resp = await axios.put(`${ENDPOINT}/user/${userId}`,
+    user
+    )
+
+    return resp.status === 200 ? resp.data : false
+}
+
 module.exports={
     RegisterApi,
     LoginApi,
     LogoutApi,
     GetUserApi,
-    UpdateUserDailyLimitApi
+    UpdateUserDailyLimitApi,
+    UpdateUserApi
 }

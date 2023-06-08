@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 250
 
@@ -34,6 +35,7 @@ export const LeftDrawer = () => {
   const [graphListItems, setGraphListItems] = useState([{itemText:"Line Graph", itemType:"Text", itemLocation:"lineGraph", itemIcon:<TimelineIcon />}, {itemText:"Bar Graph", itemType:"Text", itemLocation:"barGraph", itemIcon:<EqualizerIcon />}, {itemText:"Radial Graph", itemType:"Text", itemLocation:"radialBarGraph", itemIcon:<DataUsageIcon />}])
   const [trackerListItems, setTrackerListItems] = useState([{itemText:"Daily Tracker", itemType:"Text", itemLocation:"dailyTracker", itemIcon:<DataUsageIcon />}])
   const [speningsListItems, setSpendingsListItems] = useState([{itemText:"Spendings", itemType:"Text", itemLocation:"spending", itemIcon:<AddIcon />}])
+  const [userItems, setUserItems] = useState([{itemText:"Profile", itemType:"Text", itemLocation:"profile", itemIcon:<AccountCircleIcon />}])
 
   return (
     <Drawer
@@ -53,6 +55,9 @@ export const LeftDrawer = () => {
         <Divider classes={{root: classes.divider}} style={{marginTop:"1vh", marginBottom:"1vh"}} variant="middle"/>
 
         <ItemList listTitle={"Spending"} listItems={speningsListItems}/>
+        <Divider classes={{root: classes.divider}} style={{marginTop:"1vh", marginBottom:"1vh"}} variant="middle"/>
+
+        <ItemList listTitle={"User"} listItems={userItems}/>
       </div>
     </Drawer>
   )

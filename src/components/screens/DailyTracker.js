@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import CircleProgressBar from "../dailyTracker/CircleProgressBar";
 import SpendingList from "../spendingsList/SpendingList";
-import { Button } from "@mui/material";
+import { Alert, Button, Snackbar } from "@mui/material";
 import AddSpendingDialog from "../spending/AddSpendingDialog";
-import { createSpending } from "../../actions/spendingAction";
+import { createSpending, fetchSpendings } from "../../actions/spendingAction";
 
 const useStyles = makeStyles((theme) => ({
     title:{
@@ -38,7 +38,8 @@ const DailyTracker = (props) => {
         spendings, 
         currency,
         createSpending,
-        todaysTotal
+        todaysTotal,
+        fetchSpendings
     } = props;
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
@@ -64,8 +65,13 @@ const DailyTracker = (props) => {
     }
 
     useEffect(() => {
+        if(userId)
+            fetchSpendings(userId, "", "")
+    }, [userId])
+
+    useEffect(() => {
         if(spendings)
-        handleTodaysSpendings()
+            handleTodaysSpendings()
     }, [spendings])
     
     return (
@@ -116,6 +122,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    fetchSpendings: (userId, date, type) => {
+        dispatch(fetchSpendings(userId, date, type))
+    },
     createSpending: (userId, spending)=>{
         dispatch(createSpending(userId, spending))
     }
