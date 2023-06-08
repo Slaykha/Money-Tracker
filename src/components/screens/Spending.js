@@ -7,6 +7,8 @@ import AddSpendingDialog from '../spending/AddSpendingDialog';
 import { Alert, Button, Snackbar } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterSpendingDialog from '../spending/FilterSpendingDialog';
+import { createSpendingApi } from '../../api/spendingApi';
+import { ENDPOINT } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -39,7 +41,9 @@ const Spending = (props) => {
         createSpending,
         userCurrency,
         spendings,
-        fetchSpendings
+        fetchSpendings,
+        alert,
+        setAlert
     } = props
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
@@ -48,7 +52,6 @@ const Spending = (props) => {
     const [dateFilter, setDateFilter] = useState("")
     const [typeFilter, setTypeFilter] = useState("")
 
-    const [alert, setAlert] = useState({ open: false, message: "", status: "" })
 
     const handleClose = () => {
         setOpenAddSpendingDialog(false)
@@ -58,9 +61,22 @@ const Spending = (props) => {
         setOpenFilterSpendingDialog(false)
     }
 
-    const handleClick = (date, money, type) =>{
+    const handleClick = async (date, money, type) =>{
         if(money && type){
-            createSpending(user.id, {date, money, type})
+            try {
+                let resp = await createSpendingApi(ENDPOINT, user.id, {date, money, type})
+                if(resp){
+                    createSpending(resp)
+                    setAlert({ open: true, message: "Spending Created Successfully.", status: "success" })
+                }else{
+                    setAlert({ open: true, message: "An Error Occured.", status: "error" })
+                }
+            } catch (error) {
+                console.log(error)
+                setAlert({ open: true, message: "An Error Occured.", status: "error" })
+            }
+        }else{
+            setAlert({ open: true, message: "Please Fill all necessary fields.", status: "error" })
         }
     }
 
@@ -115,7 +131,9 @@ const Spending = (props) => {
             />
             <SpendingList
                 spendings={spendings}
+                setAlert={setAlert}
             />
+
             <Snackbar
                 open={alert.open}
                 autoHideDuration={2000}
@@ -135,8 +153,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    createSpending: (userId, spending)=>{
-        dispatch(createSpending(userId, spending))
+    createSpending: (resp)=>{
+        dispatch(createSpending(resp))
     },
     fetchSpendings: (userId, date, type) => {
         dispatch(fetchSpendings(userId, date, type))

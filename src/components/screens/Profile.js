@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
-import { UpdateUserApi } from '../../api/authApi';
+import { UpdateUserApi, UpdateUserPasswordApi } from '../../api/authApi';
 import { ENDPOINT } from '../../App';
 import { UpdateUser } from '../../actions/userActions';
+import ChangePasswordDialog from '../profile/ChangePasswordDialog';
 
 const useStyles = makeStyles(() => ({
     Box:{
@@ -22,9 +23,12 @@ const useStyles = makeStyles(() => ({
         color:"whitesmoke",
     },
     title:{
+        display:"flex",
         margin:"4%",
         marginBottom:"2%",
         paddingTop:"50px",
+    },
+    titleText:{
         fontSize:"28px",
     },
     divider:{
@@ -41,7 +45,9 @@ const useStyles = makeStyles(() => ({
 const Profile = (props) => {
     const{
         user,
-        UpdateUser
+        UpdateUser,
+        alert,
+        setAlert
     } = props
     const classes = useStyles()
 
@@ -50,10 +56,19 @@ const Profile = (props) => {
     const [dailyLimit, setDailyLimit] = useState("")
     const [createdAt, setCreadtedAt] = useState("")
 
-    const [alert, setAlert] = useState({ open: false, message: "", status: "" })
-
-
+    const [open, setOpen] = useState(false)
     const [isEditable, setIsEditable] = useState(false)
+
+    const [currentPassword, setCurrentPassword] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+    const [passwordCheck, setpasswordCheck] = useState("")
+
+    const handleClose = () => {
+        setOpen(false)
+        setCurrentPassword("")
+        setNewPassword("")
+        setpasswordCheck("")
+    }
 
     const getFormattedDate = (date) => {
         let today = new Date(date);
@@ -65,6 +80,20 @@ const Profile = (props) => {
         if (mm < 10) mm = '0' + mm;
 
         return dd + '/' + mm + '/' + yyyy;
+    }
+
+    const handleUpdatePassword = async () => {
+        try {
+            let resp = await UpdateUserPasswordApi(ENDPOINT, user.id, {currentPassword, newPassword})
+            if(resp){
+                setAlert({ open: true, message: "Account Infos Updated Successfully", status: "success" })
+            }else{
+                setAlert({ open: true, message: "An error occured!", status: "error" })
+            }
+        } catch (error) {
+            console.log(error)
+            setAlert({ open: true, message: error.response.data, status: "error" })
+        }
     }
 
     const handleUpdateUser = async () => {
@@ -104,8 +133,21 @@ const Profile = (props) => {
     return (
         <div className={classes.Box}>
             <div className={classes.title}>
-                User Profile Info
+                <div className={classes.titleText}>
+                    User Profile Info
+                </div>
+                <Button
+                    onClick={() => setOpen(true)}
+                    variant="contained"
+                    sx={{
+                        marginLeft:"auto",
+                        marginRight:"2%"
+                    }}
+                >
+                    <EditIcon sx={{ color: "whitesmoke" }} /> &nbsp; Change Password
+                </Button>
             </div>
+            
             <Divider classes={{root: classes.divider}} style={{marginTop:"1vh", marginBottom:"1vh"}} variant="middle"/>
 
             <div className={classes.content}>
@@ -235,6 +277,18 @@ const Profile = (props) => {
                     }
                 </div>
             </div>
+            <ChangePasswordDialog 
+                open={open}
+                handleClose={handleClose}
+                currentPassword={currentPassword}
+                setCurrentPassword={setCurrentPassword}
+                newPassword={newPassword} 
+                setNewPassword={setNewPassword}
+                passwordCheck={passwordCheck}
+                setpasswordCheck={setpasswordCheck}
+                handleUpdatePassword={handleUpdatePassword}
+                setAlert={setAlert}
+            />
             <Snackbar
                 open={alert.open}
                 autoHideDuration={2000}

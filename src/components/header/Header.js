@@ -48,7 +48,7 @@ const useStyles = makeStyles({
   
 })
 
-export const Header = ({user}) => {
+export const Header = ({user, setIsLoggedIn}) => {
     const classes = useStyles()
 
     const [anchorEl, setAnchorEl] = useState(null)
@@ -65,7 +65,7 @@ export const Header = ({user}) => {
     const handleLogOut = async () => {
         try{
             await LogoutApi(ENDPOINT)
-            window.location.reload()
+            setIsLoggedIn(false)
         }catch(e){
             console.error(e)
         }

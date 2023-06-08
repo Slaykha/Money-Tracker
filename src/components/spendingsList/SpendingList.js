@@ -8,7 +8,8 @@ const SpendingList = (props) => {
     const{
         spendings,
         deleteSpending,
-        currency
+        currency,
+        setAlert
     }=props
 
     return (
@@ -29,7 +30,8 @@ const SpendingList = (props) => {
                     <SpendingListItem 
                         spending={spending} 
                         deleteSpending={deleteSpending}
-                        currency={currency}    
+                        currency={currency}   
+                        setAlert={setAlert} 
                     />
                 ))
                 :

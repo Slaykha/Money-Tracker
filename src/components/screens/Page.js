@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
@@ -22,12 +22,15 @@ function Page(props) {
     isLoggedIn,
     spendings,
     fetchTodaysTotal,
-    todaysTotal
+    todaysTotal,
+    setIsLoggedIn
   } = props
 
   const PageComponent = props.component;
 
   const navigate = useNavigate()
+
+  const [alert, setAlert] = useState({ open: false, message: "", status: "" })
 
   
   useEffect(() => {
@@ -45,10 +48,16 @@ function Page(props) {
   return (
     <>
       <>
-        <Header user={user}/>
+        <Header user={user} setIsLoggedIn={setIsLoggedIn}/>
         <Menu/>
         <div className={classes.bodyComponent}>
-          <PageComponent user={user} spendings={spendings} todaysTotal={todaysTotal}/>
+          <PageComponent 
+            user={user} 
+            spendings={spendings} 
+            todaysTotal={todaysTotal}
+            alert={alert}
+            setAlert={setAlert}  
+          />
         </div>
       </>
     </>

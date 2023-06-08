@@ -8,7 +8,8 @@ const SpendingListItem = (props) => {
     const {
         spending, 
         deleteSpending,
-        currency
+        currency,
+        setAlert
     } = props
 
     const getFormattedDate = () => {
@@ -26,10 +27,15 @@ const SpendingListItem = (props) => {
     const handleDelete = async () => {
         try{
             let resp = await deleteSpendingApi(ENDPOINT, spending.id)
-            if(resp)
+            if(resp){
                 deleteSpending(spending.id)
+                setAlert({ open: true, message: "Spending Deleted Successfully.", status: "success" })
+            }else{
+                setAlert({ open: true, message: "An Error Occured!", status: "error" })
+            }
         }catch(e){
             console.error(e)
+            setAlert({ open: true, message: "An Error Occured!", status: "error" })
         }
     }
 

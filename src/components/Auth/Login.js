@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { Link, Navigate } from 'react-router-dom';
 import loginBackground2 from "../../images/loginBackground2.jpg"
 import { LoginApi } from '../../api/authApi';
@@ -64,6 +64,8 @@ const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
   
+    const [alert, setAlert] = useState({ open: false, message: "", status: "" })
+
     const handleClick = () => {
         handleLogin()
     }
@@ -78,6 +80,7 @@ const Login = (props) => {
         window.location.reload()
       }catch(e){
         console.error(e)
+        setAlert({ open: true, message: e.response.data, status: "error" })
       }
     }
 
@@ -159,6 +162,13 @@ const Login = (props) => {
             <Link className={classes.registerLink} to="/register"> Register</Link>
           </div>
         </div>
+        <Snackbar
+          open={alert.open}
+          autoHideDuration={2000}
+          onClose={() => setAlert({ open: false, message: "", status: "" })}
+        >
+          <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+        </Snackbar>
       </div>
 
     )

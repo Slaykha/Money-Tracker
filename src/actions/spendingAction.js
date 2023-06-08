@@ -13,14 +13,11 @@ export const fetchSpendings = (userId, date, type) => async (
             })
 }
 
-export const createSpending = (userId, spending) => async (dispatch) => {
-    const resp = await createSpendingApi(ENDPOINT, userId, spending)
-        if(resp){
-            dispatch({
-                type: CREATE_SPENDING,
-                payload: resp
-            })
-        }
+export const createSpending = (resp) => async (dispatch) => {
+    dispatch({
+        type: CREATE_SPENDING,
+        payload: resp
+    })
 }
 
 export const deleteSpending = (spendingId) => dispatch => {

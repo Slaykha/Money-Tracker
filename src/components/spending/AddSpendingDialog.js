@@ -20,7 +20,6 @@ const AddSpendingDialog = (props) => {
     const [type, setType] = useState("")
 
     const handleSpendingButtonClick = () => {
-        console.log(spendingDate)
         handleClick(spendingDate, money, type)
     } 
 

@@ -83,7 +83,8 @@ function GraphPage(props) {
     user,
     isLoggedIn,
     spendings,
-    fetchSpendings
+    fetchSpendings,
+    setIsLoggedIn
   } = props
 
   const PageComponent = props.component;
@@ -277,7 +278,7 @@ function GraphPage(props) {
 
     return (
         <>
-            <Header user={user}/>
+            <Header user={user} setIsLoggedIn={setIsLoggedIn}/>
             <Menu/>
             <div className={classes.bodyComponent}>
                 <div className={classes.Box} >

@@ -52,15 +52,15 @@ function App(props) {
     <div>
       <HashRouter>
         <Routes>
-          <Route path="/" element={<Page component={Home} isLoggedIn={isLoggedIn} Ititle={"Home Screen"} />}/>
-          <Route path="/spending" element={<Page component={Spending} isLoggedIn={isLoggedIn} title={"Spending"} />} />
-          <Route path="/dailyTracker" element={<Page component={DailyTracker} isLoggedIn={isLoggedIn} title={"Daily Tracker"} />} />
+          <Route path="/" element={<Page component={Home} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} Ititle={"Home Screen"} />}/>
+          <Route path="/spending" element={<Page component={Spending} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Spending"} />} />
+          <Route path="/dailyTracker" element={<Page component={DailyTracker} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Daily Tracker"} />} />
 
-          <Route path="/profile" element={<Page component={Profile} isLoggedIn={isLoggedIn} title={"Profile"} />} />
+          <Route path="/profile" element={<Page component={Profile} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Profile"} />} />
 
-          <Route path="/lineGraph" element={<GraphPage component={LineGraph} isLoggedIn={isLoggedIn} title={"Line Graph"} />} />
-          <Route path="/barGraph" element={<GraphPage component={BarGraph} isLoggedIn={isLoggedIn} title={"Bar Graph"} />} />
-          <Route path="/radialBarGraph" element={<GraphPage component={RadialBarGraph} isLoggedIn={isLoggedIn} title={"Radial Graph"} />} />
+          <Route path="/lineGraph" element={<GraphPage component={LineGraph} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Line Graph"} />} />
+          <Route path="/barGraph" element={<GraphPage component={BarGraph} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Bar Graph"} />} />
+          <Route path="/radialBarGraph" element={<GraphPage component={RadialBarGraph} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} title={"Radial Graph"} />} />
 
           <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
