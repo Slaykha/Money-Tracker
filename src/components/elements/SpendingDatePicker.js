@@ -18,8 +18,10 @@ const SpendingDatePicker = (props) => {
     },[refCurrentDate])
 
     const handleChange = (newDate) => {
-        setSpending(new Date(newDate));
+        if(newDate)
+            setSpending(new Date(newDate));
     };
+
     return (
         <div
             style={{margin:"2%"}}

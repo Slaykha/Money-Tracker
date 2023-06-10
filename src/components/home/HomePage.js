@@ -207,7 +207,7 @@ const HomePage = (props) => {
     
     useEffect(() => {
         if(user && user.id !== undefined){
-          fetchSpendings(user.id, "", "")
+          fetchSpendings(user.id, "", "", "", "")
         }
         return () => {}
     }, [user])
@@ -245,8 +245,8 @@ const mapStateToProps = (state) => ({
 });
   
 const mapDispatchToProps = (dispatch) => ({
-    fetchSpendings: (userId, date, type) => {
-        dispatch(fetchSpendings(userId, date, type))
+    fetchSpendings: (userId, date, type, moneySort, dateSort) => {
+        dispatch(fetchSpendings(userId, date, type, moneySort, dateSort))
     },
 });
 

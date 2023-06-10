@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 import React from 'react'
-import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const useStyles = makeStyles(()=>({
     graphPlaceHolder:{

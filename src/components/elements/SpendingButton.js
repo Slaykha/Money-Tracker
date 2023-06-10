@@ -5,7 +5,6 @@ import React from 'react';
 const SpendingButton = (props) => {
   const{
     handleClick,
-    staticWidth
   } = props
     const ColorButton = styled(Button)(({ theme }) => ({
         width: "96%",

@@ -29,7 +29,6 @@ const SpendingTypeSelector = (props) => {
     const{
         spending,
         setSpending,
-        staticWidth
     }=props
 
     const handleSelect = (option) => {

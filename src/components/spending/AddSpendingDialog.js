@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { Dialog, DialogContent, DialogTitle } from '@mui/material'
 import React, { useState } from 'react'
 import SpendingButton from '../elements/SpendingButton'
 import SpendingDatePicker from '../elements/SpendingDatePicker'

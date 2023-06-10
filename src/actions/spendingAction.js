@@ -1,11 +1,11 @@
-import { createSpendingApi, fetchSpendingsApi, getTodaysTotalApi } from "../api/spendingApi"
+import { fetchSpendingsApi, getTodaysTotalApi } from "../api/spendingApi"
 import { ENDPOINT } from "../App"
 import { CREATE_SPENDING, FETCH_SPENDINGS, DELETE_SPENDING, FETCH_TODAYS_TOTAL, UPDATE_SPENDING} from "./types"
 
-export const fetchSpendings = (userId, date, type) => async (
+export const fetchSpendings = (userId, date, type, moneySort, dateSort) => async (
     dispatch
 ) => {
-    const resp = await fetchSpendingsApi(ENDPOINT, userId, date, type)
+    const resp = await fetchSpendingsApi(ENDPOINT, userId, date, type, moneySort, dateSort)
         if (resp)
             dispatch({
                 type: FETCH_SPENDINGS,
@@ -21,7 +21,6 @@ export const createSpending = (resp) => async (dispatch) => {
 }
 
 export const deleteSpending = (spendingId) => dispatch => {
-    console.log(spendingId)
     dispatch({
         type: DELETE_SPENDING,
         payload: spendingId

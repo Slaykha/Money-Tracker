@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, Typography } from '@mui/material'
+import { Divider, Drawer } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React, { useState } from 'react'
 import { ItemList } from './ItemList'

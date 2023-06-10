@@ -5,7 +5,6 @@ import Spending from "./components/screens/Spending";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Page from "./components/screens/Page";
-import { makeStyles } from "@mui/styles";
 import { connect } from "react-redux";
 import { fetchUser } from "./actions/userActions";
 import DailyTracker from "./components/screens/DailyTracker";
@@ -17,13 +16,7 @@ import Profile from "./components/screens/Profile";
 
 export const ENDPOINT = "http://localhost:12345"
 
-const useStyles = makeStyles((theme) => ({
-
-  }));
-
 function App(props) {
-  const classes = useStyles();
-
   const COOKIE = document.cookie
 
   document.body.style = "background-color: #222831;"

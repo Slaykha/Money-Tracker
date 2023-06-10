@@ -7,7 +7,7 @@ const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
     const { onChange, currency, ...other } = props;
   
     return (
-// event.target.value nedir nerden gelir bu yaprak diyenlere cevap niteliğinde kod
+// event.target.value nedir nerden gelir bu diyenlere cevap niteliğinde kod
       <NumericFormat
         {...other}
         getInputRef={ref}
@@ -36,7 +36,6 @@ const SpendingTextField = (props) => {
     const {
       spending,
       setSpending,
-      staticWidth,
       currency
     }=props
 

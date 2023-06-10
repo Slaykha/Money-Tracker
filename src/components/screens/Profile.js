@@ -205,7 +205,7 @@ const Profile = (props) => {
                     disabled={!isEditable}
                 />
                 <TextField
-                    label="Email"
+                    label="Currency"
                     value={user.currency}
                     variant="filled"
                     sx={{

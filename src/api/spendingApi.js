@@ -14,8 +14,8 @@ const createSpendingApi = async (ENDPOINT ,userId, data) => {
 
 }
 
-const fetchSpendingsApi = async (ENDPOINT, userId, date, type) => {
-    let resp = await axios.get(`${ENDPOINT}/spendings/${userId}?date=${date}&type=${type}`)
+const fetchSpendingsApi = async (ENDPOINT, userId, date, type, moneySort, dateSort) => {
+    let resp = await axios.get(`${ENDPOINT}/spendings/${userId}?date=${date}&type=${type}&mSort=${moneySort}&dSort=${dateSort}`)
 
     return resp.status === 200 ? resp : false
 

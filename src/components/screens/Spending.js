@@ -9,7 +9,6 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterSpendingDialog from '../spending/FilterSpendingDialog';
 import { createSpendingApi } from '../../api/spendingApi';
 import { ENDPOINT } from '../../App';
-import EditSpendingDialog from '../spending/EditSpendingDialog';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -53,6 +52,8 @@ const Spending = (props) => {
     const [dateFilter, setDateFilter] = useState("")
     const [typeFilter, setTypeFilter] = useState("")
 
+    const [dateSort, setDateSort] = useState("")
+    const [moneySort, setMoneySort] = useState("")
 
     const handleClose = () => {
         setOpenAddSpendingDialog(false)
@@ -82,16 +83,23 @@ const Spending = (props) => {
     }
 
     const handleFilter = () => {
-        fetchSpendings(user.id, dateFilter, typeFilter)
+        fetchSpendings(user.id, dateFilter, typeFilter, moneySort, dateSort)
         handleCloseFilter()
     }
     
     useEffect(() => {
         if(user && user.id !== ""){
-          fetchSpendings(user.id, "", "")
+          fetchSpendings(user.id, "", "", "", "")
         }
         return () => {}
     }, [user])
+
+    useEffect(() => {
+        if(user && user.id !== ""){
+          fetchSpendings(user.id, "", "", moneySort, dateSort)
+        }
+        return () => {}
+    }, [dateSort, moneySort])
 
     return (
         <>
@@ -137,6 +145,10 @@ const Spending = (props) => {
             <SpendingList
                 spendings={spendings}
                 setAlert={setAlert}
+                dateSort={dateSort}
+                setDateSort={setDateSort}
+                moneySort={moneySort}
+                setMoneySort={setMoneySort}
             />
 
             <Snackbar
@@ -161,8 +173,8 @@ const mapDispatchToProps = (dispatch) => ({
     createSpending: (resp)=>{
         dispatch(createSpending(resp))
     },
-    fetchSpendings: (userId, date, type) => {
-        dispatch(fetchSpendings(userId, date, type))
+    fetchSpendings: (userId, date, type, moneySort, dateSort) => {
+        dispatch(fetchSpendings(userId, date, type, moneySort, dateSort))
     },
 });
 

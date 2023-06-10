@@ -86,7 +86,7 @@ const DailyTracker = (props) => {
     }
 
     const handleGetTodaysSpendings = () => {
-        fetchSpendings(userId, getFormattedDate(new Date()), "")
+        fetchSpendings(userId, getFormattedDate(new Date()), "", "", "")
     }
 
 
@@ -152,8 +152,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchSpendings: (userId, date, type) => {
-        dispatch(fetchSpendings(userId, date, type))
+    fetchSpendings: (userId, date, type, moneySort, dateSort) => {
+        dispatch(fetchSpendings(userId, date, type, moneySort, dateSort))
     },
     createSpending: (resp)=>{
         dispatch(createSpending(resp))

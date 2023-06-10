@@ -260,14 +260,13 @@ function GraphPage(props) {
     }
 
     useEffect(() => {
-        console.log(data)
         getDataByDate("W")
         return () => {}
     }, [spendings])
 
     useEffect(() => {
         if(user.id && spendings && spendings.length === 0){
-            fetchSpendings(user.id, "", "")
+            fetchSpendings(user.id, "", "", "", "")
         }
     }, [user])
     
@@ -345,8 +344,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchSpendings: (userId, date, type) => {
-        dispatch(fetchSpendings(userId, date, type))
+    fetchSpendings: (userId, date, type, moneySort, dateSort) => {
+        dispatch(fetchSpendings(userId, date, type, moneySort, dateSort))
     },
 });
 

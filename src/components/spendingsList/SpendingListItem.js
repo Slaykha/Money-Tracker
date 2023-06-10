@@ -47,7 +47,7 @@ const SpendingListItem = (props) => {
 
     const handleOpenEdit = () => {
         setMoneyEdit(spending.money)
-        setDateEdit(new Date(spending.spendingDate).toISOString())
+        setDateEdit(new Date(spending.spendingDate))
         setTypeEdit(spending.spendingType)
         setCurrentSetspendingId(spending.id)
         setOpenEdit(true)

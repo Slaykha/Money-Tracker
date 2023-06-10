@@ -52,8 +52,6 @@ const CircleProgressBar = ({todaysTotal, dailyLimit, currency}) => {
         percentageCalculator()
     }, [todaysTotal])
     
-    console.log(percentage)
-
     return (
         <div 
             className={classes.progressBar}

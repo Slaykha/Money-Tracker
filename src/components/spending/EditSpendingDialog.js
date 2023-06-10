@@ -1,10 +1,8 @@
-import { Button, Dialog, DialogContent, DialogTitle, TextField } from '@mui/material'
-import React, { useState } from 'react'
-import SpendingButton from '../elements/SpendingButton'
+import { Button, Dialog, DialogContent, DialogTitle } from '@mui/material'
+import React from 'react'
 import SpendingDatePicker from '../elements/SpendingDatePicker'
 import SpendingTypeSelector from '../elements/SpendingTypeSelector'
 import SpendingTextField from '../elements/SpeningTextField'
-import { DateRange } from '@mui/icons-material'
 
 const EditSpendingDialog = (props) => {
     const {
@@ -20,7 +18,6 @@ const EditSpendingDialog = (props) => {
         setTypeEdit
     } = props
 
-    console.log(dateEdit)
     return (
         <Dialog onClose={handleClose} open={open} PaperProps={{style: {overflowY: 'visible'}}}>
             <DialogTitle>Add Spending</DialogTitle>
