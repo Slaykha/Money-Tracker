@@ -3,13 +3,19 @@ import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ENDPOINT } from '../../App';
 import { deleteSpendingApi } from '../../api/spendingApi';
+import EditIcon from '@mui/icons-material/Edit';
 
 const SpendingListItem = (props) => {
     const {
         spending, 
         deleteSpending,
         currency,
-        setAlert
+        setAlert,
+        setOpenEdit,
+        setMoneyEdit,
+        setDateEdit,
+        setTypeEdit,
+        setCurrentSetspendingId
     } = props
 
     const getFormattedDate = () => {
@@ -39,6 +45,14 @@ const SpendingListItem = (props) => {
         }
     }
 
+    const handleOpenEdit = () => {
+        setMoneyEdit(spending.money)
+        setDateEdit(new Date(spending.spendingDate).toISOString())
+        setTypeEdit(spending.spendingType)
+        setCurrentSetspendingId(spending.id)
+        setOpenEdit(true)
+    }
+
     return (
         <>
             <TableRow
@@ -49,6 +63,11 @@ const SpendingListItem = (props) => {
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">{spending.money.toFixed(2)}&nbsp;{currency}</TableCell>
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">{spending.spendingType}</TableCell>
                 <TableCell sx={{color:"rgb(238, 238, 238)"}} align="right">
+                    <IconButton 
+                        onClick={handleOpenEdit}                        
+                    >
+                        <EditIcon sx={{color:"rgb(238, 238, 238)"}}/>
+                    </IconButton>   
                     <IconButton 
                         onClick={handleDelete}                        
                     >

@@ -1,6 +1,6 @@
 import { createSpendingApi, fetchSpendingsApi, getTodaysTotalApi } from "../api/spendingApi"
 import { ENDPOINT } from "../App"
-import { CREATE_SPENDING, FETCH_SPENDINGS, DELETE_SPENDING, FETCH_TODAYS_TOTAL} from "./types"
+import { CREATE_SPENDING, FETCH_SPENDINGS, DELETE_SPENDING, FETCH_TODAYS_TOTAL, UPDATE_SPENDING} from "./types"
 
 export const fetchSpendings = (userId, date, type) => async (
     dispatch
@@ -33,7 +33,14 @@ export const fetchTodaysTotal = (userId) => async (dispatch) => {
     if(resp){
         dispatch({
             type: FETCH_TODAYS_TOTAL,
-            payload: resp
+            payload: resp.data
         })
     }
+}
+
+export const updateSpending = (resp) => async (dispatch) => {
+    dispatch({
+        type: UPDATE_SPENDING,
+        payload: resp
+    })
 }

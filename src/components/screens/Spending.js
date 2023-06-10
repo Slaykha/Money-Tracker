@@ -9,6 +9,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterSpendingDialog from '../spending/FilterSpendingDialog';
 import { createSpendingApi } from '../../api/spendingApi';
 import { ENDPOINT } from '../../App';
+import EditSpendingDialog from '../spending/EditSpendingDialog';
 
 const useStyles = makeStyles((theme) => ({
     AddDiv:{
@@ -122,13 +123,17 @@ const Spending = (props) => {
                 handleClick={handleClick}
                 currency={userCurrency}
             />
+
             <FilterSpendingDialog 
                 open={openFilterSpendingDialog}
                 handleClose={handleCloseFilter}
                 setType={setTypeFilter}
                 type={typeFilter}
+                date={dateFilter}
+                setDate={setDateFilter}
                 handleFilter={handleFilter}
             />
+
             <SpendingList
                 spendings={spendings}
                 setAlert={setAlert}

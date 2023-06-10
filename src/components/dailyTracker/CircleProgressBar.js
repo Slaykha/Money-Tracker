@@ -49,8 +49,7 @@ const CircleProgressBar = ({todaysTotal, dailyLimit, currency}) => {
     };
 
     useEffect(() => {
-        if(todaysTotal)
-            percentageCalculator()
+        percentageCalculator()
     }, [todaysTotal])
     
     console.log(percentage)

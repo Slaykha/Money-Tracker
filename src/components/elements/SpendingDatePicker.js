@@ -8,15 +8,14 @@ const SpendingDatePicker = (props) => {
         spending,
         setSpending,
         currentDate,
-        staticWidth
     }=props
 
-    //we use useRef here ro stop useEffect from geting into loop
-    const redCurrentDate = useRef(currentDate)
+    //we use useRef here to stop useEffect from geting into loop
+    const refCurrentDate = useRef(currentDate)
    
     useEffect(() => {
-        handleChange(redCurrentDate.current)
-    },[redCurrentDate])
+        handleChange(refCurrentDate.current)
+    },[refCurrentDate])
 
     const handleChange = (newDate) => {
         setSpending(new Date(newDate));

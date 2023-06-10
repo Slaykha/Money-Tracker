@@ -1,8 +1,8 @@
-import { Button, Dialog, DialogContent, DialogTitle } from '@mui/material'
+import { Button, Dialog, DialogContent, DialogTitle, TextField } from '@mui/material'
 import React from 'react'
-import SpendingButton from '../elements/SpendingButton'
 import SpendingTypeSelector from '../elements/SpendingTypeSelector'
-import { styled } from '@mui/styles'
+import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const FilterSpendingDialog = (props) => {
     const {
@@ -10,25 +10,27 @@ const FilterSpendingDialog = (props) => {
         handleClose,
         setType,
         type,
-        handleFilter
+        handleFilter,
+        date,
+        setDate
     } = props
 
-    const ColorButton = styled(Button)(({ theme }) => ({
-        color: "rgb(0, 173, 181)",
-        backgroundColor: "rgb(238, 238, 238, 0.6)",
-        width: "96%",
-        height:"55px",
-        margin:"2%",
-        '&:hover': {
-          backgroundColor: "rgb(238, 238, 238, 1)",
-        },
-      }));
+    const formatteDate = (date) => {
+        let today = new Date(date);
+        let yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
 
-    const date = new Date()
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
 
+        setDate(yyyy + '-' + mm + '-' + dd)
+    }
 
     const handleReset = () => {
         setType("")
+        setDate("")
+        handleClose()
     }
 
     return (
@@ -39,16 +41,44 @@ const FilterSpendingDialog = (props) => {
                     spending={type}
                     setSpending={setType}
                 />
-                <ColorButton 
-                    onClick={handleFilter}
-                >
-                    Filter
-                </ColorButton>
-                <ColorButton 
-                    onClick={handleReset}
-                >
-                    Reset Values
-                </ColorButton>
+                <div style={{margin: "2%"}}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DesktopDatePicker
+                            label="Date"
+                            inputFormat="DD/MM/YYYY"
+                            InputProps={{style:{backgroundColor:"rgb(238, 238, 238, 0.6)"}}}
+                            value={date}
+                            onChange={(d) => formatteDate(d)}
+                            renderInput={(params) => <TextField {...params} 
+                                fullWidth
+                            />}
+                        />
+                    </LocalizationProvider>
+                </div>
+                <div style={{display:"flex"}}>
+                    <Button 
+                        onClick={handleReset}
+                        variant="contained"
+                        sx={{
+                            width: "48%",
+                            height:"55px",
+                            margin:"2%",
+                        }}  
+                    >
+                        Reset Filter Values
+                    </Button>
+                    <Button 
+                        onClick={handleFilter}
+                        variant="contained"
+                        sx={{
+                            width: "48%",
+                            height:"55px",
+                            margin:"2%",
+                        }}  
+                    >
+                        Filter
+                    </Button>
+                </div>
             </DialogContent>
         </Dialog>
     )

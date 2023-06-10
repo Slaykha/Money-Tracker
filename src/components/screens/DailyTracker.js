@@ -37,7 +37,7 @@ const DailyTracker = (props) => {
     const { 
         userId,
         dailyLimit, 
-        spendings, 
+        todaysSpendings, 
         currency,
         createSpending,
         todaysTotal,
@@ -47,17 +47,19 @@ const DailyTracker = (props) => {
     } = props;
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
-    const [todaysSpendings, setTodaysSpendings] = useState([])
 
-    const handleTodaysSpendings = () => {
-        setTodaysSpendings([])
-        let today = new Date(new Date(new Date().setHours(0, 0, 0, 0)).setDate(new Date().getDate()))
-        spendings && spendings.map((spending) => {
-            if (new Date(spending.spendingDate) > today) {
-                setTodaysSpendings(todaysSpendings => [...todaysSpendings, spending])
-            }
-        })
+    const getFormattedDate = (date) => {
+        let today = new Date(date);
+        let yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        return yyyy + "-" + mm + "-" + dd;
     }
+
 
     const handleClose = () => {
         setOpenAddSpendingDialog(false)
@@ -69,6 +71,7 @@ const DailyTracker = (props) => {
                 let resp = await createSpendingApi(ENDPOINT, userId, {date, money, type})
                 if(resp){
                     createSpending(resp)
+                    handleGetTodaysSpendings()
                     setAlert({ open: true, message: "Spending Created Successfully.", status: "success" })
                 }else{
                     setAlert({ open: true, message: "An Error Occured.", status: "error" })
@@ -82,16 +85,15 @@ const DailyTracker = (props) => {
         }
     }
 
+    const handleGetTodaysSpendings = () => {
+        fetchSpendings(userId, getFormattedDate(new Date()), "")
+    }
+
 
     useEffect(() => {
         if(userId)
-            fetchSpendings(userId, "", "")
+            handleGetTodaysSpendings()
     }, [userId])
-
-    useEffect(() => {
-        if(spendings)
-            handleTodaysSpendings()
-    }, [spendings])
     
     return (
         <div>
@@ -145,7 +147,7 @@ const DailyTracker = (props) => {
 const mapStateToProps = (state) => ({
     userId: state.user.id,
     dailyLimit: state.user.dailyLimit,
-    spendings: state.spendings,
+    todaysSpendings: state.spendings,
     currency: state.user.currency
 });
 

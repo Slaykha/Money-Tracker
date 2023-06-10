@@ -34,10 +34,9 @@ function Page(props) {
 
   
   useEffect(() => {
-    if(user && user.id !== ""){
+    if(user && user.id !== undefined){
       fetchTodaysTotal(user.id)
     }
-    return () => {}
   }, [spendings])
 
   if(!isLoggedIn){

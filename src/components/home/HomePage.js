@@ -206,7 +206,7 @@ const HomePage = (props) => {
     }, [spendings, totalSpendings])
     
     useEffect(() => {
-        if(user && user.id !== ""){
+        if(user && user.id !== undefined){
           fetchSpendings(user.id, "", "")
         }
         return () => {}

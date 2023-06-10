@@ -30,12 +30,21 @@ const deleteSpendingApi = async (ENDPOINT, spendingId) => {
 const getTodaysTotalApi = async (ENDPOINT, userId) => {
     let resp = await axios.get(`${ENDPOINT}/spendings/${userId}/today`)
 
-    return resp.status === 200 ? resp.data : false
+    return resp.status === 200 ? resp : false
 }
+
+const editSpendingApi = async (ENDPOINT, spendingId, spending) => {
+    let resp = await axios.put(`${ENDPOINT}/spending/${spendingId}`,
+    spending
+    )
+
+    return resp.status === 200 ? resp.data : false
+} 
 
 module.exports={
     createSpendingApi,
     fetchSpendingsApi,
     deleteSpendingApi,
-    getTodaysTotalApi
+    getTodaysTotalApi,
+    editSpendingApi
 }

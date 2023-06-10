@@ -35,6 +35,8 @@ const SpendingTypeSelector = (props) => {
     const handleSelect = (option) => {
         setSpending(option.target.value)
     }
+
+    console.log(spending, "@@@")
     return (
         <StyledAutocomplete
             customWidth={{main: "96%"}}
