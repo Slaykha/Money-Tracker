@@ -98,7 +98,6 @@ const useStyles = makeStyles(() =>({
         marginTop:"25%",
         color:"whiteSmoke"
     },
-
 }))
 
 export const GraphBoxes = (props) => {
@@ -138,6 +137,15 @@ export const GraphBoxes = (props) => {
         navigate(`/${type}`)
     }
 
+    const getDataTotalSpending = () => {
+        let total = 0
+        data.map(d => {
+            total += d.spending
+        })
+
+        return total
+    }
+
 
     return (
         <>
@@ -157,7 +165,7 @@ export const GraphBoxes = (props) => {
                         {currency && totalSpendings
                         ?
                             <div className={classes.TotalSpending}>
-                                <div className={classes.TotalSpendingValue}>{currency}{totalSpendings}</div>
+                                <div className={classes.TotalSpendingValue}>{currency}{getDataTotalSpending()}</div>
                                 <div className={classes.TotalSpendingText}>Spending</div>
                             </div>
                         :
@@ -222,6 +230,7 @@ export const GraphBoxes = (props) => {
                                     top: 4,
                                     zIndex: 1
                                 }}
+                                disabled={box.content === "cSoon"}
                             >
                                 <OpenInFullIcon fontSize='small' style={{color:"whitesmoke"}}/>
                             </IconButton>
@@ -232,7 +241,9 @@ export const GraphBoxes = (props) => {
                                 box.content === "pie" ?
                                     <RadialBarGraph data={data}/>
                                 :
-                                <div></div>
+                                <div style={{marginTop:"25%"}} className={classes.graphPlaceHolder}>
+                                    Coming Soon
+                                </div>
                             }
                         </div>
                     ))}

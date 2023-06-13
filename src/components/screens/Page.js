@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { fetchTodaysTotal } from "../../actions/spendingAction";
 
 
@@ -28,6 +28,7 @@ function Page(props) {
 
   const PageComponent = props.component;
 
+  let location = useLocation()
   const navigate = useNavigate()
 
   const [alert, setAlert] = useState({ open: false, message: "", status: "" })
@@ -38,6 +39,20 @@ function Page(props) {
       fetchTodaysTotal(user.id)
     }
   }, [spendings])
+
+  useEffect(() => {
+    Routing()
+  }, [])
+  
+
+  const Routing = () => {
+    console.log(location.pathname + location.search + location.hash)
+    console.log(window.location.hash)
+    if (location.pathname + location.search + location.hash === "/" && window.location.hash === "") {
+      navigate("/")
+    }
+  
+  }
 
   if(!isLoggedIn){
     navigate("/login")

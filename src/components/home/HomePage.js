@@ -41,7 +41,7 @@ const HomePage = (props) => {
     } = props 
 
     const [boxElements, setBoxElements] = useState([{icon:"", title:"", content:""}])
-    const [graphBoxes, setGraphBoxes] = useState([{title:"Bar Chart", content:"bar",}, {title:"Pie Chart", content:"pie",}, {title:"deneme3", content:"",}])
+    const [graphBoxes, setGraphBoxes] = useState([{title:"Bar Chart", content:"bar",}, {title:"Pie Chart", content:"pie",}, {title:"Coming Soon", content:"cSoon",}])
     const [totalSpendings, setTotalSpendings] = useState(0)
 
     const [data, setData] = useState()
