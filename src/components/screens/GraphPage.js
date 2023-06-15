@@ -265,7 +265,7 @@ function GraphPage(props) {
     }, [spendings])
 
     useEffect(() => {
-        if(user.id && spendings && spendings.length === 0){
+        if(user.id){
             fetchSpendings(user.id, "", "", "", "")
         }
     }, [user])

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HashRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./components/screens/Home";
 import Spending from "./components/screens/Spending";
@@ -13,11 +13,13 @@ import LineGraph from "./components/graph/LineGraph";
 import BarGraph from "./components/graph/BarGraph";
 import RadialBarGraph from "./components/graph/RadialBarGraph";
 import Profile from "./components/screens/Profile";
+import MobileDialog from "./components/mobile/MobileDialog";
 
 export const ENDPOINT = "http://localhost:12345"
 
 function App(props) {
   const COOKIE = document.cookie
+  const windowSize = useRef(window.innerWidth);
 
   document.body.style = "background-color: #222831;"
 
@@ -28,6 +30,12 @@ function App(props) {
 
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleCloseMobile = () => {
+    setMobileOpen(false)
+  }
 
   useEffect(() => {
     fetchUser()
@@ -40,6 +48,13 @@ function App(props) {
       setIsLoggedIn(false)
     }
   }, [user])
+
+  useEffect(() => {
+    if(windowSize.current < 1024){
+      setMobileOpen(true)
+    }
+  }, [windowSize.current])
+  
   
   return (
     <div>
@@ -59,6 +74,10 @@ function App(props) {
           <Route path="/register" element={<Register isLoggedIn={isLoggedIn}/>} /> 
         </Routes>
       </HashRouter>
+      <MobileDialog 
+        open={mobileOpen}
+        handleClose={handleCloseMobile}
+      />
     </div>
   );
 }

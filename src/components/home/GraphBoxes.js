@@ -84,10 +84,10 @@ const useStyles = makeStyles(() =>({
         "0%": { backgroundPosition: "200% 0%" },
     },
     graphPlaceHolder:{
-        fontSize:"36px",
+        fontSize:"150%",
         display:"block",
         textAlign:"center",
-        marginTop:"8%",
+        marginTop:"15%",
         marginBottom:"5%",
         color:"whitesmoke"
     },
@@ -242,7 +242,7 @@ export const GraphBoxes = (props) => {
                                     <RadialBarGraph data={data}/>
                                 :
                                 <div style={{marginTop:"25%"}} className={classes.graphPlaceHolder}>
-                                    Coming Soon
+                                    Coming Soon...
                                 </div>
                             }
                         </div>

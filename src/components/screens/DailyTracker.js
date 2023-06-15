@@ -8,6 +8,10 @@ import AddSpendingDialog from "../spending/AddSpendingDialog";
 import { createSpending, fetchSpendings } from "../../actions/spendingAction";
 import { createSpendingApi } from "../../api/spendingApi";
 import { ENDPOINT } from "../../App";
+import SettingsIcon from '@mui/icons-material/Settings';
+import LimitSettingsDialog from "../dailyTracker/LimitSettingsDialog";
+import { UpdateUserApi } from "../../api/authApi";
+import { UpdateUser } from "../../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
     title:{
@@ -35,6 +39,7 @@ const DailyTracker = (props) => {
     const classes = useStyles();
 
     const { 
+        user,
         userId,
         dailyLimit, 
         todaysSpendings, 
@@ -43,10 +48,14 @@ const DailyTracker = (props) => {
         todaysTotal,
         fetchSpendings,
         alert,
-        setAlert
+        setAlert,
+        UpdateUser
     } = props;
 
     const [openAddSpendingDialog, setOpenAddSpendingDialog] = useState(false)
+    const [openLimitSettingDialog, setOpenLimitSettingDialog] = useState(false)
+
+    const [dailyLimitEdit, setDailyLimitEdit] = useState(dailyLimit)
 
     const getFormattedDate = (date) => {
         let today = new Date(date);
@@ -89,6 +98,21 @@ const DailyTracker = (props) => {
         fetchSpendings(userId, getFormattedDate(new Date()), "", "", "")
     }
 
+    const handleUpdateUser = async () => {
+        try {
+            let floatDailyLimit = parseFloat(dailyLimitEdit)
+            let resp = await UpdateUserApi(ENDPOINT, user.id, {name: user.name, email: user.email, dailyLimit: floatDailyLimit})
+            if(resp){
+                UpdateUser(resp)
+                setAlert({ open: true, message: "Daily Spending Limit Updated Successfuly.", status: "success" })
+            }else{
+                setAlert({ open: true, message: "An error occured!", status: "error" })
+            }
+        } catch (error) {
+            console.log(error)
+            setAlert({ open: true, message: "An error occured!", status: "error" })
+        }
+    }
 
     useEffect(() => {
         if(userId)
@@ -105,7 +129,7 @@ const DailyTracker = (props) => {
                     Daily Limit: {dailyLimit}{currency}
                 </div>
                 <CircleProgressBar 
-                    todaysTotal={todaysTotal}
+                    todaysTotal={todaysTotal}user
                     dailyLimit={dailyLimit}
                     currency={currency}
                 />
@@ -114,6 +138,19 @@ const DailyTracker = (props) => {
                 <div
                     className={classes.AddSpendingDialogButton}
                 >
+                    <Button
+                        onClick={() => setOpenLimitSettingDialog(true)}
+                        variant="contained"
+                        sx={{
+                        background: "whitesmoke",
+                        '&:hover': {
+                            background: "ghostWhite",
+                        },
+                        marginRight:"2%"
+                        }}
+                    >
+                        <SettingsIcon sx={{ color: "gray" }} />
+                    </Button>
                     <Button
                         variant="contained"
                         onClick={() => setOpenAddSpendingDialog(true)}
@@ -132,6 +169,13 @@ const DailyTracker = (props) => {
                     spendings={todaysSpendings}
                     setAlert={setAlert}
                 />
+                <LimitSettingsDialog 
+                    open={openLimitSettingDialog}
+                    handleClose={() => setOpenLimitSettingDialog(false)}
+                    limit={dailyLimitEdit}
+                    setLimit={setDailyLimitEdit}
+                    handleEdit={handleUpdateUser}
+                />
             </div>
             <Snackbar
                 open={alert.open}
@@ -145,6 +189,7 @@ const DailyTracker = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+    user: state.user,
     userId: state.user.id,
     dailyLimit: state.user.dailyLimit,
     todaysSpendings: state.spendings,
@@ -157,6 +202,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     createSpending: (resp)=>{
         dispatch(createSpending(resp))
+    },
+    UpdateUser: (resp) => {
+        dispatch(UpdateUser(resp))
     }
 });
 

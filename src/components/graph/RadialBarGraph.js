@@ -38,7 +38,7 @@ const RadialBarGraph = ({data, isPage}) => {
                             verticalAlign="middle" 
                             wrapperStyle={{
                                 top: '50%',
-                                right: isPage ? 200 : 0,
+                                right: -40,
                                 transform: 'translate(0, -50%)',
                                 lineHeight: isPage ? "36px" : '16px',
                                 fontSize: isPage ? "32px" : "14px"
