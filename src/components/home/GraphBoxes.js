@@ -118,19 +118,8 @@ export const GraphBoxes = (props) => {
     const boxNumber = boxes && boxes.length
 
     const handleChange = (e) => {
-        switch (e.target.value) {
-            case "W":
-                getDataByDate(e.target.value)
-                break;
-            case "M":
-                getDataByDate(e.target.value)
-                break;
-            case "Y":
-                getDataByDate(e.target.value)
-                break;
-            default:
-                break;
-        }
+        if(e.target.value)
+            getDataByDate(e.target.value)
     }
 
     const onExpandClick = (type) => {
@@ -190,24 +179,26 @@ export const GraphBoxes = (props) => {
                                 }}
                                 onChange={handleChange}
                                 sx={{
-                                    color: "white",
+                                    color: "whiteSmoke",
                                     '.MuiOutlinedInput-notchedOutline': {
                                       borderColor: 'whiteSmoke',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                      borderColor: 'white',
+                                      borderColor: 'whiteSmoke',
                                     },
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                                      borderColor: 'white',
+                                      borderColor: 'whiteSmoke',
                                     },
                                     '.MuiSvgIcon-root ': {
-                                      fill: "white !important",
+                                      fill: "whiteSmoke !important",
                                     },
-                                  }}
-                                >
+
+                                }}
+                            >
                                 <option value={"W"}>Weekly</option>
                                 <option value={"M"}>Mountly</option>
                                 <option value={"Y"}>Yearly</option>
+                                <option value={"T"}>By Type</option>
                                 </NativeSelect>
                             </FormControl>
                         </Box>                      

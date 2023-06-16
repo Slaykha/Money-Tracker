@@ -193,6 +193,36 @@ const HomePage = (props) => {
                 }
             })
             setData(yearlyData)
+        }else if(interval === "T"){
+            const typeData = [{name:"Market", spending:0, fill: '#1A75FF'}, {name:"Shopping", spending:0, fill: '#8dd1e1'}, {name:"Online Shopping", spending:0, fill: '#82ca9d'}, {name:"Restaurant", spending:0, fill: '#a4de6c'}, {name:"Food", spending:0, fill: '#d0ed57'}, {name:"Cafe", spending:0, fill: '#ffc658'}, {name:"Other", spending:0, fill: '#ff4a4a'}]
+            spendings && Object.keys(spendings).length !== 0 && spendings.map((spending) => {
+                switch (spending.spendingType) {
+                    case "Market":
+                        typeData[0].spending += spending.money
+                        break;
+                    case "Shopping":
+                        typeData[1].spending += spending.money
+                        break;
+                    case "Online Shopping":
+                        typeData[2].spending += spending.money
+                        break;
+                    case "Restaurant":
+                        typeData[3].spending += spending.money
+                        break;
+                    case "Food":
+                        typeData[4].spending += spending.money
+                        break;
+                    case "Cafe":
+                        typeData[5].spending += spending.money
+                        break;
+                    case "other":
+                        typeData[6].spending += spending.money
+                        break;
+                    default:
+                        break;
+                }  
+            })
+            setData(typeData)
         }
     }
 
