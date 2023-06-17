@@ -72,7 +72,7 @@ const Register = (props) => {
   const [currencies, setCurrenies] = useState(CURRENCIES);
 
   const handleClick = () => {
-    if(handleCheckPassword()){
+    if(handleCheckPassword() && handleValidateEmail()){
       handleRegister()
     }
     else{
