@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Header } from "../header/Header";
 import { Menu } from "../sideMenu/Menu";
 import { connect } from "react-redux";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { fetchTodaysTotal } from "../../actions/spendingAction";
 
 
