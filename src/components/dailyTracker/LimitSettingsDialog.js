@@ -12,7 +12,7 @@ const LimitSettingsDialog = (props) => {
 
     return (
         <Dialog onClose={handleClose} open={open} PaperProps={{style: {width:"60%", overflowY: 'hidden', overflowX: 'hidden'}}}>
-            <DialogTitle>Mobile Application</DialogTitle>
+            <DialogTitle>Update Daily Spending Limit</DialogTitle>
             <DialogContent style={{width:"90%", overflowY: 'visible'}}>
                 <TextField 
                     label="Daily Spending Limit"

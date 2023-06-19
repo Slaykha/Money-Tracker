@@ -20,7 +20,7 @@ const EditSpendingDialog = (props) => {
 
     return (
         <Dialog onClose={handleClose} open={open} PaperProps={{style: {overflowY: 'visible'}}}>
-            <DialogTitle>Add Spending</DialogTitle>
+            <DialogTitle>Update Spending</DialogTitle>
             <DialogContent style={{width:"450px", overflowY: 'visible'}}>
                 <SpendingDatePicker
                     spending={dateEdit}

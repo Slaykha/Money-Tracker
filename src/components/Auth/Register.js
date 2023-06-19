@@ -80,12 +80,14 @@ const Register = (props) => {
     }
   }
 
+  const EMAIL_REGEX = /^\S+@\S+\.\S+$/
+
   const handleCheckPassword = () => {
     return (password === passwordCheck)
   }
 
   const handleValidateEmail = () => {
-    return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(email))
+    return (EMAIL_REGEX.test(email))
   }  
 
   const handleRegister = async () => {
